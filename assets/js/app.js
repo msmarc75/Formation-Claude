@@ -65,20 +65,26 @@
       card.classList.toggle("selected", card.dataset.level === current);
     });
 
-    var hidden = 0;
+    var hiddenLessons = 0;
     document.querySelectorAll("[data-level]").forEach(function (el) {
       if (!el.dataset.level || el.classList.contains("level-card")) return;
       var show = levelRank(el.dataset.level) <= rank;
       el.hidden = !show;
-      if (!show) hidden++;
+      // On ne compte que les vraies unités de contenu, pas les titres de section :
+      // annoncer « 10 sections masquées » là où il n'y a que 6 leçons induit en erreur.
+      if (!show && (el.classList.contains("lesson") || el.classList.contains("exercise"))) {
+        hiddenLessons++;
+      }
     });
+    var hidden = hiddenLessons;
 
     var notice = document.querySelector("[data-hidden-notice]");
     if (notice) {
       if (hidden > 0 && current !== "pro") {
         notice.hidden = false;
         notice.innerHTML =
-          "🔒 " + hidden + (hidden > 1 ? " sections sont masquées" : " section est masquée") +
+          "🔒 " + hidden +
+          (hidden > 1 ? " leçons et exercices sont masqués" : " leçon est masquée") +
           " à votre niveau actuel (" + LEVEL_LABELS[current] + "). " +
           '<button type="button" data-unlock>Passer au niveau supérieur</button>';
         notice.querySelector("[data-unlock]").addEventListener("click", function () {
