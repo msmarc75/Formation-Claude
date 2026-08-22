@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cowork — Formation Claude Premium</title>
+<meta name="description" content="Déléguer des tâches longues à Claude Cowork : espace de travail, fichiers, Skills, connecteurs, MCP et déploiement en équipe. Cours, exercices et quiz en français.">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✳️</text></svg>">
+</head>
+<body>
+
+<div class="demo-banner">
+  <strong>Démonstration</strong> — modèle freemium simulé : aucun paiement réel, et le verrouillage n'est pas une protection.
+</div>
+
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="../index.html"><span class="spark">✳</span> Formation Claude</a>
+    <nav class="main-nav" aria-label="Navigation principale">
+      <a href="../index.html">Accueil</a>
+      <a href="fondamentaux.html">Fondamentaux</a>
+      <a href="chat.html">Chat</a>
+      <a href="prompting.html">Prompting</a>
+      <a href="cowork.html" aria-current="page">Cowork</a>
+      <a href="claude-code.html">Claude Code</a>
+      <a href="api.html">API</a>
+      <a href="integrations.html">Intégrations</a>
+      <a href="bonnes-pratiques.html">Bonnes pratiques</a>
+      <a href="ressources.html">Ressources</a>
+      <a href="../tarifs.html">Tarifs</a>
+    </nav>
+    <div data-plan-pill data-base="../"></div>
+    <div data-level-switcher></div>
+  </div>
+</header>
+
+<main>
+
+  <p><span class="lvl-badge debutant">Module 4</span></p>
+  <h1>🤝 Cowork &amp; travail d'équipe</h1>
+  <p class="lead">Jusqu'ici, vous discutiez avec Claude. Dans ce module, vous lui <strong>confiez du travail</strong>&nbsp;: des tâches longues, menées dans un espace de travail avec vos fichiers, avec des compétences réutilisables (les Skills) et des connexions à vos outils métier. Puis vous passez de l'usage individuel au déploiement en équipe.</p>
+
+  <div class="page-progress" data-page-progress></div>
+
+  <div class="value-teaser" data-value-teaser hidden></div>
+
+  <div class="toc">
+    <strong>Objectifs de ce module</strong>
+    <ul>
+      <li>Comprendre la différence entre discuter avec Claude et lui déléguer une tâche.</li>
+      <li>Préparer, lancer et récupérer une tâche déléguée sur vos propres fichiers.</li>
+      <li>Créer des Skills et brancher des connecteurs pour vos outils quotidiens.</li>
+      <li>Déployer Cowork dans une équipe avec des règles claires de sécurité et de qualité.</li>
+    </ul>
+  </div>
+
+  <div class="hidden-notice" data-hidden-notice hidden></div>
+
+  <!-- ================================================================
+       NIVEAU DÉBUTANT
+       ================================================================ -->
+
+  <h2>🟢 Niveau débutant</h2>
+
+  <section class="lesson" data-lesson="cowork:quest-ce-que-cowork" data-level="debutant">
+    <div class="lesson-head">
+      <h3>1. Qu'est-ce que Claude Cowork&nbsp;?</h3>
+      <span class="lvl-badge debutant">Débutant</span>
+    </div>
+    <p><strong>Cowork</strong> est la manière dont Claude travaille <em>pour vous</em> plutôt qu'<em>avec vous</em> message par message. Au lieu d'échanger une question et une réponse, vous décrivez un objectif, et Claude mène la tâche de bout en bout dans un <strong>espace de travail</strong>&nbsp;: il ouvre vos fichiers, en crée de nouveaux, enchaîne les étapes, se corrige, et vous rend des livrables.</p>
+    <p>La différence avec le chat classique tient en trois points&nbsp;:</p>
+    <div class="table-wrap">
+    <table>
+      <tr><th></th><th>Chat classique</th><th>Cowork</th></tr>
+      <tr><td><strong>Unité de travail</strong></td><td>Un message, une réponse</td><td>Une tâche complète, en plusieurs étapes</td></tr>
+      <tr><td><strong>Durée</strong></td><td>Quelques secondes</td><td>Plusieurs minutes, parfois davantage</td></tr>
+      <tr><td><strong>Résultat</strong></td><td>Du texte dans la conversation</td><td>Des fichiers produits ou modifiés dans un espace de travail</td></tr>
+      <tr><td><strong>Votre rôle</strong></td><td>Vous guidez à chaque tour</td><td>Vous cadrez au départ, vous vérifiez à l'arrivée</td></tr>
+    </table>
+    </div>
+    <p>Le bon réflexe mental&nbsp;: vous ne parlez plus à un moteur de réponses, vous <strong>briefez un collaborateur</strong>. Un collaborateur rapide et infatigable, mais qui n'a que le contexte que vous lui donnez, et dont le travail se relit.</p>
+    <p>Les tâches qui s'y prêtent le mieux ont trois caractéristiques&nbsp;: elles sont <strong>délimitées</strong> (on sait quand c'est fini), <strong>vérifiables</strong> (on peut juger le résultat) et <strong>fastidieuses</strong> (elles vous coûtent du temps sans vous apprendre grand-chose). Mettre en forme quarante notes, comparer deux versions d'un contrat, produire une synthèse à partir d'un dossier&nbsp;: voilà le cœur de cible.</p>
+    <div class="callout tip">
+      <span class="title">💡 À retenir</span>
+      Le chat sert à <em>réfléchir</em>&nbsp;; Cowork sert à <em>produire</em>. Une bonne journée de travail alterne les deux&nbsp;: on cadre le problème dans le chat, on délègue l'exécution à Cowork, on relit soi-même.
+    </div>
+  </section>
+
+  <section class="lesson" data-lesson="cowork:premiere-tache" data-level="debutant">
+    <div class="lesson-head">
+      <h3>2. Votre première tâche déléguée</h3>
+      <span class="lvl-badge debutant">Débutant</span>
+    </div>
+    <p>Une tâche déléguée réussie se joue avant le lancement. Trois questions à vous poser&nbsp;:</p>
+    <ol>
+      <li><strong>Le périmètre est-il fermé&nbsp;?</strong> «&nbsp;Améliore ma communication&nbsp;» n'est pas une tâche. «&nbsp;Reprends ces 12 fiches produit et harmonise leur structure&nbsp;» en est une.</li>
+      <li><strong>Le résultat attendu est-il descriptible&nbsp;?</strong> Format, longueur, ton, nombre de fichiers&nbsp;: si vous ne savez pas décrire le livrable, Claude ne peut pas le deviner.</li>
+      <li><strong>Puis-je vérifier le travail&nbsp;?</strong> Si vous n'avez aucun moyen de juger le résultat, ne déléguez pas — vous ne feriez que déplacer l'incertitude.</li>
+    </ol>
+    <p>Le brief type tient en quatre blocs&nbsp;: contexte, tâche, contraintes, livrable.</p>
+    <pre><code>CONTEXTE
+Je suis responsable formation. Le dossier « notes » contient
+14 comptes rendus de sessions, pris à la volée, de qualité inégale.
+
+TÂCHE
+Produis pour chaque session une fiche de synthèse d'une page.
+
+CONTRAINTES
+- Ton neutre et professionnel, vouvoiement.
+- N'invente aucun chiffre : si une information manque,
+  écris « non précisé ».
+- Conserve les noms des intervenants tels quels.
+
+LIVRABLE
+Un fichier par session, nommé fiche-&lt;numéro&gt;-&lt;sujet&gt;.md,
+avec les sections : Contexte, Points clés, Décisions, Suites à donner.
+Plus un fichier synthese-globale.md listant les thèmes récurrents.</code></pre>
+    <p>Pendant l'exécution, Claude vous montre ce qu'il fait&nbsp;: fichiers lus, fichiers écrits, étapes franchies. Vous pouvez l'interrompre pour corriger le tir — c'est même recommandé si vous voyez qu'il part dans la mauvaise direction dès les premières minutes.</p>
+    <p>À l'arrivée, ne vous contentez pas de survoler&nbsp;: ouvrez <strong>deux ou trois livrables au hasard</strong> et comparez-les aux sources. C'est le contrôle qualité minimal, et il prend deux minutes.</p>
+    <div class="callout">
+      <span class="title">✳ Le réflexe clé</span>
+      Commencez petit. Votre première tâche déléguée devrait porter sur cinq fichiers, pas sur cinq cents. Vous apprenez ainsi à calibrer vos briefs sans risquer un lot entier de travail à refaire.
+    </div>
+  </section>
+
+  <section class="lesson" data-lesson="cowork:fichiers" data-level="debutant">
+    <div class="lesson-head">
+      <h3>3. Travailler avec ses propres fichiers</h3>
+      <span class="lvl-badge debutant">Débutant</span>
+    </div>
+    <p>L'espace de travail est le terrain de jeu de Claude&nbsp;: tout ce que vous y déposez, il peut le lire&nbsp;; tout ce qu'il produit s'y retrouve. D'où l'importance de l'organiser <em>avant</em> de lancer la tâche.</p>
+    <p>Une arborescence lisible vaut mieux qu'un long brief&nbsp;:</p>
+    <pre><code>projet-rapport-annuel/
+├── sources/          # documents d'entrée, ne pas modifier
+│   ├── comptes-2025.xlsx
+│   ├── notes-comite.docx
+│   └── enquete-clients.csv
+├── modeles/          # gabarits et exemples de ce que j'attends
+│   └── exemple-chapitre.md
+└── livrables/        # ce que Claude doit produire</code></pre>
+    <p>Cette séparation en trois dossiers règle à elle seule la plupart des malentendus&nbsp;: vous pouvez écrire «&nbsp;lis tout ce qui est dans <code>sources/</code>, respecte le gabarit de <code>modeles/</code>, écris uniquement dans <code>livrables/</code>&nbsp;». La consigne est courte, sans ambiguïté, et protège vos originaux.</p>
+    <p>Quelques principes de sélection&nbsp;:</p>
+    <ul>
+      <li><strong>Ciblez, ne noyez pas.</strong> Importer «&nbsp;tout le dossier partagé au cas où&nbsp;» dégrade la qualité&nbsp;: Claude passe du temps sur des documents hors sujet et dilue son attention.</li>
+      <li><strong>Donnez un exemple.</strong> Un seul fichier «&nbsp;voici à quoi doit ressembler le résultat&nbsp;» remplace trois paragraphes de description.</li>
+      <li><strong>Nommez explicitement.</strong> <code>2024-T4-synthese-ventes.xlsx</code> se comprend seul&nbsp;; <code>doc_final_v3(2).xlsx</code> non.</li>
+      <li><strong>Préférez les formats ouverts</strong> quand vous avez le choix (CSV plutôt qu'un export exotique)&nbsp;: moins de perte d'information.</li>
+    </ul>
+    <div class="callout warn">
+      <span class="title">⚠️ Prudence</span>
+      Ne déposez dans l'espace de travail que des documents que vous avez le droit d'y déposer. Données personnelles, dossiers RH, informations couvertes par un accord de confidentialité&nbsp;: vérifiez d'abord la politique de votre organisation (module 8).
+    </div>
+  </section>
+
+  <!-- ================================================================
+       NIVEAU INTERMÉDIAIRE
+       ================================================================ -->
+
+  <h2 data-level="intermediaire">🟠 Niveau intermédiaire</h2>
+
+  <section class="lesson-locked" data-level="intermediaire" data-locked-for="cowork:skills" hidden>
+  <div class="lesson-head">
+    <h3>4. Les Skills&nbsp;: apprendre vos procédures à Claude</h3>
+    <span class="lvl-badge intermediaire">Intermédiaire</span>
+    <span class="premium-badge">Premium</span>
+  </div>
+  <div class="locked-teaser"><p>Au bout de quelques semaines d'usage, un constat s'impose&nbsp;: vous réécrivez toujours les mêmes consignes. «&nbsp;Nos comptes rendus commencent par les décisions, jamais par le déroulé&nbsp;», «&nbsp;on n'écrit jamais client mais adhérent&nbsp;», «&nbsp;les montants s'écrivent avec une espace insécable&nbsp;». C'est exactement le rôle d'une Skill&nbsp;: un paquet de savoir-faire réutilisable, que Claude charge quand la situation s'y prête.</p><p>Une Skill n'est pas un prompt enregistré. Trois différences&nbsp;:</p></div>
+  <div class="locked-cta">
+    <span class="lock-icon">🔒</span>
+    <span class="lock-text">Cette leçon fait partie des 49 leçons Intermédiaire et Pro incluses dans la formule Premium.</span>
+    <a class="btn btn-gold" href="../tarifs.html?src=cowork:skills">Débloquer</a>
+  </div>
+</section>
+<section class="lesson" data-lesson="cowork:skills" data-level="intermediaire">
+    <div class="lesson-head">
+      <h3>4. Les Skills&nbsp;: apprendre vos procédures à Claude</h3>
+      <span class="lvl-badge intermediaire">Intermédiaire</span>
+    </div>
+    <p>Au bout de quelques semaines d'usage, un constat s'impose&nbsp;: vous réécrivez toujours les mêmes consignes. «&nbsp;Nos comptes rendus commencent par les décisions, jamais par le déroulé&nbsp;», «&nbsp;on n'écrit jamais <em>client</em> mais <em>adhérent</em>&nbsp;», «&nbsp;les montants s'écrivent avec une espace insécable&nbsp;». C'est exactement le rôle d'une <strong>Skill</strong>&nbsp;: un paquet de savoir-faire réutilisable, que Claude charge quand la situation s'y prête.</p>
+    <p>Une Skill n'est pas un prompt enregistré. Trois différences&nbsp;:</p>
+    <ul>
+      <li>Elle se déclenche <strong>d'elle-même</strong> quand la tâche correspond à sa description — vous n'avez pas à l'invoquer explicitement.</li>
+      <li>Elle peut embarquer des <strong>fichiers de référence</strong>&nbsp;: gabarits, exemples, glossaire, checklists, voire des scripts.</li>
+      <li>Elle est <strong>partageable</strong>&nbsp;: la même procédure vaut pour toute l'équipe, et s'améliore au même endroit pour tout le monde.</li>
+    </ul>
+    <p><strong>Quand créer une Skill&nbsp;?</strong> La règle des trois fois&nbsp;: si vous avez donné la même consigne trois fois, elle mérite d'être capitalisée. Autres bons signaux&nbsp;: la tâche suit une procédure écrite quelque part (norme interne, charte éditoriale), le résultat doit être homogène entre collègues, ou la consigne est longue à réexpliquer.</p>
+    <p>À l'inverse, <strong>ne créez pas de Skill</strong> pour une tâche unique, pour un besoin encore flou, ou pour ce qui relève du contexte ponctuel («&nbsp;ce trimestre, insiste sur la marge&nbsp;»). Une bibliothèque de Skills mal tenue devient vite un fatras dans lequel plus rien ne se déclenche correctement.</p>
+    <div class="callout tip">
+      <span class="title">💡 Repère</span>
+      Une bonne Skill décrit <em>comment vous travaillez</em>, pas <em>ce que vous voulez aujourd'hui</em>. Le premier est stable et se capitalise&nbsp;; le second appartient au brief de la tâche.
+    </div>
+  </section>
+
+  <section class="lesson-locked" data-level="intermediaire" data-locked-for="cowork:creer-skills" hidden>
+  <div class="lesson-head">
+    <h3>5. Créer et organiser ses Skills</h3>
+    <span class="lvl-badge intermediaire">Intermédiaire</span>
+    <span class="premium-badge">Premium</span>
+  </div>
+  <div class="locked-teaser"><p>Une Skill, matériellement, c'est un dossier. À la racine, un fichier SKILL.md&nbsp;; à côté, autant de fichiers de référence que nécessaire.</p><p>Le fichier SKILL.md s'ouvre sur un en-tête qui porte deux informations décisives&nbsp;: le nom et la description de déclenchement.</p></div>
+  <div class="locked-cta">
+    <span class="lock-icon">🔒</span>
+    <span class="lock-text">Cette leçon fait partie des 49 leçons Intermédiaire et Pro incluses dans la formule Premium.</span>
+    <a class="btn btn-gold" href="../tarifs.html?src=cowork:creer-skills">Débloquer</a>
+  </div>
+</section>
+<section class="lesson" data-lesson="cowork:creer-skills" data-level="intermediaire">
+    <div class="lesson-head">
+      <h3>5. Créer et organiser ses Skills</h3>
+      <span class="lvl-badge intermediaire">Intermédiaire</span>
+    </div>
+    <p>Une Skill, matériellement, c'est <strong>un dossier</strong>. À la racine, un fichier <code>SKILL.md</code>&nbsp;; à côté, autant de fichiers de référence que nécessaire.</p>
+    <pre><code>compte-rendu-reunion/
+├── SKILL.md              # les instructions + le déclencheur
+├── gabarit-cr.md         # la structure type d'un compte rendu
+├── glossaire-interne.md  # vocabulaire maison, sigles à ne pas traduire
+└── exemples/
+    └── cr-comite-2025-03.md</code></pre>
+    <p>Le fichier <code>SKILL.md</code> s'ouvre sur un en-tête qui porte deux informations décisives&nbsp;: le <strong>nom</strong> et la <strong>description de déclenchement</strong>.</p>
+    <pre><code>---
+name: compte-rendu-reunion
+description: Rédige un compte rendu de réunion à partir de notes brutes
+  ou d'une transcription. À utiliser dès qu'on fournit des notes de
+  réunion, un verbatim, ou qu'on demande un CR, un relevé de décisions
+  ou un compte rendu de comité.
+---
+
+## Principe
+
+Un compte rendu sert à l'absent : il doit permettre de savoir ce qui a
+été décidé sans avoir assisté à la séance.
+
+## Procédure
+
+1. Repérer d'abord les décisions et les engagements, avant le déroulé.
+2. Appliquer la structure de `gabarit-cr.md`, sans en changer l'ordre.
+3. Reprendre les termes de `glossaire-interne.md` (ne jamais traduire
+   les sigles maison).
+4. Toute information incertaine est signalée « à confirmer »,
+   jamais devinée.
+
+## Règles de rédaction
+
+- Phrases courtes, voix active, vouvoiement.
+- Chaque action porte un responsable et une échéance.
+- Aucun jugement de valeur sur les intervenants.</code></pre>
+    <p><strong>La description est la pièce la plus importante</strong>&nbsp;: c'est elle qui décide si la Skill se déclenche. Écrivez-la avec les mots que vous employez réellement, y compris les synonymes et les abréviations («&nbsp;CR&nbsp;», «&nbsp;relevé de décisions&nbsp;»). Une description vague («&nbsp;aide à la rédaction&nbsp;») se déclenche à tort et à travers&nbsp;; une description trop étroite ne se déclenche jamais.</p>
+    <p>Quelques règles d'hygiène&nbsp;: une Skill = une intention&nbsp;; instructions courtes dans <code>SKILL.md</code> et détails renvoyés dans les fichiers annexes&nbsp;; testez la Skill sur trois cas réels avant de la partager&nbsp;; et datez vos gabarits pour savoir quand ils ont vieilli.</p>
+  </section>
+
+  <section class="lesson-locked" data-level="intermediaire" data-locked-for="cowork:connecteurs" hidden>
+  <div class="lesson-head">
+    <h3>6. Les connecteurs&nbsp;: relier Claude à vos outils</h3>
+    <span class="lvl-badge intermediaire">Intermédiaire</span>
+    <span class="premium-badge">Premium</span>
+  </div>
+  <div class="locked-teaser"><p>Un connecteur donne à Claude l'accès à un service extérieur&nbsp;: espace de fichiers, messagerie, agenda, outil de gestion de projet, base de connaissances. Au lieu d'exporter puis de réimporter, Claude va chercher l'information là où elle vit.</p><p>Les bénéfices sont évidents&nbsp;: moins de copier-coller, données à jour, tâches qui traversent plusieurs outils. Les précautions le sont moins, et méritent d'être posées noir sur blanc.</p></div>
+  <div class="locked-cta">
+    <span class="lock-icon">🔒</span>
+    <span class="lock-text">Cette leçon fait partie des 49 leçons Intermédiaire et Pro incluses dans la formule Premium.</span>
+    <a class="btn btn-gold" href="../tarifs.html?src=cowork:connecteurs">Débloquer</a>
+  </div>
+</section>
+<section class="lesson" data-lesson="cowork:connecteurs" data-level="intermediaire">
+    <div class="lesson-head">
+      <h3>6. Les connecteurs&nbsp;: relier Claude à vos outils</h3>
+      <span class="lvl-badge intermediaire">Intermédiaire</span>
+    </div>
+    <p>Un <strong>connecteur</strong> donne à Claude l'accès à un service extérieur&nbsp;: espace de fichiers, messagerie, agenda, outil de gestion de projet, base de connaissances. Au lieu d'exporter puis de réimporter, Claude va chercher l'information là où elle vit.</p>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Type de connecteur</th><th>Ce que ça change concrètement</th></tr>
+      <tr><td>Espace de fichiers (type Drive)</td><td>«&nbsp;Reprends la dernière version du dossier Appels d'offres&nbsp;» — sans téléchargement manuel</td></tr>
+      <tr><td>Messagerie</td><td>Retrouver un échange, préparer une réponse à partir du fil réel</td></tr>
+      <tr><td>Agenda</td><td>Préparer une réunion à partir de son ordre du jour et de ses participants</td></tr>
+      <tr><td>Outil de suivi (tickets, projets)</td><td>Faire le point sur un lot de tâches, rédiger un état d'avancement</td></tr>
+    </table>
+    </div>
+    <p>Les bénéfices sont évidents&nbsp;: moins de copier-coller, données à jour, tâches qui traversent plusieurs outils. Les précautions le sont moins, et méritent d'être posées noir sur blanc.</p>
+    <ul>
+      <li><strong>Moindre privilège.</strong> Connectez ce qui est nécessaire à la tâche, pas l'intégralité de vos accès. Un connecteur en lecture seule couvre l'immense majorité des besoins.</li>
+      <li><strong>Périmètre restreint.</strong> Quand c'est possible, limitez l'accès à un dossier ou à un espace précis plutôt qu'à tout le compte.</li>
+      <li><strong>Actions engageantes.</strong> Envoyer un message, modifier un fichier partagé, déplacer un ticket&nbsp;: exigez une validation humaine. Le confort ne vaut pas un e-mail parti par erreur.</li>
+      <li><strong>Contenu non fiable.</strong> Un document ou un message peut contenir du texte cherchant à détourner l'assistant (injection de prompt). Ce que Claude lit dans vos outils est une <em>donnée</em>, jamais un ordre.</li>
+      <li><strong>Traçabilité.</strong> Sachez qui a connecté quoi, et revoyez la liste des connecteurs deux fois par an.</li>
+    </ul>
+    <div class="callout warn">
+      <span class="title">⚠️ Prudence</span>
+      Avant de connecter un outil professionnel, vérifiez auprès de votre DSI ou de votre référent conformité que l'usage est autorisé — surtout si l'outil contient des données personnelles ou des informations couvertes par un secret contractuel.
+    </div>
+  </section>
+
+  <!-- ================================================================
+       NIVEAU PRO
+       ================================================================ -->
+
+  <h2 data-level="pro">🟣 Niveau pro</h2>
+
+  <section class="lesson-locked" data-level="pro" data-locked-for="cowork:mcp" hidden>
+  <div class="lesson-head">
+    <h3>7. MCP, le protocole des connecteurs</h3>
+    <span class="lvl-badge pro">Pro</span>
+    <span class="premium-badge">Premium</span>
+  </div>
+  <div class="locked-teaser"><p>Derrière les connecteurs se trouve le Model Context Protocol (MCP), un standard ouvert publié par Anthropic et documenté sur modelcontextprotocol.io. Son objectif&nbsp;: régler une bonne fois le problème du «&nbsp;M&nbsp;×&nbsp;N&nbsp;» — M assistants qui doivent chacun s'intégrer à N systèmes, soit M&nbsp;×&nbsp;N intégrations sur mesure. Avec un protocole commun, on retombe à M&nbsp;+&nbsp;N.</p><p>Le vocabulaire tient en quelques termes&nbsp;:</p></div>
+  <div class="locked-cta">
+    <span class="lock-icon">🔒</span>
+    <span class="lock-text">Cette leçon fait partie des 49 leçons Intermédiaire et Pro incluses dans la formule Premium.</span>
+    <a class="btn btn-gold" href="../tarifs.html?src=cowork:mcp">Débloquer</a>
+  </div>
+</section>
+<section class="lesson" data-lesson="cowork:mcp" data-level="pro">
+    <div class="lesson-head">
+      <h3>7. MCP, le protocole des connecteurs</h3>
+      <span class="lvl-badge pro">Pro</span>
+    </div>
+    <p>Derrière les connecteurs se trouve le <strong>Model Context Protocol</strong> (MCP), un standard ouvert publié par Anthropic et documenté sur <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener">modelcontextprotocol.io</a>. Son objectif&nbsp;: régler une bonne fois le problème du «&nbsp;<em>M</em>&nbsp;×&nbsp;<em>N</em>&nbsp;» — <em>M</em> assistants qui doivent chacun s'intégrer à <em>N</em> systèmes, soit <em>M</em>&nbsp;×&nbsp;<em>N</em> intégrations sur mesure. Avec un protocole commun, on retombe à <em>M</em>&nbsp;+&nbsp;<em>N</em>.</p>
+    <p>Le vocabulaire tient en quelques termes&nbsp;:</p>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Terme</th><th>Définition</th></tr>
+      <tr><td><strong>Serveur MCP</strong></td><td>Un programme qui expose un système (fichiers, base, API métier) selon le protocole</td></tr>
+      <tr><td><strong>Client MCP</strong></td><td>L'application qui héberge le modèle et se connecte aux serveurs — ici, Claude</td></tr>
+      <tr><td><strong>Outils (tools)</strong></td><td>Des actions que le modèle peut décider d'appeler&nbsp;: rechercher, créer, mettre à jour…</td></tr>
+      <tr><td><strong>Ressources</strong></td><td>Des contenus que le serveur met à disposition en lecture&nbsp;: documents, enregistrements</td></tr>
+      <tr><td><strong>Prompts</strong></td><td>Des modèles d'invocation prêts à l'emploi, proposés par le serveur</td></tr>
+    </table>
+    </div>
+    <p>Pourquoi un standard <em>ouvert</em> change la donne&nbsp;? Parce que l'intégration que votre équipe écrit pour son ERP maison ne dépend plus d'un fournisseur&nbsp;: elle sert à tout client MCP, aujourd'hui et demain. C'est le même raisonnement que pour un format de fichier ouvert — vous investissez dans une interface, pas dans une dépendance.</p>
+    <p>Côté architecture, retenez trois points&nbsp;: le serveur MCP est un <strong>point de contrôle</strong> naturel (c'est là qu'on applique les droits et la journalisation)&nbsp;; les outils exposés doivent être <strong>étroits et explicites</strong> (mieux vaut <code>chercher_facture(numero)</code> qu'un <code>executer_sql(requete)</code> à tout faire)&nbsp;; et l'installation d'un serveur tiers relève de la <strong>chaîne d'approvisionnement logicielle</strong>, avec la revue de sécurité qui va avec. Le module 5 montre la mise en pratique avec <code>claude mcp add</code>.</p>
+  </section>
+
+  <section class="lesson-locked" data-level="pro" data-locked-for="cowork:deployer-equipe" hidden>
+  <div class="lesson-head">
+    <h3>8. Déployer Cowork en équipe</h3>
+    <span class="lvl-badge pro">Pro</span>
+    <span class="premium-badge">Premium</span>
+  </div>
+  <div class="locked-teaser"><p>Le passage de l'usage individuel à l'usage collectif est moins une question d'outil que d'organisation. Quatre chantiers, dans cet ordre.</p><p>1. Un socle commun de Skills. Identifiez les cinq à dix procédures les plus partagées (compte rendu, note de synthèse, réponse client, charte éditoriale, revue de document) et faites-en des Skills d'équipe. Une seule source de vérité, versionnée, avec un propriétaire nommé pour chacune. Sans propriétaire, une Skill vieillit et personne ne s'en aperçoit.</p></div>
+  <div class="locked-cta">
+    <span class="lock-icon">🔒</span>
+    <span class="lock-text">Cette leçon fait partie des 49 leçons Intermédiaire et Pro incluses dans la formule Premium.</span>
+    <a class="btn btn-gold" href="../tarifs.html?src=cowork:deployer-equipe">Débloquer</a>
+  </div>
+</section>
+<section class="lesson" data-lesson="cowork:deployer-equipe" data-level="pro">
+    <div class="lesson-head">
+      <h3>8. Déployer Cowork en équipe</h3>
+      <span class="lvl-badge pro">Pro</span>
+    </div>
+    <p>Le passage de l'usage individuel à l'usage collectif est moins une question d'outil que d'organisation. Quatre chantiers, dans cet ordre.</p>
+    <p><strong>1. Un socle commun de Skills.</strong> Identifiez les cinq à dix procédures les plus partagées (compte rendu, note de synthèse, réponse client, charte éditoriale, revue de document) et faites-en des Skills d'équipe. Une seule source de vérité, versionnée, avec un propriétaire nommé pour chacune. Sans propriétaire, une Skill vieillit et personne ne s'en aperçoit.</p>
+    <p><strong>2. Une carte des connecteurs.</strong> Décidez collectivement quels outils sont connectables, avec quels droits, par qui. Formalisez-la dans un tableau simple&nbsp;:</p>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Outil</th><th>Droits</th><th>Qui&nbsp;?</th><th>Validation humaine</th></tr>
+      <tr><td>Espace documentaire équipe</td><td>Lecture</td><td>Toute l'équipe</td><td>Non</td></tr>
+      <tr><td>Espace documentaire équipe</td><td>Écriture</td><td>Référents</td><td>Oui, avant publication</td></tr>
+      <tr><td>Messagerie</td><td>Lecture</td><td>Sur demande</td><td>—</td></tr>
+      <tr><td>Envoi de messages</td><td>Écriture</td><td>Personne pour l'instant</td><td>Interdit</td></tr>
+    </table>
+    </div>
+    <p><strong>3. Des règles de gouvernance courtes.</strong> Une page suffit&nbsp;: quelles données ne sortent jamais, quels livrables exigent une relecture humaine avant diffusion, comment on signale un résultat douteux, qui arbitre. Une charte de vingt pages que personne ne lit protège moins qu'une page affichée et connue.</p>
+    <p><strong>4. La formation des collègues.</strong> Le facteur limitant n'est jamais l'outil, c'est la capacité à formuler un brief et à relire un livrable. Un format qui marche&nbsp;: une session d'une heure sur un cas réel de l'équipe, puis un binôme «&nbsp;référent&nbsp;/&nbsp;nouvel utilisateur&nbsp;» pendant deux semaines, puis un point de retour d'expérience mensuel où l'on transforme les bonnes trouvailles en Skills.</p>
+    <div class="callout">
+      <span class="title">✳ Le réflexe clé</span>
+      Déployez par cas d'usage, pas par population. Un cas d'usage réussi et documenté convainc mieux que dix licences distribuées sans accompagnement.
+    </div>
+  </section>
+
+  <section class="lesson-locked" data-level="pro" data-locked-for="cowork:orchestrer" hidden>
+  <div class="lesson-head">
+    <h3>9. Orchestrer des tâches longues</h3>
+    <span class="lvl-badge pro">Pro</span>
+    <span class="premium-badge">Premium</span>
+  </div>
+  <div class="locked-teaser"><p>Plus une tâche est longue, plus les erreurs ont le temps de se propager. L'orchestration consiste à structurer le travail pour que les écarts soient détectés tôt.</p><p>Découper en jalons vérifiables. Une tâche de trois heures se découpe en quatre étapes dont chacune produit un artefact contrôlable&nbsp;: un plan, un jeu de données nettoyé, un brouillon, une version finale. Vous validez le plan en deux minutes&nbsp;; valider trois heures de travail terminé en prend trente.</p></div>
+  <div class="locked-cta">
+    <span class="lock-icon">🔒</span>
+    <span class="lock-text">Cette leçon fait partie des 49 leçons Intermédiaire et Pro incluses dans la formule Premium.</span>
+    <a class="btn btn-gold" href="../tarifs.html?src=cowork:orchestrer">Débloquer</a>
+  </div>
+</section>
+<section class="lesson" data-lesson="cowork:orchestrer" data-level="pro">
+    <div class="lesson-head">
+      <h3>9. Orchestrer des tâches longues</h3>
+      <span class="lvl-badge pro">Pro</span>
+    </div>
+    <p>Plus une tâche est longue, plus les erreurs ont le temps de se propager. L'orchestration consiste à structurer le travail pour que les écarts soient détectés tôt.</p>
+    <p><strong>Découper en jalons vérifiables.</strong> Une tâche de trois heures se découpe en quatre étapes dont chacune produit un artefact contrôlable&nbsp;: un plan, un jeu de données nettoyé, un brouillon, une version finale. Vous validez le plan en deux minutes&nbsp;; valider trois heures de travail terminé en prend trente.</p>
+    <pre><code>ÉTAPE 1 — Inventaire
+Liste tous les fichiers de sources/ avec, pour chacun,
+son type, sa date et une ligne de résumé. Écris inventaire.md
+et ARRÊTE-TOI : j'attends ma validation avant l'étape 2.
+
+ÉTAPE 2 — Plan
+À partir de inventaire.md, propose le plan du rapport
+(titres et intention de chaque section) dans plan.md. Stop.
+
+ÉTAPE 3 — Rédaction
+Rédige section par section, un fichier par section.
+
+ÉTAPE 4 — Relecture
+Relis l'ensemble, liste dans revue.md les incohérences
+et les affirmations non sourcées. Ne corrige rien toi-même.</code></pre>
+    <p><strong>Suivre l'avancement.</strong> Demandez un journal de bord tenu par Claude&nbsp;: un fichier <code>avancement.md</code> mis à jour à chaque étape, avec ce qui est fait, ce qui bloque, et les décisions prises faute d'instruction. C'est ce dernier point qui vous intéresse le plus&nbsp;: les hypothèses silencieuses sont la principale cause de livrables à refaire.</p>
+    <p><strong>Vérifier le travail rendu.</strong> Trois contrôles complémentaires&nbsp;: l'<em>échantillon</em> (ouvrir trois livrables au hasard et remonter à la source), la <em>cohérence</em> (les totaux, les dates, les noms se recoupent-ils&nbsp;?), et la <em>relecture croisée</em> (faire relire le résultat par une seconde exécution, avec pour seule consigne de chercher les erreurs, sans corriger).</p>
+    <p><strong>Quand reprendre la main&nbsp;?</strong> Dès que l'un de ces signaux apparaît&nbsp;: Claude tourne en rond sur la même difficulté, il commence à combler des manques par des suppositions, le sujet engage juridiquement ou financièrement l'organisation, ou vous ne comprenez plus ce qu'il fait. Reprendre la main n'est pas un échec de l'outil&nbsp;: c'est le fonctionnement normal d'une délégation.</p>
+    <div class="callout warn">
+      <span class="title">⚠️ Prudence</span>
+      Une tâche longue et autonome ne dispense jamais de la responsabilité du livrable. C'est vous qui signez ce qui sort, pas l'assistant.
+    </div>
+  </section>
+
+  <!-- ================================================================
+       EXERCICES
+       ================================================================ -->
+
+  <h2>💪 Exercices pratiques</h2>
+
+  <div class="exercise" data-level="debutant">
+    <span class="ex-label">Exercice · Débutant</span>
+    <h4>Déléguer la mise en forme et la synthèse d'un lot de notes</h4>
+    <p>Rassemblez cinq à dix notes personnelles brutes (réunions, lectures, idées) dans un dossier. Confiez à Claude leur mise en forme homogène <em>et</em> une synthèse transversale. Rédigez le brief avant de lancer quoi que ce soit, puis contrôlez le résultat.</p>
+    <details class="solution" data-premium hidden>
+      <summary>Voir une démarche corrigée</summary>
+      <div class="sol-body">
+        <p><strong>1. Préparez l'espace de travail</strong> avec la séparation en trois dossiers&nbsp;: <code>sources/</code> (vos notes brutes, à ne pas modifier), <code>modeles/</code> (une note que vous avez déjà mise en forme comme vous l'aimez), <code>livrables/</code> (vide).</p>
+        <p><strong>2. Le brief&nbsp;:</strong></p>
+        <pre><code>CONTEXTE
+sources/ contient 8 notes brutes prises à la volée, sans structure.
+modeles/note-type.md montre la mise en forme que je veux.
+
+TÂCHE
+1. Pour chaque note de sources/, produis une version mise en forme
+   dans livrables/, en respectant strictement modeles/note-type.md.
+2. Puis produis livrables/synthese.md : les 5 thèmes qui reviennent
+   le plus, avec pour chacun les notes concernées.
+
+CONTRAINTES
+- N'ajoute aucune information absente des notes.
+- Si un passage est incompréhensible, garde-le tel quel entre
+  crochets avec la mention [illisible] plutôt que de l'interpréter.
+- Conserve les noms propres et les chiffres à l'identique.
+- Ne modifie jamais les fichiers de sources/.
+
+LIVRABLE
+Un fichier par note, nommé note-&lt;date&gt;-&lt;sujet&gt;.md, plus synthese.md.</code></pre>
+        <p><strong>3. Le contrôle qualité.</strong> Ouvrez deux notes mises en forme et comparez-les mot à mot avec l'original&nbsp;: cherchez les ajouts (une information qui n'était pas là) et les pertes (un chiffre disparu). Vérifiez ensuite que chaque thème de la synthèse renvoie bien à des notes qui en parlent réellement.</p>
+        <p><strong>Ce que l'exercice démontre&nbsp;:</strong> la qualité du livrable dépend d'abord de trois choses — un dossier de sources propre, un exemple de résultat attendu, et une contrainte explicite de non-invention. Le brief fait dix lignes&nbsp;; c'est suffisant, à condition qu'elles soient les bonnes.</p>
+      </div>
+    </details><div class="solution-locked" hidden>
+  <details class="solution">
+    <summary>🔒 Corrigé détaillé — formule Premium</summary>
+    <div class="sol-body">
+      <p>Le corrigé pas à pas de cet exercice est inclus dans la formule Premium, avec les 24 corrigés du parcours.</p>
+      <p><a class="btn btn-gold" href="../tarifs.html?src=corrige">Voir les formules</a></p>
+    </div>
+  </details>
+</div>
+
+  </div>
+
+  <div class="exercise" data-level="intermediaire">
+    <span class="ex-label">Exercice · Intermédiaire</span>
+    <h4>Écrire le SKILL.md d'une skill «&nbsp;compte rendu de réunion&nbsp;»</h4>
+    <p>Rédigez le <code>SKILL.md</code> complet d'une Skill qui produit les comptes rendus selon les usages de <em>votre</em> organisation. Soignez particulièrement la description de déclenchement, puis testez-la sur deux réunions réelles.</p>
+    <details class="solution" data-premium hidden>
+      <summary>Voir la solution</summary>
+      <div class="sol-body">
+        <p>Structure du dossier&nbsp;:</p>
+        <pre><code>compte-rendu-reunion/
+├── SKILL.md
+├── gabarit-cr.md
+├── glossaire-interne.md
+└── exemples/cr-comite-exemple.md</code></pre>
+        <p>Contenu de <code>SKILL.md</code>&nbsp;:</p>
+        <pre><code>---
+name: compte-rendu-reunion
+description: Produit un compte rendu de réunion à partir de notes
+  brutes, d'une transcription ou d'un ordre du jour annoté. À utiliser
+  dès qu'on parle de CR, de compte rendu, de relevé de décisions, de
+  procès-verbal, de notes de comité ou de synthèse de réunion.
+---
+
+## Objectif
+
+Le compte rendu s'adresse à quelqu'un qui n'était pas présent.
+Il doit permettre de savoir, en une lecture : ce qui a été décidé,
+qui fait quoi, et pour quand.
+
+## Procédure
+
+1. Lire l'intégralité des notes avant d'écrire quoi que ce soit.
+2. Extraire d'abord les DÉCISIONS et les ACTIONS, avant le déroulé.
+3. Appliquer la structure de `gabarit-cr.md` sans en modifier l'ordre
+   ni les intitulés de section.
+4. Remplacer chaque terme par son équivalent de
+   `glossaire-interne.md` (sigles maison : ne jamais les développer).
+5. Relire en vérifiant que chaque action a un responsable ET
+   une échéance. S'il en manque, écrire « à préciser ».
+
+## Règles de rédaction
+
+- Vouvoiement, ton neutre, phrases courtes, voix active.
+- Aucun jugement sur les personnes ni sur la qualité des échanges.
+- Les désaccords sont rapportés factuellement, sans arbitrage.
+- Les chiffres sont repris à l'identique ; jamais recalculés.
+- Une information absente des notes n'est jamais devinée :
+  elle est signalée « non précisé dans les notes ».
+
+## Format de sortie
+
+Fichier Markdown nommé `CR-AAAA-MM-JJ-&lt;instance&gt;.md`.
+Sections, dans cet ordre :
+1. En-tête (date, instance, participants, excusés)
+2. Décisions
+3. Actions (tableau : action | responsable | échéance)
+4. Points discutés
+5. Points reportés
+6. Prochaine réunion
+
+## Contre-exemples
+
+- NE PAS raconter la réunion minute par minute.
+- NE PAS reformuler une décision en la rendant plus ambitieuse.
+- NE PAS fusionner deux actions portées par deux personnes.</code></pre>
+        <p><strong>Pourquoi cette structure fonctionne.</strong> La <code>description</code> énumère les mots réellement employés dans l'organisation («&nbsp;CR&nbsp;», «&nbsp;PV&nbsp;», «&nbsp;relevé de décisions&nbsp;»)&nbsp;: le déclenchement devient fiable. Les instructions restent courtes et renvoient aux fichiers annexes pour les détails, ce qui garde la Skill lisible et modifiable. Enfin, la section «&nbsp;Contre-exemples&nbsp;» vaut souvent mieux qu'une consigne positive de plus&nbsp;: elle cible les dérives que vous avez réellement observées.</p>
+        <p><strong>Le test.</strong> Prenez deux réunions passées dont vous avez le CR validé. Lancez la Skill sur les notes brutes correspondantes et comparez. Les écarts vous disent ce qui manque dans le <code>SKILL.md</code> — c'est ainsi qu'une Skill se met au point, par itérations sur des cas réels, jamais dans l'abstrait.</p>
+      </div>
+    </details><div class="solution-locked" hidden>
+  <details class="solution">
+    <summary>🔒 Corrigé détaillé — formule Premium</summary>
+    <div class="sol-body">
+      <p>Le corrigé pas à pas de cet exercice est inclus dans la formule Premium, avec les 24 corrigés du parcours.</p>
+      <p><a class="btn btn-gold" href="../tarifs.html?src=corrige">Voir les formules</a></p>
+    </div>
+  </details>
+</div>
+
+  </div>
+
+  <div class="exercise" data-level="pro">
+    <span class="ex-label">Exercice · Pro</span>
+    <h4>Plan de déploiement pour une équipe de 20 personnes</h4>
+    <p>Vous êtes chargé de déployer Cowork dans une direction de 20 personnes (5 managers, 15 contributeurs) traitant des dossiers clients. Produisez le plan&nbsp;: Skills communes, connecteurs autorisés, règles de sécurité, séquence de déploiement et indicateurs de réussite.</p>
+    <details class="solution" data-premium hidden>
+      <summary>Voir la solution</summary>
+      <div class="sol-body">
+        <p><strong>Phase 0 — Cadrage (2 semaines).</strong> Recensez les tâches candidates par entretiens courts (20&nbsp;minutes par personne) et retenez celles qui sont délimitées, vérifiables et fastidieuses. Classez-les sur deux axes&nbsp;: fréquence et temps consommé. Ne gardez que les trois premiers cas d'usage&nbsp;: un déploiement qui commence par dix cas n'en réussit aucun.</p>
+        <p><strong>Phase 1 — Socle de Skills (4 à 6 semaines, groupe pilote de 4 personnes).</strong> Cinq Skills suffisent au départ&nbsp;:</p>
+        <div class="table-wrap">
+        <table>
+          <tr><th>Skill</th><th>Rôle</th><th>Propriétaire</th></tr>
+          <tr><td><code>compte-rendu-reunion</code></td><td>CR homogènes pour tous les comités</td><td>Assistante de direction</td></tr>
+          <tr><td><code>synthese-dossier-client</code></td><td>Fiche de synthèse standard d'un dossier</td><td>Manager référent</td></tr>
+          <tr><td><code>reponse-client</code></td><td>Ton, formules et mentions obligatoires</td><td>Responsable qualité</td></tr>
+          <tr><td><code>charte-editoriale</code></td><td>Vocabulaire maison, typographie, interdits</td><td>Communication</td></tr>
+          <tr><td><code>revue-document</code></td><td>Checklist de relecture avant diffusion</td><td>Responsable qualité</td></tr>
+        </table>
+        </div>
+        <p>Chaque Skill a un propriétaire nommé, une date de dernière revue et un journal des modifications. Revue trimestrielle obligatoire&nbsp;: une Skill non revue depuis deux trimestres est retirée.</p>
+        <p><strong>Phase 2 — Connecteurs (progressive).</strong> Trois vagues&nbsp;: (1) espace documentaire de l'équipe en <em>lecture seule</em>, pour tous&nbsp;; (2) agenda en lecture, pour la préparation de réunions&nbsp;; (3) écriture dans un dossier <code>livrables/</code> dédié, pour les référents uniquement. La messagerie sortante reste interdite&nbsp;: aucun envoi automatique, sans exception.</p>
+        <p><strong>Règles de sécurité (une page, affichée).</strong></p>
+        <ol>
+          <li><strong>Données interdites</strong>&nbsp;: pièces d'identité, données de santé, éléments RH individuels, informations couvertes par un accord de confidentialité non couvert par le contrat.</li>
+          <li><strong>Moindre privilège</strong>&nbsp;: lecture par défaut&nbsp;; l'écriture se demande, se justifie et se limite à un dossier.</li>
+          <li><strong>Validation humaine obligatoire</strong> avant toute diffusion externe d'un livrable, sans exception, y compris pour les référents.</li>
+          <li><strong>Contenu externe = donnée, pas instruction</strong>&nbsp;: un document ou un message lu par Claude ne donne jamais d'ordre. Tout comportement inattendu est signalé au référent.</li>
+          <li><strong>Traçabilité</strong>&nbsp;: registre des connecteurs actifs (outil, droits, demandeur, date), revu tous les six mois.</li>
+          <li><strong>Incidents</strong>&nbsp;: un canal unique de signalement, une revue mensuelle des cas remontés.</li>
+        </ol>
+        <p><strong>Phase 3 — Généralisation (6 à 8 semaines).</strong> Deux vagues de 8 personnes. Pour chacune&nbsp;: une session d'une heure sur un cas réel de l'équipe (pas une démonstration générique), puis un binôme avec un membre du pilote pendant deux semaines, puis un atelier de retour d'expérience où les bonnes trouvailles deviennent des Skills. Les managers sont formés en premier&nbsp;: un manager qui ne sait pas relire un livrable ne peut pas encadrer l'usage.</p>
+        <p><strong>Indicateurs.</strong> Volontairement peu nombreux&nbsp;: (a) nombre de tâches déléguées par semaine et par cas d'usage&nbsp;; (b) taux de livrables acceptés sans reprise majeure&nbsp;; (c) temps médian économisé sur les trois cas d'usage retenus, estimé par les utilisateurs&nbsp;; (d) nombre d'incidents signalés — un chiffre à zéro est suspect, il signale plutôt une sous-déclaration qu'une absence de problème.</p>
+        <p><strong>Le piège à éviter.</strong> Distribuer les accès à 20 personnes le premier jour «&nbsp;pour que chacun explore&nbsp;». Résultat classique&nbsp;: trois enthousiastes, dix-sept comptes dormants, aucune capitalisation, et des pratiques divergentes impossibles à rattraper ensuite.</p>
+      </div>
+    </details><div class="solution-locked" hidden>
+  <details class="solution">
+    <summary>🔒 Corrigé détaillé — formule Premium</summary>
+    <div class="sol-body">
+      <p>Le corrigé pas à pas de cet exercice est inclus dans la formule Premium, avec les 24 corrigés du parcours.</p>
+      <p><a class="btn btn-gold" href="../tarifs.html?src=corrige">Voir les formules</a></p>
+    </div>
+  </details>
+</div>
+
+  </div>
+
+  <!-- ================================================================
+       QUIZ
+       ================================================================ -->
+
+  <h2>❓ Quiz de validation</h2>
+
+  <div class="quiz">
+    <p><strong>Validez vos acquis</strong> — une seule bonne réponse par question.</p>
+
+    <div class="quiz-q">
+      <p class="q-text">1. Qu'est-ce qui distingue le mieux Cowork du chat classique&nbsp;?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" type="button">Cowork utilise un modèle plus intelligent que le chat</button>
+        <button class="quiz-opt" type="button" data-correct="true">Cowork mène une tâche complète en plusieurs étapes et produit des fichiers dans un espace de travail</button>
+        <button class="quiz-opt" type="button">Cowork fonctionne sans connexion Internet</button>
+      </div>
+      <div class="quiz-explain">Le chat répond message par message&nbsp;; Cowork exécute une tâche délimitée de bout en bout et rend des livrables. Vous cadrez au départ et vérifiez à l'arrivée, au lieu de guider à chaque tour.</div>
+    </div>
+
+    <div class="quiz-q">
+      <p class="q-text">2. Laquelle de ces tâches se prête le mieux à une délégation&nbsp;?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" type="button">«&nbsp;Améliore la communication de mon service&nbsp;»</button>
+        <button class="quiz-opt" type="button" data-correct="true">«&nbsp;Harmonise la structure de ces 12 fiches produit selon ce gabarit&nbsp;»</button>
+        <button class="quiz-opt" type="button">«&nbsp;Dis-moi si notre stratégie est la bonne&nbsp;»</button>
+      </div>
+      <div class="quiz-explain">Une bonne tâche déléguée est délimitée (on sait quand c'est fini), vérifiable (on peut juger le résultat) et fastidieuse. Les deux autres propositions ne remplissent aucun de ces critères.</div>
+    </div>
+
+    <div class="quiz-q">
+      <p class="q-text">3. Dans un dossier de Skill, quel élément décide si la Skill se déclenche&nbsp;?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" type="button">Le nom du dossier</button>
+        <button class="quiz-opt" type="button">L'ordre alphabétique des fichiers de référence</button>
+        <button class="quiz-opt" type="button" data-correct="true">La description de déclenchement, dans l'en-tête de SKILL.md</button>
+      </div>
+      <div class="quiz-explain">La <code>description</code> doit énumérer les situations et les mots réellement employés («&nbsp;CR&nbsp;», «&nbsp;relevé de décisions&nbsp;»…). Trop vague, la Skill se déclenche à tort&nbsp;; trop étroite, elle ne se déclenche jamais.</div>
+    </div>
+
+    <div class="quiz-q">
+      <p class="q-text">4. Que signifie le principe de moindre privilège appliqué aux connecteurs&nbsp;?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" type="button">Utiliser le modèle le moins coûteux disponible</button>
+        <button class="quiz-opt" type="button" data-correct="true">N'accorder que les droits strictement nécessaires à la tâche, en lecture seule quand cela suffit</button>
+        <button class="quiz-opt" type="button">Réserver les connecteurs aux administrateurs de l'organisation</button>
+      </div>
+      <div class="quiz-explain">On connecte le périmètre utile, avec le droit minimal, et l'on exige une validation humaine pour toute action engageante&nbsp;: envoi de message, modification d'un document partagé, changement d'état d'un ticket.</div>
+    </div>
+
+    <div class="quiz-q">
+      <p class="q-text">5. Le Model Context Protocol (MCP) est…</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" type="button">Un format de fichier propriétaire réservé à Claude</button>
+        <button class="quiz-opt" type="button">Un modèle de langage spécialisé dans les connecteurs</button>
+        <button class="quiz-opt" type="button" data-correct="true">Un standard ouvert par lequel des serveurs exposent outils et ressources à un assistant</button>
+      </div>
+      <div class="quiz-explain">MCP règle le problème du «&nbsp;<em>M</em>&nbsp;×&nbsp;<em>N</em>&nbsp;»&nbsp;: une intégration écrite une fois sert à tout client compatible. Le serveur MCP devient aussi le point naturel où appliquer droits et journalisation.</div>
+    </div>
+
+    <p class="quiz-score"></p>
+  </div>
+
+  <!-- ================================================================
+       VIDÉOS & RESSOURCES
+       ================================================================ -->
+
+  <h2>🎬 Vidéos &amp; ressources officielles</h2>
+  <p>Pour approfondir ce module avec les sources d'Anthropic&nbsp;:</p>
+
+  <div class="resource-grid">
+    <a class="resource-card" href="https://www.anthropic.com/learn" target="_blank" rel="noopener">
+      <span class="kind">🎓 Cours en ligne</span>
+      <h4>Anthropic Academy</h4>
+      <p>Les parcours officiels et gratuits d'Anthropic&nbsp;: usage de Claude au travail, prompting, agents et automatisation.</p>
+    </a>
+    <a class="resource-card" href="https://modelcontextprotocol.io" target="_blank" rel="noopener">
+      <span class="kind">🔌 Protocole</span>
+      <h4>Model Context Protocol</h4>
+      <p>Le site de référence du standard ouvert derrière les connecteurs&nbsp;: concepts, spécification et serveurs existants.</p>
+    </a>
+    <a class="resource-card" href="https://support.claude.com" target="_blank" rel="noopener">
+      <span class="kind">🛟 Centre d'aide</span>
+      <h4>Support Claude</h4>
+      <p>Articles pratiques sur les espaces de travail, les fichiers, les connecteurs et la gestion des comptes d'équipe.</p>
+    </a>
+    <a class="resource-card" href="https://www.youtube.com/results?search_query=Anthropic+Claude+Cowork" target="_blank" rel="noopener">
+      <span class="kind">🎬 Vidéos</span>
+      <h4>Démonstrations en vidéo</h4>
+      <p>Recherche YouTube sur les démonstrations et annonces officielles d'Anthropic (en anglais, sous-titres disponibles).</p>
+    </a>
+  </div>
+
+  <nav class="page-nav">
+    <a href="prompting.html">← Module 3 · L'art du prompt</a>
+    <a class="next" href="claude-code.html">Module 5 · Claude Code →</a>
+  </nav>
+
+</main>
+
+<div class="upsell-bar" data-upsell-bar hidden></div>
+
+<footer class="site-footer">
+  <p>Formation Claude — projet pédagogique indépendant, non affilié à Anthropic.</p>
+</footer>
+
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

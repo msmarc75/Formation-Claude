@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mon compte — Formation Claude Premium</title>
+<meta name="description" content="Formule en cours, progression consolidée et gestion de l'abonnement de démonstration.">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✳️</text></svg>">
+</head>
+<body>
+
+<div class="demo-banner">
+  <strong>Démonstration</strong> — abonnement simulé, stocké dans votre navigateur uniquement.
+</div>
+
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="index.html"><span class="spark">✳</span> Formation Claude</a>
+    <nav class="main-nav" aria-label="Navigation principale">
+      <a href="index.html">Accueil</a>
+      <a href="pages/fondamentaux.html">Fondamentaux</a>
+      <a href="pages/claude-code.html">Claude Code</a>
+      <a href="pages/api.html">API</a>
+      <a href="pages/ressources.html">Ressources</a>
+      <a href="tarifs.html">Tarifs</a>
+      <a href="compte.html" aria-current="page">Mon compte</a>
+    </nav>
+    <div data-plan-pill data-base=""></div>
+  </div>
+</header>
+
+<main>
+
+  <h1>Mon compte</h1>
+
+  <section class="checkout-panel">
+    <h2 style="margin-top:0">Formule en cours</h2>
+    <p id="plan-line" class="lead" style="margin:0"></p>
+    <div id="plan-actions" style="margin-top:1.2rem"></div>
+  </section>
+
+  <h2>Votre progression</h2>
+  <div class="page-progress" id="global-progress"></div>
+  <div class="module-grid" id="module-list"></div>
+
+  <h2>Vos données</h2>
+  <p>Cette démonstration ne comporte aucun compte utilisateur ni serveur. Tout ce qui vous concerne — formule, progression, prénom saisi dans le tunnel — vit dans le <code>localStorage</code> de ce navigateur, et nulle part ailleurs. Rien n'est envoyé, rien n'est partagé, rien ne vous suit d'un appareil à l'autre.</p>
+  <p><button class="btn btn-ghost" type="button" id="reset">Effacer toutes mes données locales</button></p>
+
+  <div class="callout warn">
+    <span class="title">⚠️ Ce que ce serait, pour de vrai</span>
+    Un abonnement réel supposerait un compte authentifié côté serveur, un contenu délivré seulement après vérification du droit d'accès, et un prestataire de paiement. Ici, changer de formule revient à modifier une valeur dans votre navigateur — c'est précisément pourquoi ce verrouillage ne protège rien.
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <p>Formation Claude — projet pédagogique indépendant, non affilié à Anthropic.<br>
+  <a href="../index.html">Version 1 — intégralement gratuite</a> · <a href="tarifs.html">Tarifs</a></p>
+</footer>
+
+<script src="assets/js/app.js"></script>
+<script>
+(function () {
+  var MODULES = [
+    ["fondamentaux", "1. Fondamentaux", 9, 3, "🧭"],
+    ["chat", "2. Claude Chat", 9, 3, "💬"],
+    ["prompting", "3. L'art du prompt", 9, 3, "✍️"],
+    ["cowork", "4. Cowork & équipe", 9, 3, "🤝"],
+    ["claude-code", "5. Claude Code", 10, 3, "⌨️"],
+    ["api", "6. API & développeurs", 10, 3, "🔌"],
+    ["integrations", "7. Intégrations", 8, 2, "🧩"],
+    ["bonnes-pratiques", "8. Bonnes pratiques", 8, 3, "🛡️"]
+  ];
+
+  function done() {
+    try { return JSON.parse(localStorage.getItem("fc2-done") || "{}") || {}; }
+    catch (e) { return {}; }
+  }
+  function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+
+  function render() {
+    var premium = window.fcGetPlan() === "premium";
+    var prenom = get("fc2-prenom");
+    var billing = get("fc2-billing") === "annuel" ? "annuel" : "mensuel";
+    var P = window.fcPrices;
+
+    document.getElementById("plan-line").innerHTML = premium
+      ? '<span class="plan-pill premium">★ Premium</span> ' +
+        (prenom ? "Bonjour " + prenom + ". " : "") +
+        "Vous avez accès aux 72 leçons et aux 24 corrigés. Facturation " + billing +
+        " (" + (billing === "annuel" ? P.annuel * 12 + " € par an" : P.mensuel + " € par mois") + "), fictive."
+      : '<span class="plan-pill gratuit">Formule gratuite</span> ' +
+        "Vous avez accès aux 23 leçons de niveau Débutant, aux 40 questions de quiz et aux 24 énoncés d'exercices.";
+
+    document.getElementById("plan-actions").innerHTML = premium
+      ? '<button class="btn btn-ghost" type="button" id="resil">Revenir à la formule gratuite</button>'
+      : '<a class="btn btn-gold" href="tarifs.html?src=compte">Découvrir la formule Premium</a>';
+
+    var r = document.getElementById("resil");
+    if (r) r.addEventListener("click", function () {
+      if (confirm("Revenir à la formule gratuite ? Votre progression est conservée.")) {
+        window.fcSetPlan("gratuit"); render();
+      }
+    });
+
+    var map = done(), totalDone = 0, totalShown = 0, html = "";
+    MODULES.forEach(function (m) {
+      var slug = m[0], titre = m[1], total = m[2], free = m[3], emoji = m[4];
+      var shown = premium ? total : free;
+      var d = Object.keys(map).filter(function (k) { return k.indexOf(slug + ":") === 0; }).length;
+      if (d > shown) d = shown;
+      totalDone += d; totalShown += shown;
+      var pct = shown ? Math.round(d / shown * 100) : 0;
+      html += '<a class="module-card" href="pages/' + slug + '.html">' +
+        '<span class="emoji">' + emoji + '</span><h3>' + titre + '</h3>' +
+        '<div class="progress-track"><div class="progress-fill" style="width:' + pct + '%"></div></div>' +
+        '<span class="meta">' + d + ' / ' + shown + ' leçons terminées' +
+        (premium || total === free ? "" : "  ·  +" + (total - free) + " en Premium") +
+        '</span></a>';
+    });
+    document.getElementById("module-list").innerHTML = html;
+
+    var gp = totalShown ? Math.round(totalDone / totalShown * 100) : 0;
+    document.getElementById("global-progress").innerHTML =
+      "<strong>Progression globale :</strong> " + totalDone + " / " + totalShown +
+      " leçons terminées (" + gp + " %)" +
+      '<div class="progress-track"><div class="progress-fill" style="width:' + gp + '%"></div></div>';
+  }
+
+  document.getElementById("reset").addEventListener("click", function () {
+    if (!confirm("Effacer votre formule, votre progression et vos préférences ?")) return;
+    ["fc2-plan", "fc2-done", "fc2-level", "fc2-billing", "fc2-prenom", "fc2-bar-closed"]
+      .forEach(function (k) { try { localStorage.removeItem(k); } catch (e) {} });
+    window.location.reload();
+  });
+
+  document.addEventListener("DOMContentLoaded", render);
+  if (document.readyState !== "loading") render();
+})();
+</script>
+</body>
+</html>

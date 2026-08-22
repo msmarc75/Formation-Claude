@@ -20,6 +20,44 @@ Un site de formation complet et gratuit à l'écosystème **Claude** (Anthropic)
 
 Chaque module propose des **cours**, des **exercices corrigés**, un **quiz interactif** et une sélection de **vidéos et ressources officielles**.
 
+
+## Deux versions du site
+
+Ce dépôt contient **deux conditionnements du même contenu pédagogique**.
+
+| | Version 1 | Version 2 — freemium |
+|---|---|---|
+| Chemin | `/` | `/freemium/` |
+| En ligne | [le site](https://msmarc75.github.io/Formation-Claude/) | [la version freemium](https://msmarc75.github.io/Formation-Claude/freemium/) |
+| Accès | Tout est gratuit, sans verrou | 23 leçons Débutant offertes, 49 leçons Intermédiaire et Pro en Premium |
+| Corrigés d'exercices | Les 24 | Réservés à la formule Premium |
+| Bibliothèque | Complète | Glossaire, plan de révision et aide-mémoire en Premium |
+| Paiement | — | Tunnel **simulé**, aucune transaction |
+
+Le contenu des 72 leçons est **rigoureusement identique** entre les deux versions : la v2 est **générée** depuis la v1 par `build/build-freemium.py`. Toute divergence de contenu est un bug.
+
+### ⚠️ La version freemium ne protège rien
+
+La v2 est une **maquette de modèle économique**, pas un système de contrôle d'accès. Le site est entièrement statique : les leçons Premium sont présentes dans le HTML envoyé au navigateur et seulement masquées par JavaScript. N'importe qui peut les lire en désactivant JavaScript ou en ouvrant le code source.
+
+Une mise en production réelle exigerait trois choses qu'un site statique ne peut pas fournir :
+
+1. une **authentification côté serveur** (comptes, sessions) ;
+2. un **serveur qui ne renvoie le contenu premium qu'après vérification** du droit d'accès — le contenu ne doit jamais atteindre un navigateur non autorisé ;
+3. un **prestataire de paiement** (Stripe, Paddle…) et la gestion du cycle de vie des abonnements.
+
+Le tunnel d'abonnement de la v2 ne demande aucun moyen de paiement, n'envoie aucune donnée et se contente d'écrire une valeur dans le `localStorage`.
+
+### Régénérer la version freemium
+
+Après toute modification du contenu dans `/pages` :
+
+```bash
+python3 build/build-freemium.py      # régénère /freemium/pages
+python3 build/validate-freemium.py   # contrôle la cohérence du résultat
+```
+
+
 ## Le principe des niveaux
 
 Un sélecteur de niveau, présent dans l'en-tête de chaque page, filtre le contenu. Les niveaux sont **cumulatifs** :

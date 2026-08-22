@@ -1,0 +1,875 @@
+/* ==========================================================================
+   Formation Claude — Design system
+   Site statique, zéro dépendance. Thème clair/sombre automatique.
+   ========================================================================== */
+
+:root {
+  --bg: #faf9f5;
+  --bg-alt: #f0eee6;
+  --surface: #ffffff;
+  --text: #1f1e1d;
+  --text-soft: #5e5d59;
+  --border: #e3e1d9;
+  --accent: #c15f3c;          /* terracotta Claude */
+  --accent-soft: #f5e6df;
+  --link: #a04d2e;
+  --code-bg: #282524;
+  --code-text: #f5f1ea;
+  --ok: #1a7f4b;
+  --ok-soft: #e2f3e9;
+  --warn: #b3591a;
+  --warn-soft: #fbeadb;
+  --bad: #b3261e;
+  --bad-soft: #f9e2e0;
+  --lvl-debutant: #1a7f4b;
+  --lvl-debutant-soft: #e2f3e9;
+  --lvl-intermediaire: #b3591a;
+  --lvl-intermediaire-soft: #fbeadb;
+  --lvl-pro: #6b3fa0;
+  --lvl-pro-soft: #efe6f9;
+  --radius: 12px;
+  --shadow: 0 1px 3px rgba(0, 0, 0, .07), 0 4px 14px rgba(0, 0, 0, .05);
+  --maxw: 60rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1c1a19;
+    --bg-alt: #262322;
+    --surface: #2b2827;
+    --text: #f0eee9;
+    --text-soft: #b3afa8;
+    --border: #403c3a;
+    --accent: #d97d5a;
+    --accent-soft: #3d2c24;
+    --link: #e29a7d;
+    --code-bg: #171514;
+    --code-text: #ece7df;
+    --ok: #4fc98a;
+    --ok-soft: #1d3529;
+    --warn: #e8964f;
+    --warn-soft: #3d2d1c;
+    --bad: #ef7b74;
+    --bad-soft: #402322;
+    --lvl-debutant: #4fc98a;
+    --lvl-debutant-soft: #1d3529;
+    --lvl-intermediaire: #e8964f;
+    --lvl-intermediaire-soft: #3d2d1c;
+    --lvl-pro: #b78ae0;
+    --lvl-pro-soft: #2e2340;
+    --shadow: 0 1px 3px rgba(0, 0, 0, .4);
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--text);
+  background: var(--bg);
+}
+
+/* ----- En-tête ----------------------------------------------------------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+
+.site-header .inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: .6rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-decoration: none;
+  color: var(--text);
+  white-space: nowrap;
+}
+.brand .spark { color: var(--accent); }
+
+.main-nav {
+  display: flex;
+  gap: .15rem;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+.main-nav a {
+  text-decoration: none;
+  color: var(--text-soft);
+  font-size: .88rem;
+  padding: .3rem .55rem;
+  border-radius: 8px;
+}
+.main-nav a:hover { background: var(--bg-alt); color: var(--text); }
+.main-nav a[aria-current="page"] { color: var(--accent); font-weight: 600; }
+
+/* Commutateur de niveau (injecté par app.js) */
+.level-switcher {
+  display: flex;
+  gap: .25rem;
+  background: var(--bg-alt);
+  border-radius: 999px;
+  padding: .2rem;
+}
+.level-switcher button {
+  border: none;
+  background: transparent;
+  font: inherit;
+  font-size: .82rem;
+  padding: .25rem .7rem;
+  border-radius: 999px;
+  cursor: pointer;
+  color: var(--text-soft);
+}
+.level-switcher button.active { background: var(--surface); color: var(--text); font-weight: 600; box-shadow: var(--shadow); }
+.level-switcher button:focus-visible { outline: 2px solid var(--accent); }
+
+/* ----- Mise en page ------------------------------------------------------ */
+
+main {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 4rem;
+}
+
+h1 { font-size: 2rem; line-height: 1.25; margin: 1rem 0 .5rem; }
+h2 { font-size: 1.45rem; margin-top: 2.5rem; }
+h3 { font-size: 1.15rem; }
+h1, h2, h3 { font-weight: 700; letter-spacing: -.01em; }
+
+p, ul, ol { color: var(--text); }
+a { color: var(--link); }
+
+.lead { font-size: 1.15rem; color: var(--text-soft); max-width: 44rem; }
+
+hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+
+/* ----- Hero (accueil) ---------------------------------------------------- */
+
+.hero {
+  text-align: center;
+  padding: 3rem 0 1.5rem;
+}
+.hero h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: .75rem; }
+.hero .lead { margin: 0 auto 1.5rem; }
+
+.badge-row { display: flex; gap: .5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1rem; }
+
+/* Sélecteur de niveau grand format (accueil) */
+.level-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+.level-card {
+  text-align: left;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 1.1rem 1.2rem;
+  cursor: pointer;
+  font: inherit;
+  color: var(--text);
+  transition: border-color .15s, transform .15s;
+}
+.level-card:hover { transform: translateY(-2px); }
+.level-card h3 { margin: .2rem 0 .35rem; }
+.level-card p { margin: 0; font-size: .9rem; color: var(--text-soft); }
+.level-card.selected { border-color: var(--accent); box-shadow: var(--shadow); }
+.level-card .lvl-dot { font-size: 1.4rem; }
+
+/* ----- Badges de niveau -------------------------------------------------- */
+
+.lvl-badge {
+  display: inline-block;
+  font-size: .74rem;
+  font-weight: 700;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  padding: .12rem .55rem;
+  border-radius: 999px;
+  vertical-align: middle;
+}
+.lvl-badge.debutant { color: var(--lvl-debutant); background: var(--lvl-debutant-soft); }
+.lvl-badge.intermediaire { color: var(--lvl-intermediaire); background: var(--lvl-intermediaire-soft); }
+.lvl-badge.pro { color: var(--lvl-pro); background: var(--lvl-pro-soft); }
+
+/* ----- Cartes de modules (accueil) --------------------------------------- */
+
+.module-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.module-card {
+  display: block;
+  text-decoration: none;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.15rem 1.25rem;
+  transition: transform .15s, box-shadow .15s;
+}
+.module-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+.module-card .emoji { font-size: 1.7rem; }
+.module-card h3 { margin: .5rem 0 .3rem; }
+.module-card p { margin: 0 0 .8rem; font-size: .89rem; color: var(--text-soft); }
+.module-card .meta { font-size: .78rem; color: var(--text-soft); }
+
+/* ----- Progression ------------------------------------------------------- */
+
+.progress-track {
+  height: 7px;
+  background: var(--bg-alt);
+  border-radius: 999px;
+  overflow: hidden;
+  margin: .35rem 0;
+}
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  border-radius: 999px;
+  transition: width .4s ease;
+}
+.page-progress {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: .8rem 1.1rem;
+  margin: 1.25rem 0;
+  font-size: .9rem;
+  color: var(--text-soft);
+}
+
+/* ----- Leçons ------------------------------------------------------------ */
+
+.lesson {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.6rem;
+  margin: 1.25rem 0;
+}
+.lesson > h3:first-of-type, .lesson > h2:first-of-type { margin-top: 0; }
+.lesson-head { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+.lesson-head h3 { margin: 0; font-size: 1.25rem; }
+
+.lesson.done { border-color: color-mix(in srgb, var(--ok) 45%, var(--border)); }
+.lesson.done .lesson-head h3::after { content: " ✓"; color: var(--ok); }
+
+.mark-done {
+  font: inherit;
+  font-size: .82rem;
+  border: 1px solid var(--border);
+  background: var(--bg-alt);
+  color: var(--text-soft);
+  border-radius: 999px;
+  padding: .3rem .85rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+.mark-done:hover { border-color: var(--ok); color: var(--ok); }
+.mark-done.is-done { background: var(--ok-soft); border-color: var(--ok); color: var(--ok); font-weight: 600; }
+
+/* Bandeau contenu masqué */
+.hidden-notice {
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  padding: .8rem 1.1rem;
+  color: var(--text-soft);
+  font-size: .9rem;
+  margin: 1.25rem 0;
+}
+.hidden-notice button {
+  font: inherit; font-size: .85rem;
+  border: none; background: none; color: var(--link);
+  cursor: pointer; text-decoration: underline; padding: 0;
+}
+
+/* ----- Encadrés ---------------------------------------------------------- */
+
+.callout {
+  border-left: 4px solid var(--accent);
+  background: var(--accent-soft);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: .85rem 1.1rem;
+  margin: 1rem 0;
+  font-size: .95rem;
+}
+.callout.tip { border-color: var(--ok); background: var(--ok-soft); }
+.callout.warn { border-color: var(--warn); background: var(--warn-soft); }
+.callout .title { font-weight: 700; display: block; margin-bottom: .15rem; }
+
+/* ----- Code -------------------------------------------------------------- */
+
+pre {
+  position: relative;
+  background: var(--code-bg);
+  color: var(--code-text);
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+  font-size: .87rem;
+  line-height: 1.55;
+}
+code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+:not(pre) > code {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: .08em .35em;
+  font-size: .86em;
+}
+
+.copy-btn {
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+  font: inherit;
+  font-size: .72rem;
+  border: 1px solid rgba(255, 255, 255, .25);
+  background: rgba(255, 255, 255, .08);
+  color: var(--code-text);
+  border-radius: 6px;
+  padding: .18rem .55rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity .15s;
+}
+pre:hover .copy-btn, .copy-btn:focus-visible { opacity: 1; }
+.copy-btn.copied { border-color: var(--ok); color: #7fe0ab; }
+
+/* ----- Exercices --------------------------------------------------------- */
+
+.exercise {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 1.2rem 1.4rem;
+  margin: 1rem 0;
+}
+.exercise .ex-label {
+  font-size: .78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--accent);
+}
+.exercise h4 { margin: .25rem 0 .5rem; font-size: 1.05rem; }
+
+details.solution {
+  margin-top: .8rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-alt);
+}
+details.solution summary {
+  cursor: pointer;
+  padding: .55rem .9rem;
+  font-weight: 600;
+  font-size: .9rem;
+  color: var(--link);
+}
+details.solution[open] summary { border-bottom: 1px solid var(--border); }
+details.solution .sol-body { padding: .75rem 1rem; font-size: .95rem; }
+
+/* ----- Quiz -------------------------------------------------------------- */
+
+.quiz {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 1.2rem 1.4rem;
+  margin: 1.25rem 0;
+}
+.quiz-q { margin: 1.1rem 0; padding-top: 1.1rem; border-top: 1px solid var(--border); }
+.quiz-q:first-of-type { border-top: none; margin-top: .4rem; padding-top: 0; }
+.quiz-q .q-text { font-weight: 600; margin-bottom: .6rem; }
+.quiz-opts { display: grid; gap: .45rem; }
+.quiz-opt {
+  font: inherit;
+  font-size: .95rem;
+  text-align: left;
+  border: 1px solid var(--border);
+  background: var(--bg-alt);
+  color: var(--text);
+  border-radius: 8px;
+  padding: .55rem .9rem;
+  cursor: pointer;
+}
+.quiz-opt:hover:not(:disabled) { border-color: var(--accent); }
+.quiz-opt:disabled { cursor: default; opacity: .75; }
+.quiz-opt.correct { border-color: var(--ok); background: var(--ok-soft); color: var(--ok); font-weight: 600; opacity: 1; }
+.quiz-opt.wrong { border-color: var(--bad); background: var(--bad-soft); color: var(--bad); }
+.quiz-explain {
+  display: none;
+  margin-top: .6rem;
+  font-size: .9rem;
+  color: var(--text-soft);
+  background: var(--bg-alt);
+  border-radius: 8px;
+  padding: .6rem .9rem;
+}
+.quiz-q.answered .quiz-explain { display: block; }
+.quiz-score { margin-top: 1rem; font-weight: 600; display: none; }
+
+/* ----- Cartes ressources / vidéos ---------------------------------------- */
+
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: .9rem;
+  margin: 1rem 0;
+}
+.resource-card {
+  display: block;
+  text-decoration: none;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: .9rem 1.05rem;
+  transition: transform .15s, box-shadow .15s;
+}
+.resource-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.resource-card .kind {
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--accent);
+}
+.resource-card h4 { margin: .2rem 0 .25rem; font-size: .98rem; }
+.resource-card p { margin: 0; font-size: .84rem; color: var(--text-soft); }
+
+/* ----- Tableaux ---------------------------------------------------------- */
+
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: .92rem; margin: 1rem 0; }
+th, td { border: 1px solid var(--border); padding: .5rem .75rem; text-align: left; vertical-align: top; }
+th { background: var(--bg-alt); }
+
+/* ----- Navigation bas de page ------------------------------------------- */
+
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 3rem;
+  flex-wrap: wrap;
+}
+.page-nav a {
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: .7rem 1.1rem;
+  color: var(--text);
+  background: var(--surface);
+  font-size: .92rem;
+}
+.page-nav a:hover { border-color: var(--accent); }
+.page-nav .next { margin-left: auto; }
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  color: var(--text-soft);
+  font-size: .85rem;
+  text-align: center;
+  padding: 1.5rem 1.25rem 2.5rem;
+}
+.site-footer a { color: var(--text-soft); }
+
+/* ----- Divers ------------------------------------------------------------ */
+
+.toc {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: .9rem 1.3rem;
+  font-size: .92rem;
+}
+.toc ul { margin: .4rem 0; padding-left: 1.2rem; }
+
+kbd {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  padding: .05em .4em;
+  font-size: .82em;
+  font-family: inherit;
+}
+
+@media (max-width: 640px) {
+  .site-header .inner { padding: .5rem .9rem; }
+  main { padding: 1rem .9rem 3rem; }
+  .lesson, .exercise, .quiz { padding: 1rem 1.05rem; }
+}
+
+/* Un composant qui déclare `display: flex` écrase la règle [hidden] du
+   navigateur et reste visible malgré l'attribut. Les barres et bandeaux de
+   cette couche sont dans ce cas : on rétablit la priorité une fois pour toutes. */
+[hidden] { display: none !important; }
+
+/* ==========================================================================
+   COUCHE FREEMIUM (v2) — verrouillage, tarifs, tunnel d'abonnement
+   ========================================================================== */
+
+:root {
+  --gold: #9a6b1f;
+  --gold-soft: #fbf1dc;
+  --gold-border: #e6d0a3;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --gold: #e2b45c;
+    --gold-soft: #382d18;
+    --gold-border: #5c4720;
+  }
+}
+
+/* ----- Bandeau de démonstration ----------------------------------------- */
+
+.demo-banner {
+  background: var(--warn-soft);
+  color: var(--warn);
+  border-bottom: 1px solid var(--gold-border);
+  font-size: .82rem;
+  text-align: center;
+  padding: .4rem 1rem;
+}
+.demo-banner strong { font-weight: 700; }
+
+/* ----- Pastille de formule dans l'en-tête -------------------------------- */
+
+.plan-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-size: .78rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: .25rem .7rem;
+  text-decoration: none;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+.plan-pill.gratuit {
+  background: var(--gold-soft);
+  color: var(--gold);
+  border-color: var(--gold-border);
+}
+.plan-pill.gratuit:hover { background: var(--gold); color: #fff; }
+.plan-pill.premium {
+  background: var(--gold);
+  color: #fff;
+}
+
+/* ----- Badge premium ----------------------------------------------------- */
+
+.premium-badge {
+  display: inline-block;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: .12rem .5rem;
+  border-radius: 999px;
+  background: var(--gold-soft);
+  color: var(--gold);
+  border: 1px solid var(--gold-border);
+  vertical-align: middle;
+}
+
+/* ----- Leçon verrouillée ------------------------------------------------- */
+
+.lesson-locked {
+  position: relative;
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 1.4rem 1.6rem 1.2rem;
+  margin: 1.25rem 0;
+  overflow: hidden;
+}
+.lesson-locked .lesson-head { margin-bottom: .5rem; }
+.lesson-locked .lesson-head h3 { margin: 0; font-size: 1.25rem; }
+
+.locked-teaser {
+  position: relative;
+  max-height: 5.2rem;
+  overflow: hidden;
+  color: var(--text-soft);
+  font-size: .95rem;
+  margin: .5rem 0 0;
+}
+.locked-teaser::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 3.2rem;
+  background: linear-gradient(to bottom,
+    color-mix(in srgb, var(--surface) 0%, transparent),
+    var(--surface) 92%);
+}
+.locked-teaser p:last-child { filter: blur(2.5px); user-select: none; }
+
+.locked-cta {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  flex-wrap: wrap;
+  margin-top: .9rem;
+  padding-top: .9rem;
+  border-top: 1px dashed var(--gold-border);
+}
+.locked-cta .lock-icon { font-size: 1.1rem; }
+.locked-cta .lock-text { font-size: .88rem; color: var(--text-soft); flex: 1 1 12rem; }
+
+/* ----- Boutons ----------------------------------------------------------- */
+
+.btn {
+  display: inline-block;
+  font: inherit;
+  font-size: .9rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: .5rem 1.2rem;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  transition: transform .12s, filter .12s;
+}
+.btn:hover { transform: translateY(-1px); filter: brightness(1.06); }
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-gold { background: var(--gold); color: #fff; }
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border);
+}
+.btn-ghost:hover { border-color: var(--accent); }
+.btn-block { display: block; width: 100%; }
+
+/* ----- Compteur de valeur en tête de module ------------------------------ */
+
+.value-teaser {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  background: var(--gold-soft);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius);
+  padding: .9rem 1.2rem;
+  margin: 1.25rem 0;
+  font-size: .92rem;
+}
+.value-teaser .vt-text { flex: 1 1 16rem; color: var(--text); }
+.value-teaser strong { color: var(--gold); }
+
+/* ----- Sélecteur de niveau verrouillé ------------------------------------ */
+
+.level-switcher button.locked { opacity: .6; }
+.level-switcher button.locked::after { content: " 🔒"; font-size: .8em; }
+
+/* ----- Page tarifs ------------------------------------------------------- */
+
+.billing-toggle {
+  display: inline-flex;
+  gap: .25rem;
+  background: var(--bg-alt);
+  border-radius: 999px;
+  padding: .22rem;
+  margin: 1rem 0 1.5rem;
+}
+.billing-toggle button {
+  font: inherit;
+  font-size: .85rem;
+  border: none;
+  background: transparent;
+  color: var(--text-soft);
+  border-radius: 999px;
+  padding: .35rem 1rem;
+  cursor: pointer;
+}
+.billing-toggle button.active {
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 600;
+  box-shadow: var(--shadow);
+}
+
+.plan-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1.25rem;
+  margin: 1.5rem 0;
+  align-items: start;
+}
+.plan-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 1.5rem 1.6rem;
+}
+.plan-card.featured {
+  border-color: var(--gold);
+  border-width: 2px;
+  box-shadow: var(--shadow);
+  position: relative;
+}
+.plan-card.featured::before {
+  content: "Le plus complet";
+  position: absolute;
+  top: -.72rem;
+  left: 1.4rem;
+  background: var(--gold);
+  color: #fff;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: .15rem .7rem;
+  border-radius: 999px;
+}
+.plan-card h3 { margin: 0 0 .2rem; font-size: 1.3rem; }
+.plan-card .plan-sub { color: var(--text-soft); font-size: .9rem; margin: 0 0 1rem; }
+.plan-price { font-size: 2.2rem; font-weight: 700; letter-spacing: -.02em; }
+.plan-price .per { font-size: .95rem; font-weight: 400; color: var(--text-soft); }
+.plan-note { font-size: .82rem; color: var(--text-soft); min-height: 1.2rem; margin: .1rem 0 1.1rem; }
+.plan-features { list-style: none; padding: 0; margin: 1.2rem 0 0; font-size: .92rem; }
+.plan-features li { padding: .3rem 0 .3rem 1.6rem; position: relative; }
+.plan-features li::before {
+  content: "✓"; position: absolute; left: 0; color: var(--ok); font-weight: 700;
+}
+.plan-features li.no::before { content: "—"; color: var(--text-soft); }
+.plan-features li.no { color: var(--text-soft); }
+
+/* ----- Tunnel d'abonnement ---------------------------------------------- */
+
+.checkout-steps {
+  display: flex;
+  gap: .5rem;
+  margin: 1.5rem 0;
+  font-size: .82rem;
+  flex-wrap: wrap;
+}
+.checkout-steps span {
+  flex: 1 1 8rem;
+  padding: .45rem .8rem;
+  border-radius: 8px;
+  background: var(--bg-alt);
+  color: var(--text-soft);
+  text-align: center;
+  border: 1px solid var(--border);
+}
+.checkout-steps span.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: var(--accent);
+  font-weight: 600;
+}
+.checkout-steps span.done { color: var(--ok); border-color: var(--ok); }
+
+.checkout-panel {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 1.6rem 1.8rem;
+  margin: 1.25rem 0;
+}
+.field { margin: .9rem 0; }
+.field label { display: block; font-size: .86rem; font-weight: 600; margin-bottom: .25rem; }
+.field input, .field select {
+  width: 100%;
+  font: inherit;
+  font-size: .95rem;
+  padding: .55rem .8rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+}
+.field input:focus, .field select:focus { outline: 2px solid var(--accent); border-color: var(--accent); }
+.field .hint { font-size: .78rem; color: var(--text-soft); margin-top: .2rem; }
+
+.recap {
+  background: var(--bg-alt);
+  border-radius: 8px;
+  padding: .9rem 1.1rem;
+  font-size: .92rem;
+}
+.recap .line { display: flex; justify-content: space-between; padding: .25rem 0; }
+.recap .line.total {
+  border-top: 1px solid var(--border);
+  margin-top: .4rem;
+  padding-top: .55rem;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.success-box {
+  text-align: center;
+  padding: 2rem 1.5rem;
+}
+.success-box .big { font-size: 3rem; line-height: 1; }
+.success-box h2 { margin: .6rem 0 .4rem; }
+
+/* ----- Tableau comparatif ------------------------------------------------ */
+
+.compare td.yes { color: var(--ok); font-weight: 600; }
+.compare td.no { color: var(--text-soft); }
+.compare th:nth-child(3) { background: var(--gold-soft); color: var(--gold); }
+
+/* ----- Bandeau bas de page ----------------------------------------------- */
+
+.upsell-bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  background: color-mix(in srgb, var(--surface) 95%, transparent);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid var(--gold-border);
+  padding: .7rem 1.25rem;
+  font-size: .88rem;
+}
+.upsell-bar .ub-text { flex: 1 1 14rem; }
+.upsell-bar .ub-close {
+  border: none; background: none; cursor: pointer;
+  color: var(--text-soft); font-size: 1.1rem; line-height: 1; padding: .2rem .4rem;
+}
+
+@media (max-width: 640px) {
+  .plan-card { padding: 1.2rem 1.2rem; }
+  .checkout-panel { padding: 1.1rem 1.1rem; }
+  .lesson-locked { padding: 1.1rem 1.1rem 1rem; }
+}
