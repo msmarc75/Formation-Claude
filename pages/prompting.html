@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>L'art du prompt — Formation Claude</title>
+<meta name="description" content="Écrire de meilleurs prompts : anatomie, rôle et contexte, itération, few-shot, format de sortie, décomposition, balises XML, chaîne de raisonnement et évaluation. Cours, exercices et quiz en français.">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✳️</text></svg>">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="../index.html"><span class="spark">✳</span> Formation Claude</a>
+    <nav class="main-nav" aria-label="Navigation principale">
+      <a href="../index.html">Accueil</a>
+      <a href="fondamentaux.html">Fondamentaux</a>
+      <a href="chat.html">Chat</a>
+      <a href="prompting.html" aria-current="page">Prompting</a>
+      <a href="cowork.html">Cowork</a>
+      <a href="claude-code.html">Claude Code</a>
+      <a href="api.html">API</a>
+      <a href="integrations.html">Intégrations</a>
+      <a href="bonnes-pratiques.html">Bonnes pratiques</a>
+      <a href="ressources.html">Ressources</a>
+    </nav>
+    <div data-level-switcher></div>
+  </div>
+</header>
+
+<main>
+
+  <p><span class="lvl-badge debutant">Module 3</span></p>
+  <h1>✍️ L'art du prompt</h1>
+  <p class="lead">Un prompt n'est pas une incantation&nbsp;: c'est un cahier des charges. Ce module montre comment passer d'une demande vague à une consigne qui produit exactement le résultat attendu — des quatre ingrédients de base jusqu'aux prompts système structurés et à leur évaluation méthodique.</p>
+
+  <div class="page-progress" data-page-progress></div>
+
+  <div class="toc">
+    <strong>Objectifs de ce module</strong>
+    <ul>
+      <li>Construire un prompt complet&nbsp;: objectif, contexte, contraintes, format.</li>
+      <li>Utiliser le rôle, les exemples et l'itération pour gagner en précision.</li>
+      <li>Contrôler la sortie et décomposer les tâches complexes.</li>
+      <li>Structurer en XML, guider le raisonnement et évaluer ses prompts.</li>
+    </ul>
+  </div>
+
+  <div class="hidden-notice" data-hidden-notice hidden></div>
+
+  <!-- ================================================================
+       NIVEAU DÉBUTANT
+       ================================================================ -->
+
+  <h2>🟢 Niveau débutant</h2>
+
+  <section class="lesson" data-lesson="prompting:anatomie" data-level="debutant">
+    <div class="lesson-head">
+      <h3>1. Anatomie d'un bon prompt</h3>
+      <span class="lvl-badge debutant">Débutant</span>
+    </div>
+    <p>Un prompt efficace tient en quatre ingrédients. Aucun n'est obligatoire, mais chacun manquant est une décision que vous laissez prendre à Claude à votre place.</p>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Ingrédient</th><th>Question à laquelle il répond</th></tr>
+      <tr><td><strong>Objectif</strong></td><td>Qu'est-ce que je veux obtenir, et pour en faire quoi&nbsp;?</td></tr>
+      <tr><td><strong>Contexte</strong></td><td>Qui suis-je, à qui cela s'adresse, dans quelle situation&nbsp;?</td></tr>
+      <tr><td><strong>Contraintes</strong></td><td>Qu'est-ce qui est interdit, imposé, limité&nbsp;?</td></tr>
+      <tr><td><strong>Format</strong></td><td>À quoi doit ressembler la réponse&nbsp;?</td></tr>
+    </table>
+    </div>
+    <p><strong>Avant.</strong> Une demande courante, et le résultat qu'elle produit&nbsp;:</p>
+    <pre><code>Écris une annonce pour recruter un développeur.</code></pre>
+    <p>Claude produira une annonce correcte et parfaitement interchangeable&nbsp;: elle ne parle ni de votre entreprise, ni de votre poste, et il vous faudra la réécrire entièrement.</p>
+    <p><strong>Après.</strong> La même demande, avec les quatre ingrédients&nbsp;:</p>
+    <pre><code>OBJECTIF
+Rédige une offre d'emploi publiable telle quelle sur notre site.
+
+CONTEXTE
+- Entreprise : éditeur de logiciel de gestion pour laboratoires
+  d'analyses, 30 personnes, Nantes, 15 ans d'existence.
+- Poste : développeur back-end, 3 à 6 ans d'expérience.
+- Ce qui plaît chez nous : produit stable, clients fidèles,
+  deux jours de télétravail, pas d'astreinte.
+- Ce qui peut rebuter : base de code ancienne à moderniser.
+
+CONTRAINTES
+- 350 mots maximum.
+- Dire honnêtement que la base de code est ancienne.
+- Ne mentionner ni salaire ni technologies précises : je les ajoute.
+- Pas de superlatifs (« leader », « passionné », « excellence »).
+
+FORMAT
+Titre du poste, 3 lignes sur l'entreprise, « Votre mission »
+(5 puces), « Ce que nous cherchons » (5 puces), « Pourquoi nous
+rejoindre » (3 puces), une ligne pour candidater.</code></pre>
+    <p>La différence n'est pas de longueur, elle est de <em>décisions</em>&nbsp;: le second prompt en prend une quinzaine que le premier abandonnait. Et il est réutilisable&nbsp;: pour le prochain poste, seul le bloc CONTEXTE change.</p>
+    <div class="callout tip">
+      <span class="title">💡 À retenir</span>
+      Le test&nbsp;: donneriez-vous ce prompt tel quel à un nouveau stagiaire compétent mais qui ne connaît rien à votre entreprise&nbsp;? S'il aurait besoin de vous poser des questions, ajoutez les réponses au prompt.
+    </div>
+  </section>
+
+  <section class="lesson" data-lesson="prompting:role-contexte" data-level="debutant">
+    <div class="lesson-head">
+      <h3>2. Donner un rôle et du contexte</h3>
+      <span class="lvl-badge debutant">Débutant</span>
+    </div>
+    <p>Attribuer un <strong>rôle</strong> à Claude oriente son vocabulaire, son niveau de détail et les points qu'il juge importants. C'est le moyen le plus économique de changer une réponse entière.</p>
+    <p>Comparez ces trois ouvertures sur un même sujet&nbsp;:</p>
+    <pre><code>Tu es un expert-comptable. Explique le seuil de TVA à un artisan
+qui démarre son activité.
+
+Tu es un formateur qui s'adresse à des étudiants de première année.
+Explique le seuil de TVA, avec un exemple chiffré simple.
+
+Tu es un auditeur méticuleux. Liste les cas limites et les erreurs
+fréquentes autour du seuil de TVA, sous forme de check-list.</code></pre>
+    <p>Le sujet est identique&nbsp;; les trois réponses n'ont ni la même structure, ni la même longueur, ni le même angle.</p>
+    <p>Un rôle prend toute sa valeur quand on lui ajoute <strong>l'audience</strong> et le <strong>ton</strong>. La trilogie rôle&nbsp;/ audience&nbsp;/ ton se formule en trois lignes&nbsp;:</p>
+    <pre><code>RÔLE : tu es responsable de la communication interne d'un hôpital.
+AUDIENCE : les 400 soignants, souvent lus en 30 secondes entre
+deux patients, sur téléphone.
+TON : factuel, chaleureux mais bref, aucune formule creuse,
+aucun jargon administratif.
+
+Rédige l'annonce du changement d'horaires du service de nuit à
+partir du 1er septembre. 120 mots maximum. Termine par le nom
+de la personne à contacter en cas de difficulté.</code></pre>
+    <div class="callout">
+      <span class="title">✳ Le réflexe clé</span>
+      Un rôle décrit une <em>posture</em>, pas un pouvoir&nbsp;: écrire «&nbsp;tu es avocat&nbsp;» ne rend pas la réponse juridiquement fiable et ne remplace pas un professionnel. Le rôle change la forme et l'angle, pas le degré de vérité — celui-ci se travaille avec les sources et la vérification (module&nbsp;8).
+    </div>
+    <p>Un dernier réglage souvent oublié&nbsp;: le <strong>niveau de connaissance de votre interlocuteur</strong>. «&nbsp;Explique-moi comme à quelqu'un qui connaît le métier mais pas la technique&nbsp;» produit un texte bien plus juste que «&nbsp;explique simplement&nbsp;», qui aboutit souvent à un texte enfantin et creux.</p>
+  </section>
+
+  <section class="lesson" data-lesson="prompting:iterer" data-level="debutant">
+    <div class="lesson-head">
+      <h3>3. Itérer plutôt que recommencer</h3>
+      <span class="lvl-badge debutant">Débutant</span>
+    </div>
+    <p>L'erreur la plus répandue chez les débutants&nbsp;: obtenir une réponse imparfaite, effacer, et réécrire un prompt «&nbsp;meilleur&nbsp;» depuis zéro. C'est un gâchis&nbsp;: la première réponse contient déjà 70&nbsp;% de ce que vous vouliez, et Claude a tout le contexte en tête.</p>
+    <p>Un bon message de suivi obéit à trois règles&nbsp;: <strong>dire ce qui va</strong>, <strong>dire ce qui ne va pas</strong>, <strong>dire ce qu'on veut à la place</strong>.</p>
+    <pre><code>Le plan et le ton sont bons, garde-les.
+Deux problèmes : le paragraphe 2 est trop abstrait, et la
+conclusion répète l'introduction.
+Réécris uniquement ces deux passages : le paragraphe 2 avec un
+exemple chiffré réel de notre secteur, la conclusion avec une
+seule question ouverte adressée au lecteur.</code></pre>
+    <p>Quelques suivis à garder sous la main&nbsp;:</p>
+    <ul>
+      <li><strong>Resserrer</strong>&nbsp;: «&nbsp;Réduis de moitié sans perdre d'information&nbsp;; supprime d'abord les adverbes et les transitions.&nbsp;»</li>
+      <li><strong>Faire critiquer</strong>&nbsp;: «&nbsp;Relis ta réponse et liste ses trois faiblesses les plus sérieuses, puis corrige-les.&nbsp;»</li>
+      <li><strong>Diversifier</strong>&nbsp;: «&nbsp;Propose trois versions vraiment différentes&nbsp;: une factuelle, une narrative, une provocante.&nbsp;»</li>
+      <li><strong>Débloquer</strong>&nbsp;: «&nbsp;Qu'est-ce qui te manque pour faire mieux&nbsp;? Pose-moi jusqu'à cinq questions avant de recommencer.&nbsp;»</li>
+    </ul>
+    <p>Cette dernière est la plus sous-utilisée&nbsp;: elle retourne la charge du prompt. Plutôt que de deviner ce que Claude n'a pas compris, vous le lui faites dire.</p>
+    <div class="callout tip">
+      <span class="title">💡 Repère</span>
+      Quand une conversation part vraiment de travers — trois ou quatre corrections sans amélioration —, ne vous acharnez pas&nbsp;: demandez «&nbsp;récapitule en un seul prompt tout ce que je t'ai demandé jusqu'ici&nbsp;», corrigez ce récapitulatif, et ouvrez une conversation neuve avec. Vous repartez propre, sans perdre le travail.
+    </div>
+  </section>
+
+  <!-- ================================================================
+       NIVEAU INTERMÉDIAIRE
+       ================================================================ -->
+
+  <h2 data-level="intermediaire">🟠 Niveau intermédiaire</h2>
+
+  <section class="lesson" data-lesson="prompting:few-shot" data-level="intermediaire">
+    <div class="lesson-head">
+      <h3>4. Les exemples few-shot&nbsp;: montrer plutôt que décrire</h3>
+      <span class="lvl-badge intermediaire">Intermédiaire</span>
+    </div>
+    <p>Décrire un style prend dix lignes et reste ambigu. En montrer deux exemples prend cinq lignes et ne laisse aucun doute. C'est le principe du <strong>few-shot</strong>&nbsp;: fournir quelques paires entrée&nbsp;/&nbsp;sortie modèles avant la vraie demande.</p>
+    <pre><code>Reformule les remontées clients en tickets internes.
+Voici le format attendu.
+
+Exemple 1
+Entrée : « Ça fait trois fois que je me fais déconnecter en
+plein milieu d'une saisie, c'est insupportable. »
+Sortie : [Fiabilité] Déconnexions répétées pendant la saisie —
+perte de données en cours. Impact : élevé. Fréquence : récurrente.
+
+Exemple 2
+Entrée : « Ce serait bien de pouvoir exporter en Excel. »
+Sortie : [Évolution] Demande d'export au format tableur.
+Impact : faible. Fréquence : ponctuelle.
+
+Exemple 3
+Entrée : « Je ne comprends rien à votre écran de facturation. »
+Sortie : [Ergonomie] Écran de facturation jugé incompréhensible —
+libellés à clarifier. Impact : moyen. Fréquence : ponctuelle.
+
+À toi maintenant.
+Entrée : « Impossible de retrouver une facture de l'an dernier,
+votre moteur de recherche ne trouve rien. »</code></pre>
+    <p>Trois exemples ont ici transmis, sans une seule phrase d'explication&nbsp;: la liste des catégories, la structure de la phrase, l'échelle d'impact, la longueur, et même le fait qu'on reformule sans reprendre le ton émotionnel du client.</p>
+    <p><strong>Comment choisir ses exemples.</strong> C'est là que tout se joue&nbsp;:</p>
+    <ul>
+      <li><strong>Couvrez la diversité réelle</strong>, pas trois fois le même cas facile. Un exemple par grande catégorie de sortie.</li>
+      <li><strong>Incluez un cas limite</strong> et sa bonne réponse&nbsp;: l'entrée ambiguë, l'entrée vide, l'entrée hors sujet. C'est ce qui empêchera les improvisations.</li>
+      <li><strong>Soyez rigoureusement cohérent&nbsp;:</strong> si un seul de vos exemples s'écarte du format, Claude imitera aussi cet écart.</li>
+      <li><strong>Deux à cinq exemples suffisent</strong> le plus souvent. Au-delà, on allonge le contexte sans gain net&nbsp;; le problème est alors ailleurs, généralement dans la consigne.</li>
+    </ul>
+    <div class="callout">
+      <span class="title">✳ Le réflexe clé</span>
+      Quand une consigne écrite ne «&nbsp;prend&nbsp;» pas après deux tentatives de reformulation, arrêtez d'expliquer et fabriquez un exemple. Montrer coûte presque toujours moins cher que décrire.
+    </div>
+  </section>
+
+  <section class="lesson" data-lesson="prompting:format-sortie" data-level="intermediaire">
+    <div class="lesson-head">
+      <h3>5. Contrôler le format de sortie</h3>
+      <span class="lvl-badge intermediaire">Intermédiaire</span>
+    </div>
+    <p>Une réponse bien formatée s'exploite&nbsp;; une réponse en prose se relit. Dès qu'un résultat doit être comparé, trié, collé ailleurs ou traité par un programme, imposez le format.</p>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Besoin</th><th>Formulation efficace</th></tr>
+      <tr><td>Comparer des options</td><td>«&nbsp;Réponds en tableau, colonnes&nbsp;: option&nbsp;| coût&nbsp;| délai&nbsp;| risque principal.&nbsp;»</td></tr>
+      <tr><td>Réutiliser dans un programme</td><td>«&nbsp;Réponds uniquement par un objet JSON valide, sans texte avant ni après.&nbsp;»</td></tr>
+      <tr><td>Structurer une réflexion</td><td>«&nbsp;Donne d'abord un plan en 5 titres, sans rédiger.&nbsp;»</td></tr>
+      <tr><td>Maîtriser la longueur</td><td>«&nbsp;120 mots maximum&nbsp;», «&nbsp;3 puces d'une ligne&nbsp;»</td></tr>
+      <tr><td>Trancher</td><td>«&nbsp;Réponds uniquement par OUI ou NON, puis une phrase de justification.&nbsp;»</td></tr>
+    </table>
+    </div>
+    <p>Pour le JSON, décrivez le schéma <em>et</em> les cas d'absence de valeur&nbsp;:</p>
+    <pre><code>Extrais les informations de la facture ci-dessous.
+Réponds uniquement par un objet JSON valide, sans commentaire.
+Schéma :
+{
+  "numero": string,
+  "date": string au format AAAA-MM-JJ,
+  "fournisseur": string,
+  "total_ht": number,
+  "devise": string sur 3 lettres,
+  "lignes": [ { "libelle": string, "quantite": number,
+                "prix_unitaire": number } ]
+}
+Si une information est absente du document, mets null.
+N'invente aucune valeur, ne calcule aucun total manquant.</code></pre>
+    <p>Deux précisions valent de l'or&nbsp;: «&nbsp;<strong>sans texte avant ni après</strong>&nbsp;», qui évite les «&nbsp;Voici le JSON demandé&nbsp;:&nbsp;» qui cassent un analyseur&nbsp;; et «&nbsp;<strong>mets null si absent</strong>&nbsp;», qui donne une issue légitime au lieu d'un remplissage plausible.</p>
+    <div class="callout warn">
+      <span class="title">⚠️ Attention</span>
+      Les contraintes de longueur exprimées en mots sont approximatives&nbsp;: un modèle ne compte pas ses mots, il vise. Pour une contrainte stricte, contrôlez à la sortie plutôt que de faire confiance à la consigne — et préférez «&nbsp;3 puces d'une ligne&nbsp;» à «&nbsp;exactement 87 mots&nbsp;».
+    </div>
+  </section>
+
+  <section class="lesson" data-lesson="prompting:decomposer" data-level="intermediaire">
+    <div class="lesson-head">
+      <h3>6. Décomposer les tâches complexes</h3>
+      <span class="lvl-badge intermediaire">Intermédiaire</span>
+    </div>
+    <p>Une demande qui empile analyse, décision et rédaction produit un résultat médiocre sur les trois plans. Le remède est toujours le même&nbsp;: découper.</p>
+    <p><strong>Première technique&nbsp;: le plan d'abord.</strong> Sur un livrable long, ne laissez jamais rédiger sans avoir validé la structure — corriger un plan de dix lignes coûte bien moins cher que de faire réécrire six pages.</p>
+    <pre><code>Je dois écrire une note de cadrage sur la refonte de notre
+site intranet, pour le comité de direction.
+Étape 1 uniquement : propose 3 plans possibles, en 6 titres
+chacun, avec en une phrase l'angle de chaque plan.
+Ne rédige rien pour l'instant.</code></pre>
+    <p><strong>Deuxième technique&nbsp;: le brouillon puis l'auto-critique.</strong> On sépare la production de l'évaluation, ce qui donne de bien meilleurs résultats qu'une demande de perfection immédiate&nbsp;:</p>
+    <pre><code>Procède en trois temps, dans une seule réponse.
+1. BROUILLON : rédige la section « Risques » (250 mots).
+2. CRITIQUE : liste 3 faiblesses précises de ton brouillon
+   (imprécision, affirmation non étayée, redite).
+3. VERSION FINALE : réécris en corrigeant ces 3 faiblesses.</code></pre>
+    <p><strong>Troisième technique&nbsp;: une conversation par étape.</strong> Pour un dossier réellement complexe, chaque étape mérite son propre fil, avec en entrée la sortie validée de la précédente&nbsp;: collecte et tri des faits, puis analyse, puis recommandation, puis rédaction. Vous gardez ainsi un contexte propre à chaque étape et vous pouvez reprendre une seule d'entre elles sans tout refaire.</p>
+    <div class="callout tip">
+      <span class="title">💡 Repère</span>
+      Signe qu'il faut découper&nbsp;: votre prompt contient «&nbsp;et&nbsp;» entre deux verbes d'action différents. «&nbsp;Analyse ces 40 réponses <em>et</em> rédige une synthèse pour le comité&nbsp;» est en réalité deux tâches, avec un contrôle humain souhaitable entre les deux.
+    </div>
+  </section>
+
+  <!-- ================================================================
+       NIVEAU PRO
+       ================================================================ -->
+
+  <h2 data-level="pro">🟣 Niveau pro</h2>
+
+  <section class="lesson" data-lesson="prompting:balises-xml" data-level="pro">
+    <div class="lesson-head">
+      <h3>7. Structurer avec des balises XML</h3>
+      <span class="lvl-badge pro">Pro</span>
+    </div>
+    <p>Dès qu'un prompt dépasse une trentaine de lignes et mêle instructions, données et exemples, la prose devient ambiguë&nbsp;: où finissent vos consignes, où commence le document&nbsp;? Les <strong>balises XML</strong> lèvent l'ambiguïté. Claude y est particulièrement réceptif, et la <a href="https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview" target="_blank" rel="noopener">documentation de prompt engineering</a> en fait une recommandation centrale.</p>
+    <p><strong>Pourquoi cela fonctionne&nbsp;:</strong></p>
+    <ul>
+      <li><strong>Frontières nettes</strong>&nbsp;: le contenu de <code>&lt;document&gt;</code> est visiblement une donnée à traiter, pas une instruction à suivre. C'est aussi une première barrière contre l'injection de prompt.</li>
+      <li><strong>Références possibles</strong>&nbsp;: vous pouvez écrire «&nbsp;en te fondant uniquement sur <code>&lt;contexte&gt;</code>&nbsp;», ce qui est vérifiable.</li>
+      <li><strong>Maintenance</strong>&nbsp;: modifier un bloc n'oblige pas à relire tout le prompt&nbsp;; et un prompt balisé se génère par programme sans risque de collage hasardeux.</li>
+      <li><strong>Sortie contrôlable</strong>&nbsp;: demander une réponse dans des balises rend l'extraction triviale.</li>
+    </ul>
+    <p>Il n'existe pas de liste officielle de balises&nbsp;: choisissez des noms parlants et restez cohérent. Exemple complet de prompt système&nbsp;:</p>
+    <pre><code>&lt;role&gt;
+Tu es analyste qualité chez un éditeur de logiciel. Tu classes
+les retours d'utilisateurs pour l'équipe produit.
+&lt;/role&gt;
+
+&lt;instructions&gt;
+1. Lis le retour situé dans &lt;document&gt;.
+2. Classe-le dans exactement une catégorie de &lt;categories&gt;.
+3. Évalue la gravité : bloquant, gênant, mineur.
+4. Ne t'appuie sur aucune connaissance extérieure à &lt;document&gt;.
+5. Si le retour est inclassable, catégorie « autre » et
+   explique pourquoi en une phrase.
+&lt;/instructions&gt;
+
+&lt;categories&gt;
+fiabilite | performance | ergonomie | evolution | facturation | autre
+&lt;/categories&gt;
+
+&lt;exemples&gt;
+  &lt;exemple&gt;
+    &lt;entree&gt;L'application se ferme quand j'ouvre un devis.&lt;/entree&gt;
+    &lt;sortie&gt;&lt;categorie&gt;fiabilite&lt;/categorie&gt;
+    &lt;gravite&gt;bloquant&lt;/gravite&gt;
+    &lt;justification&gt;Fermeture inopinée empêchant l'usage.&lt;/justification&gt;&lt;/sortie&gt;
+  &lt;/exemple&gt;
+&lt;/exemples&gt;
+
+&lt;format_de_sortie&gt;
+Réponds uniquement par un bloc &lt;sortie&gt; contenant
+&lt;categorie&gt;, &lt;gravite&gt; et &lt;justification&gt; (une phrase).
+Aucun texte hors de ce bloc.
+&lt;/format_de_sortie&gt;</code></pre>
+    <p>Le document à traiter est ensuite fourni dans le message utilisateur, entre <code>&lt;document&gt;</code> et <code>&lt;/document&gt;</code>. Cette séparation entre prompt système stable et donnée variable est exactement ce qui rend un prompt industrialisable (module&nbsp;6).</p>
+  </section>
+
+  <section class="lesson" data-lesson="prompting:raisonnement" data-level="pro">
+    <div class="lesson-head">
+      <h3>8. Guider le raisonnement</h3>
+      <span class="lvl-badge pro">Pro</span>
+    </div>
+    <p>Un modèle de langage produit son texte au fil de la génération&nbsp;: ce qu'il a déjà écrit conditionne la suite. D'où un principe contre-intuitif mais robuste&nbsp;: <strong>lui laisser écrire son raisonnement avant sa conclusion améliore la conclusion</strong>. C'est la <em>chaîne de pensée</em> (chain of thought).</p>
+    <p>La version minimale tient en une phrase — «&nbsp;procède étape par étape&nbsp;» — mais une version dirigée fait bien mieux, parce qu'elle impose <em>quelles</em> étapes&nbsp;:</p>
+    <pre><code>Avant de conclure, écris ton analyse dans &lt;reflexion&gt; :
+1. Les faits établis par le document, avec la citation exacte.
+2. Ce que le document ne dit pas et qui serait nécessaire.
+3. Les deux interprétations possibles et ce qui les départage.
+Puis, dans &lt;reponse&gt;, donne ta conclusion en 5 lignes maximum,
+en indiquant ton niveau de confiance : élevé, moyen ou faible.</code></pre>
+    <p><strong>L'ordre compte.</strong> Demander «&nbsp;donne ta réponse, puis explique ton raisonnement&nbsp;» n'apporte presque rien&nbsp;: la conclusion étant déjà écrite, la suite ne fait que la justifier après coup. La réflexion doit précéder la réponse pour l'influencer.</p>
+    <p><strong>Quand c'est contre-productif&nbsp;:</strong></p>
+    <ul>
+      <li><strong>Tâches simples et massives</strong> (classification, extraction, reformulation)&nbsp;: coût et latence augmentent sans gain de qualité.</li>
+      <li><strong>Sorties strictement structurées</strong>&nbsp;: du raisonnement en tête casse un JSON attendu — isolez-le dans une balise, ou renoncez-y.</li>
+      <li><strong>Écriture créative</strong>&nbsp;: l'analyse préalable produit souvent des textes plats et scolaires.</li>
+      <li><strong>Quand la réflexion étendue du modèle est déjà active</strong>&nbsp;: superposer des consignes de raisonnement devient redondant (voir module&nbsp;1).</li>
+    </ul>
+    <div class="callout warn">
+      <span class="title">⚠️ Attention</span>
+      Une chaîne de raisonnement plausible n'est pas une preuve de justesse&nbsp;: le modèle peut dérouler dix étapes impeccables et se tromper à la troisième. Le raisonnement visible sert surtout à <em>vous</em> permettre de repérer où la logique dérape — encore faut-il le lire.
+    </div>
+  </section>
+
+  <section class="lesson" data-lesson="prompting:meta-prompting" data-level="pro">
+    <div class="lesson-head">
+      <h3>9. Méta-prompting et évaluation</h3>
+      <span class="lvl-badge pro">Pro</span>
+    </div>
+    <p>À partir d'un certain niveau d'exigence, on ne s'améliore plus à l'intuition&nbsp;: on fait écrire, critiquer et mesurer ses prompts.</p>
+    <p><strong>Faire écrire le prompt.</strong> Claude connaît bien les techniques de ce module&nbsp;; utilisez-le comme rédacteur de prompts&nbsp;:</p>
+    <pre><code>Je veux un prompt système pour un assistant qui rédige des
+comptes rendus de réunion à partir de notes brutes.
+Écris ce prompt en balises XML, avec rôle, instructions,
+contraintes et format de sortie.
+Avant d'écrire, pose-moi les 5 questions dont tu as besoin.</code></pre>
+    <p><strong>Faire critiquer le prompt</strong>, ce qui est encore plus rentable&nbsp;:</p>
+    <pre><code>Voici mon prompt système, entre &lt;prompt&gt; et &lt;/prompt&gt;.
+1. Quelles instructions sont ambiguës ou contradictoires ?
+2. Quels cas limites ne sont pas traités ?
+3. Comment un utilisateur malveillant pourrait-il le détourner ?
+4. Propose une version corrigée, puis liste tes changements.</code></pre>
+    <p><strong>Constituer un jeu de tests.</strong> Un prompt de production sans jeu de tests est un prompt dont personne ne connaît la qualité. Réunissez 20 à 50 cas réels&nbsp;: des cas ordinaires, des cas limites, des cas piégeux, avec pour chacun la sortie attendue ou au moins un critère de réussite vérifiable («&nbsp;le montant extrait est exact&nbsp;», «&nbsp;aucune donnée personnelle en sortie&nbsp;»).</p>
+    <p><strong>Mesurer les régressions.</strong> Chaque modification de prompt se rejoue sur l'ensemble du jeu, et on compare&nbsp;: quels cas passent, lesquels échouent, lesquels ont changé sans qu'on l'ait voulu. C'est le seul moyen de détecter qu'une consigne ajoutée pour corriger un cas en a cassé trois autres — la régression classique. Le <a href="https://github.com/anthropics/anthropic-cookbook" target="_blank" rel="noopener">cookbook Anthropic</a> propose des exemples d'évaluation automatisée, y compris avec un modèle en position de juge.</p>
+    <div class="callout">
+      <span class="title">✳ Le réflexe clé</span>
+      Versionnez vos prompts comme du code&nbsp;: un fichier, un historique, une note expliquant chaque changement et le résultat mesuré. Sans cela, au bout de quelques semaines, plus personne ne sait pourquoi telle phrase étrange est là — ni s'il est prudent de la retirer.
+    </div>
+  </section>
+
+  <!-- ================================================================
+       EXERCICES
+       ================================================================ -->
+
+  <h2>💪 Exercices pratiques</h2>
+
+  <div class="exercise" data-level="debutant">
+    <span class="ex-label">Exercice · Débutant</span>
+    <h4>Du prompt vague au prompt structuré</h4>
+    <p>Voici un prompt réellement vague&nbsp;: «&nbsp;<em>fais-moi un texte pour mon site</em>&nbsp;». Réécrivez-le en appliquant les quatre ingrédients (objectif, contexte, contraintes, format), puis testez les deux versions à la suite et comparez les résultats.</p>
+    <details class="solution">
+      <summary>Voir la solution</summary>
+      <div class="sol-body">
+        <p><strong>Diagnostic.</strong> Le prompt d'origine laisse Claude décider de tout&nbsp;: quel type de texte, quelle page, quel métier, quel public, quelle longueur, quel ton, quel objectif commercial. Sept décisions prises au hasard&nbsp;: la probabilité que le résultat convienne est faible.</p>
+        <p><strong>Version structurée</strong> (exemple pour une praticienne indépendante)&nbsp;:</p>
+        <pre><code>OBJECTIF
+Rédige le texte de la page d'accueil de mon site professionnel.
+But de la page : qu'un visiteur comprenne en 20 secondes ce que
+je fais et prenne rendez-vous.
+
+CONTEXTE
+- Je suis kinésithérapeute, installée à Rennes depuis 6 ans.
+- Spécialité : rééducation après blessure sportive.
+- Patients : coureurs et joueurs de sport collectif, 25-45 ans.
+- Ce qui me distingue : suivi en 3 phases avec bilan chiffré,
+  et un créneau d'urgence réservé chaque jour.
+
+CONTRAINTES
+- 250 mots maximum, tutoiement exclu, vouvoiement.
+- Aucune promesse de guérison ni allégation médicale.
+- Pas de superlatifs, pas de « passionnée », pas de « à l'écoute ».
+- Ne pas inventer de témoignage, de chiffre ni de diplôme.
+
+FORMAT
+- Un titre de 6 mots maximum.
+- Un paragraphe d'accroche de 3 lignes.
+- 3 sous-titres avec 2 lignes chacun.
+- Un appel à l'action final d'une ligne.</code></pre>
+        <p><strong>Ce que l'exercice démontre.</strong> Le second prompt n'est pas «&nbsp;mieux écrit&nbsp;», il est <em>plus décidé</em>. Deux ajouts font une grande part de la différence&nbsp;: le <strong>but de la page</strong> (prendre rendez-vous), qui oriente chaque phrase&nbsp;; et les <strong>interdictions explicites</strong>, qui suppriment d'un coup le vocabulaire creux typique des textes de site. Notez enfin que la contrainte «&nbsp;ne rien inventer&nbsp;» n'est pas un détail&nbsp;: sans elle, un modèle produit volontiers un faux témoignage ou un «&nbsp;plus de 500 patients suivis&nbsp;» que vous n'avez jamais dit.</p>
+        <p>Dernière étape utile&nbsp;: gardez ce prompt dans un fichier. Pour la page suivante, seuls l'OBJECTIF et le FORMAT changeront.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercise" data-level="intermediaire">
+    <span class="ex-label">Exercice · Intermédiaire</span>
+    <h4>Un prompt few-shot d'extraction en JSON</h4>
+    <p>Concevez un prompt qui transforme des annonces immobilières rédigées en texte libre en objets JSON exploitables. Il doit combiner un schéma explicite, deux ou trois exemples, et une règle claire pour les informations manquantes. Testez-le ensuite sur une annonce volontairement incomplète.</p>
+    <details class="solution">
+      <summary>Voir la solution</summary>
+      <div class="sol-body">
+        <pre><code>Tu extrais des données structurées d'annonces immobilières.
+Réponds uniquement par un objet JSON valide, sans texte avant
+ni après.
+
+SCHÉMA
+{
+  "type": "appartement" | "maison" | "autre",
+  "ville": string,
+  "surface_m2": number | null,
+  "pieces": number | null,
+  "etage": number | null,
+  "ascenseur": true | false | null,
+  "exterieur": "balcon" | "terrasse" | "jardin" | "aucun" | null,
+  "prix_eur": number | null,
+  "mentions_incertaines": [string]
+}
+
+RÈGLES
+- Une information absente vaut null. Ne la déduis jamais.
+- Une information ambiguë est reportée telle quelle dans
+  "mentions_incertaines" et le champ concerné reste null.
+- "aucun" pour exterieur signifie que l'annonce dit explicitement
+  qu'il n'y en a pas ; le silence vaut null.
+
+EXEMPLE 1
+Entrée : « T3 de 68 m2 à Angers, 2e étage avec ascenseur,
+balcon exposé sud. 219 000 €. »
+Sortie : {"type":"appartement","ville":"Angers","surface_m2":68,
+"pieces":3,"etage":2,"ascenseur":true,"exterieur":"balcon",
+"prix_eur":219000,"mentions_incertaines":[]}
+
+EXEMPLE 2
+Entrée : « Maison de plain-pied à Saumur, jardin clos,
+4 pièces, sans ascenseur. Prix à débattre. »
+Sortie : {"type":"maison","ville":"Saumur","surface_m2":null,
+"pieces":4,"etage":0,"ascenseur":false,"exterieur":"jardin",
+"prix_eur":null,"mentions_incertaines":["prix à débattre"]}
+
+EXEMPLE 3
+Entrée : « Beau studio lumineux, proche centre, environ 30 m2,
+dernier étage. »
+Sortie : {"type":"appartement","ville":null,"surface_m2":30,
+"pieces":1,"etage":null,"ascenseur":null,"exterieur":null,
+"prix_eur":null,"mentions_incertaines":["environ 30 m2",
+"dernier étage : numéro d'étage non précisé","ville non précisée"]}
+
+À TOI
+Entrée : « Charmant 2 pièces en plein cœur de Nantes, refait à
+neuf, petit extérieur, 249 000 € FAI. »</code></pre>
+        <p><strong>Pourquoi ce prompt fonctionne.</strong> Chaque exemple porte une leçon différente&nbsp;: le premier montre le cas nominal complet&nbsp;; le deuxième montre un <em>false</em> explicite et un prix absent malgré une phrase qui parle de prix&nbsp;; le troisième est le plus important — il montre comment se comporter face à l'imprécision («&nbsp;environ&nbsp;», «&nbsp;dernier étage&nbsp;», ville manquante) au lieu de deviner. Le champ <code>mentions_incertaines</code> est l'astuce centrale&nbsp;: il donne au modèle un endroit où mettre ce qu'il ne sait pas, ce qui réduit fortement la tentation d'inventer.</p>
+        <p>Sur l'annonce de test, la sortie attendue laisse <code>surface_m2</code> à null et signale «&nbsp;petit extérieur&nbsp;» comme incertain (balcon&nbsp;? terrasse&nbsp;?), tout en reconnaissant «&nbsp;2 pièces&nbsp;», Nantes et 249&nbsp;000. Si votre prompt renvoie une surface inventée ou un <code>exterieur</code> tranché, ajoutez un exemple couvrant précisément ce cas&nbsp;: c'est ainsi qu'un jeu d'exemples se construit, cas d'échec après cas d'échec.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercise" data-level="pro">
+    <span class="ex-label">Exercice · Pro</span>
+    <h4>Prompt système XML et plan d'évaluation</h4>
+    <p>Rédigez un prompt système complet, en balises XML, pour un assistant de <strong>relecture de contrats</strong> destiné à une équipe achats non juriste. Puis écrivez le mini-plan d'évaluation qui permettra de vérifier qu'il fait son travail et de détecter les régressions.</p>
+    <details class="solution">
+      <summary>Voir la solution</summary>
+      <div class="sol-body">
+        <p><strong>1. Le prompt système.</strong></p>
+        <pre><code>&lt;role&gt;
+Tu assistes une équipe achats non juriste dans la relecture de
+contrats fournisseurs. Tu signales les points d'attention ; tu ne
+donnes jamais de conseil juridique et ne valides jamais un contrat.
+&lt;/role&gt;
+
+&lt;perimetre&gt;
+Contrats de prestation et de fourniture, droit français,
+montants inférieurs au seuil de validation juridique interne.
+&lt;/perimetre&gt;
+
+&lt;instructions&gt;
+1. Lis intégralement le contrat fourni dans &lt;document&gt;.
+2. Pour chaque point de &lt;points_de_controle&gt;, indique s'il est
+   présent, absent, ou rédigé de façon défavorable.
+3. Cite systématiquement l'article et la phrase exacte sur
+   laquelle tu te fondes. Sans citation, ne signale rien.
+4. N'utilise aucune connaissance extérieure au document, sauf
+   pour qualifier un usage comme « inhabituel ».
+5. Classe chaque point : bloquant, à négocier, acceptable.
+6. Termine par les 3 questions à poser au fournisseur.
+&lt;/instructions&gt;
+
+&lt;points_de_controle&gt;
+durée et reconduction | résiliation et préavis | prix et révision |
+pénalités et plafond de responsabilité | propriété intellectuelle |
+confidentialité | données personnelles | réversibilité |
+droit applicable et juridiction
+&lt;/points_de_controle&gt;
+
+&lt;contraintes&gt;
+- Ne jamais affirmer qu'une clause est légale ou illégale.
+- Ne jamais proposer de rédaction contractuelle définitive :
+  proposer une intention de négociation en une phrase.
+- Si le document est illisible ou incomplet, le dire et s'arrêter.
+- Si un point de contrôle est absent du contrat, l'écrire
+  explicitement : une absence est un risque, pas un vide.
+&lt;/contraintes&gt;
+
+&lt;format_de_sortie&gt;
+&lt;synthese&gt;5 lignes maximum, niveau de risque global&lt;/synthese&gt;
+&lt;points&gt;
+  &lt;point&gt;&lt;sujet&gt;&lt;/sujet&gt;&lt;statut&gt;présent|absent|défavorable&lt;/statut&gt;
+  &lt;citation&gt;&lt;/citation&gt;&lt;niveau&gt;bloquant|à négocier|acceptable&lt;/niveau&gt;
+  &lt;intention_de_negociation&gt;&lt;/intention_de_negociation&gt;&lt;/point&gt;
+&lt;/points&gt;
+&lt;questions&gt;3 questions maximum&lt;/questions&gt;
+&lt;avertissement&gt;Rappel : analyse indicative, non juridique.&lt;/avertissement&gt;
+&lt;/format_de_sortie&gt;</code></pre>
+        <p><strong>2. Le mini-plan d'évaluation.</strong> Il tient en quatre éléments.</p>
+        <p><em>a) Le jeu de tests</em> — 20 contrats anonymisés&nbsp;: 10 ordinaires, 5 avec une clause franchement défavorable connue, 3 auxquels il manque volontairement un point de contrôle (pas de clause de résiliation, pas de mention des données personnelles), 1 document tronqué, 1 document hors périmètre (un bail, par exemple).</p>
+        <p><em>b) Les critères, vérifiables mécaniquement ou en un coup d'œil</em>&nbsp;:</p>
+        <div class="table-wrap">
+        <table>
+          <tr><th>Critère</th><th>Comment le mesurer</th></tr>
+          <tr><td>Détection</td><td>Part des clauses défavorables connues effectivement signalées</td></tr>
+          <tr><td>Fausses alertes</td><td>Nombre de points signalés à tort sur les contrats ordinaires</td></tr>
+          <tr><td>Traçabilité</td><td>Chaque citation existe-t-elle réellement dans le document&nbsp;?</td></tr>
+          <tr><td>Absences</td><td>Les points de contrôle manquants sont-ils signalés comme absents&nbsp;?</td></tr>
+          <tr><td>Tenue du cadre</td><td>Aucun avis juridique, aucune rédaction définitive, avertissement présent</td></tr>
+          <tr><td>Format</td><td>Sortie XML complète et analysable sans retouche</td></tr>
+        </table>
+        </div>
+        <p><em>c) La procédure</em>&nbsp;: à chaque modification du prompt, rejouer les 20 cas, consigner les résultats dans un tableau daté, et comparer avec la version précédente. On regarde surtout les cas qui <strong>passaient</strong> et qui échouent désormais&nbsp;: c'est la régression, presque toujours causée par une consigne ajoutée pour corriger un cas particulier.</p>
+        <p><em>d) Le garde-fou humain</em>&nbsp;: la traçabilité est le critère le plus important, car c'est celui qui permet à un non-juriste de vérifier. Un point signalé sans citation vérifiable doit compter comme un échec, même si l'analyse est juste — sinon le dispositif entier repose sur la confiance aveugle. Et le test «&nbsp;hors périmètre&nbsp;» n'est pas un caprice&nbsp;: un assistant qui analyse consciencieusement un bail alors qu'on lui a défini un périmètre est un assistant qui ignorera aussi les autres limites qu'on lui a fixées.</p>
+      </div>
+    </details>
+  </div>
+
+  <!-- ================================================================
+       QUIZ
+       ================================================================ -->
+
+  <h2>❓ Quiz de validation</h2>
+
+  <div class="quiz">
+    <p><strong>Validez vos acquis</strong> — une seule bonne réponse par question.</p>
+
+    <div class="quiz-q">
+      <p class="q-text">1. Quels sont les quatre ingrédients d'un prompt complet&nbsp;?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" type="button">Politesse, longueur, urgence, exemples</button>
+        <button class="quiz-opt" type="button" data-correct="true">Objectif, contexte, contraintes, format</button>
+        <button class="quiz-opt" type="button">Rôle, température, modèle, langue</button>
+      </div>
+      <div class="quiz-explain">Chaque ingrédient absent est une décision que vous laissez prendre au modèle&nbsp;: le type de texte, le public, la longueur, le ton. Un prompt structuré n'est pas plus long, il est plus <em>décidé</em>.</div>
+    </div>
+
+    <div class="quiz-q">
+      <p class="q-text">2. La réponse n'est pas satisfaisante. Quelle est généralement la meilleure réaction&nbsp;?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" type="button">Tout effacer et réécrire un prompt parfait depuis zéro</button>
+        <button class="quiz-opt" type="button" data-correct="true">Envoyer un suivi disant ce qui va, ce qui ne va pas, et ce qu'on veut à la place</button>
+        <button class="quiz-opt" type="button">Répéter le même prompt jusqu'à obtenir mieux</button>
+      </div>
+      <div class="quiz-explain">La première réponse contient déjà l'essentiel et Claude garde tout le contexte. Le suivi le plus sous-utilisé&nbsp;: «&nbsp;Qu'est-ce qui te manque pour faire mieux&nbsp;? Pose-moi cinq questions.&nbsp;»</div>
+    </div>
+
+    <div class="quiz-q">
+      <p class="q-text">3. Dans un prompt few-shot, quel exemple est le plus utile à ajouter&nbsp;?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" type="button">Un troisième exemple identique aux deux premiers, pour insister</button>
+        <button class="quiz-opt" type="button" data-correct="true">Un cas limite ou ambigu, accompagné de la bonne façon de le traiter</button>
+        <button class="quiz-opt" type="button">Un exemple d'une autre tâche, pour montrer la variété</button>
+      </div>
+      <div class="quiz-explain">Les exemples doivent couvrir la diversité réelle, cas limites compris&nbsp;: c'est ce qui empêche les improvisations. Attention aussi à la cohérence&nbsp;: un exemple qui s'écarte du format sera imité tel quel.</div>
+    </div>
+
+    <div class="quiz-q">
+      <p class="q-text">4. Pourquoi baliser un long prompt en XML&nbsp;?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" type="button">Parce que Claude ne comprend pas le texte brut</button>
+        <button class="quiz-opt" type="button">Parce que cela réduit le nombre de tokens consommés</button>
+        <button class="quiz-opt" type="button" data-correct="true">Parce que cela sépare sans ambiguïté instructions, données et exemples, et rend le prompt référençable et maintenable</button>
+      </div>
+      <div class="quiz-explain">Les balises marquent les frontières&nbsp;: le contenu de <code>&lt;document&gt;</code> est visiblement une donnée à traiter, pas une instruction — une première barrière contre l'injection de prompt. Elles ajoutent des tokens plutôt qu'elles n'en retirent.</div>
+    </div>
+
+    <div class="quiz-q">
+      <p class="q-text">5. À propos de la chaîne de raisonnement («&nbsp;procède étape par étape&nbsp;»), quelle affirmation est exacte&nbsp;?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" type="button">Il faut toujours demander la réponse d'abord, puis le raisonnement</button>
+        <button class="quiz-opt" type="button" data-correct="true">La réflexion doit précéder la conclusion pour l'influencer, et elle est inutile sur les tâches simples</button>
+        <button class="quiz-opt" type="button">Un raisonnement détaillé garantit que la réponse est juste</button>
+      </div>
+      <div class="quiz-explain">Le texte déjà généré conditionne la suite&nbsp;: un raisonnement placé après la conclusion ne fait que la justifier. Sur une extraction ou une classification, il ajoute coût et latence sans gain — et une chaîne plausible peut mener à une réponse fausse.</div>
+    </div>
+
+    <p class="quiz-score"></p>
+  </div>
+
+  <!-- ================================================================
+       VIDÉOS & RESSOURCES
+       ================================================================ -->
+
+  <h2>🎬 Vidéos &amp; ressources officielles</h2>
+  <p>Pour approfondir ce module avec les sources d'Anthropic&nbsp;:</p>
+
+  <div class="resource-grid">
+    <a class="resource-card" href="https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview" target="_blank" rel="noopener">
+      <span class="kind">📄 Documentation</span>
+      <h4>Guide du prompt engineering</h4>
+      <p>La référence officielle&nbsp;: clarté des consignes, exemples, chaîne de raisonnement, balises XML, prompts système.</p>
+    </a>
+    <a class="resource-card" href="https://github.com/anthropics/prompt-eng-interactive-tutorial" target="_blank" rel="noopener">
+      <span class="kind">🧪 Tutoriel interactif</span>
+      <h4>Prompt Engineering Interactive Tutorial</h4>
+      <p>Le cours pratique d'Anthropic, chapitre par chapitre, avec exercices corrigés à exécuter soi-même.</p>
+    </a>
+    <a class="resource-card" href="https://github.com/anthropics/anthropic-cookbook" target="_blank" rel="noopener">
+      <span class="kind">💻 Exemples de code</span>
+      <h4>Anthropic Cookbook</h4>
+      <p>Recettes complètes&nbsp;: extraction structurée, classification, évaluations automatisées et modèle en position de juge.</p>
+    </a>
+    <a class="resource-card" href="https://www.youtube.com/results?search_query=Anthropic+Claude+prompt+engineering" target="_blank" rel="noopener">
+      <span class="kind">🎬 Vidéos</span>
+      <h4>Prompt engineering en vidéo</h4>
+      <p>Recherche YouTube&nbsp;: ateliers et démonstrations d'Anthropic sur l'écriture et l'évaluation de prompts (en anglais).</p>
+    </a>
+  </div>
+
+  <nav class="page-nav">
+    <a href="chat.html">← Module 2 · Claude Chat</a>
+    <a class="next" href="cowork.html">Module 4 · Cowork →</a>
+  </nav>
+
+</main>
+
+<footer class="site-footer">
+  <p>Formation Claude — projet pédagogique indépendant, non affilié à Anthropic.</p>
+</footer>
+
+<script src="../assets/js/app.js"></script>
+</body>
+</html>
