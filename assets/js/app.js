@@ -42,7 +42,11 @@
       var btn = document.createElement("button");
       btn.type = "button";
       btn.textContent = LEVEL_LABELS[l];
-      btn.dataset.level = l;
+      // data-set-level, et non data-level : le filtrage de contenu masque tout
+      // élément [data-level] au-dessus du niveau courant. Nommer l'attribut de
+      // la même façon ferait disparaître les boutons « Intermédiaire » et
+      // « Pro » dès le passage en Débutant, sans moyen de revenir en arrière.
+      btn.dataset.setLevel = l;
       btn.addEventListener("click", function () { setLevel(l); });
       wrap.appendChild(btn);
     });
@@ -59,7 +63,7 @@
     var rank = levelRank(current);
 
     document.querySelectorAll(".level-switcher button").forEach(function (btn) {
-      btn.classList.toggle("active", btn.dataset.level === current);
+      btn.classList.toggle("active", btn.dataset.setLevel === current);
     });
     document.querySelectorAll(".level-card").forEach(function (card) {
       card.classList.toggle("selected", card.dataset.level === current);
@@ -67,7 +71,9 @@
 
     var hiddenLessons = 0;
     document.querySelectorAll("[data-level]").forEach(function (el) {
-      if (!el.dataset.level || el.classList.contains("level-card")) return;
+      // Les commandes de navigation ne sont jamais du contenu à filtrer.
+      if (!el.dataset.level || el.closest(".level-switcher") ||
+          el.classList.contains("level-card")) return;
       var show = levelRank(el.dataset.level) <= rank;
       el.hidden = !show;
       // On ne compte que les vraies unités de contenu, pas les titres de section :
