@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ressources &amp; glossaire — Formation Claude Premium</title>
+<meta name="description" content="Bibliothèque de la formation Claude : vidéos et cours officiels, documentation, dépôts de code, glossaire français de l'IA générative et plan de révision.">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✳️</text></svg>">
+</head>
+<body>
+
+<div class="demo-banner">
+  <strong>Démonstration</strong> — modèle freemium simulé : aucun paiement réel, et le verrouillage n'est pas une protection.
+</div>
+
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="../index.html"><span class="spark">✳</span> Formation Claude</a>
+    <nav class="main-nav" aria-label="Navigation principale">
+      <a href="../index.html">Accueil</a>
+      <a href="fondamentaux.html">Fondamentaux</a>
+      <a href="chat.html">Chat</a>
+      <a href="prompting.html">Prompting</a>
+      <a href="cowork.html">Cowork</a>
+      <a href="claude-code.html">Claude Code</a>
+      <a href="api.html">API</a>
+      <a href="integrations.html">Intégrations</a>
+      <a href="bonnes-pratiques.html">Bonnes pratiques</a>
+      <a href="ressources.html" aria-current="page">Ressources</a>
+      <a href="../tarifs.html">Tarifs</a>
+    </nav>
+    <div data-plan-pill data-base="../"></div>
+    <div data-level-switcher></div>
+  </div>
+</header>
+
+<main>
+
+  <h1>📚 Bibliothèque de ressources</h1>
+  <p class="lead">Toutes les sources officielles pour aller plus loin, un glossaire français de l'IA générative, et un plan de révision pour ancrer ce que vous avez appris. Cette page n'a ni leçons ni quiz&nbsp;: c'est votre point de retour permanent.</p>
+
+  <div class="toc">
+    <strong>Sur cette page</strong>
+    <ul>
+      <li><a href="#videos">Vidéos et cours officiels</a></li>
+      <li><a href="#docs">Documentation de référence</a></li>
+      <li><a href="#code">Dépôts de code et tutoriels pratiques</a></li>
+      <li><a href="#glossaire">Glossaire français de l'IA générative</a></li>
+      <li><a href="#revision">Plan de révision en 4 semaines</a></li>
+      <li><a href="#antiseches">Aide-mémoire&nbsp;: les prompts qui marchent</a></li>
+    </ul>
+  </div>
+
+  <div class="callout warn">
+    <span class="title">⚠️ Un mot sur les liens</span>
+    L'écosystème Claude évolue vite&nbsp;: de nouvelles fonctionnalités apparaissent régulièrement et certaines pages sont réorganisées. Tous les liens ci-dessous pointent vers des <strong>points d'entrée officiels stables</strong> plutôt que vers des pages profondes susceptibles de bouger. En cas de doute sur une fonctionnalité, la documentation officielle fait toujours autorité sur cette formation.
+  </div>
+
+  <!-- ================================================================ -->
+  <h2 id="videos">🎬 Vidéos et cours officiels</h2>
+  <p>Anthropic publie ses contenus de formation à deux endroits&nbsp;: l'Academy (cours structurés, écrits et vidéo) et sa chaîne YouTube (démonstrations, annonces, sessions techniques). L'essentiel est en anglais, avec des sous-titres automatiques traduisibles en français.</p>
+
+  <div class="resource-grid">
+    <a class="resource-card" href="https://www.anthropic.com/learn" target="_blank" rel="noopener">
+      <span class="kind">🎓 Cours</span>
+      <h4>Anthropic Academy</h4>
+      <p>Le centre de formation officiel&nbsp;: parcours pour débutants, ingénierie de prompt, développement avec l'API et Claude&nbsp;Code.</p>
+    </a>
+    <a class="resource-card" href="https://www.youtube.com/@anthropic-ai" target="_blank" rel="noopener">
+      <span class="kind">🎬 Chaîne vidéo</span>
+      <h4>YouTube — Anthropic</h4>
+      <p>La chaîne officielle&nbsp;: démonstrations produit, annonces de modèles, sessions techniques et retours d'expérience.</p>
+    </a>
+    <a class="resource-card" href="https://www.youtube.com/results?search_query=Anthropic+Claude+Code+tutorial" target="_blank" rel="noopener">
+      <span class="kind">🔍 Recherche vidéo</span>
+      <h4>Vidéos sur Claude&nbsp;Code</h4>
+      <p>Tutoriels et démonstrations sur l'agent de codage&nbsp;: prise en main, CLAUDE.md, hooks, MCP, usage en équipe.</p>
+    </a>
+    <a class="resource-card" href="https://www.youtube.com/results?search_query=Anthropic+prompt+engineering" target="_blank" rel="noopener">
+      <span class="kind">🔍 Recherche vidéo</span>
+      <h4>Vidéos sur l'ingénierie de prompt</h4>
+      <p>Les sessions d'Anthropic consacrées aux techniques de prompting, du débutant aux méthodes avancées.</p>
+    </a>
+    <a class="resource-card" href="https://www.anthropic.com/news" target="_blank" rel="noopener">
+      <span class="kind">📰 Actualités</span>
+      <h4>Blog et annonces</h4>
+      <p>Nouveaux modèles, nouvelles fonctionnalités, articles d'ingénierie. La source à suivre pour rester à jour.</p>
+    </a>
+    <a class="resource-card" href="https://www.anthropic.com/research" target="_blank" rel="noopener">
+      <span class="kind">🔬 Recherche</span>
+      <h4>Publications scientifiques</h4>
+      <p>Constitutional AI, interprétabilité, sûreté des agents&nbsp;: les travaux de fond, pour le niveau pro.</p>
+    </a>
+  </div>
+
+  <!-- ================================================================ -->
+  <h2 id="docs">📄 Documentation de référence</h2>
+  <p>La documentation officielle est la source de vérité. Ces six points d'entrée couvrent l'ensemble des modules de cette formation.</p>
+
+  <div class="resource-grid">
+    <a class="resource-card" href="https://docs.claude.com" target="_blank" rel="noopener">
+      <span class="kind">📘 Racine</span>
+      <h4>docs.claude.com</h4>
+      <p>Toute la documentation Claude&nbsp;: produits, API, guides et références. Le point de départ pour toute question précise.</p>
+    </a>
+    <a class="resource-card" href="https://docs.claude.com/en/docs/about-claude/models" target="_blank" rel="noopener">
+      <span class="kind">🤖 Modèles</span>
+      <h4>Vue d'ensemble des modèles</h4>
+      <p>Modèles disponibles, capacités, fenêtres de contexte, identifiants à utiliser dans l'API. Modules 1 et 6.</p>
+    </a>
+    <a class="resource-card" href="https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview" target="_blank" rel="noopener">
+      <span class="kind">✍️ Prompting</span>
+      <h4>Guide d'ingénierie de prompt</h4>
+      <p>Le guide officiel des techniques&nbsp;: clarté, exemples, balises XML, chaîne de raisonnement. Module&nbsp;3.</p>
+    </a>
+    <a class="resource-card" href="https://docs.claude.com/en/docs/claude-code/overview" target="_blank" rel="noopener">
+      <span class="kind">⌨️ Claude Code</span>
+      <h4>Documentation Claude&nbsp;Code</h4>
+      <p>Installation, mémoire de projet, permissions, hooks, MCP, sous-agents, SDK et intégration CI. Module&nbsp;5.</p>
+    </a>
+    <a class="resource-card" href="https://docs.claude.com/en/api/overview" target="_blank" rel="noopener">
+      <span class="kind">🔌 API</span>
+      <h4>Référence de l'API</h4>
+      <p>Messages API, tool use, streaming, prompt caching, traitement par lots, SDK officiels. Module&nbsp;6.</p>
+    </a>
+    <a class="resource-card" href="https://support.claude.com" target="_blank" rel="noopener">
+      <span class="kind">💬 Support</span>
+      <h4>Centre d'aide</h4>
+      <p>Questions sur les offres, la facturation, les limites d'usage, la confidentialité et la gestion de compte.</p>
+    </a>
+  </div>
+
+  <!-- ================================================================ -->
+  <h2 id="code">💻 Dépôts de code et tutoriels pratiques</h2>
+  <p>Pour les niveaux intermédiaire et pro&nbsp;: du code réel à lire, exécuter et adapter.</p>
+
+  <div class="resource-grid">
+    <a class="resource-card" href="https://github.com/anthropics/anthropic-cookbook" target="_blank" rel="noopener">
+      <span class="kind">🍳 Recettes</span>
+      <h4>Anthropic Cookbook</h4>
+      <p>Des dizaines de carnets Jupyter prêts à l'emploi&nbsp;: tool use, RAG, vision, extraction structurée, agents.</p>
+    </a>
+    <a class="resource-card" href="https://github.com/anthropics/prompt-eng-interactive-tutorial" target="_blank" rel="noopener">
+      <span class="kind">🎯 Tutoriel</span>
+      <h4>Tutoriel interactif de prompting</h4>
+      <p>Le cours d'ingénierie de prompt d'Anthropic sous forme d'exercices progressifs à faire soi-même.</p>
+    </a>
+    <a class="resource-card" href="https://github.com/anthropics/claude-code" target="_blank" rel="noopener">
+      <span class="kind">⌨️ Dépôt</span>
+      <h4>Claude&nbsp;Code sur GitHub</h4>
+      <p>Le dépôt officiel&nbsp;: notes de version, signalement de bogues, discussions de la communauté.</p>
+    </a>
+    <a class="resource-card" href="https://github.com/anthropics/anthropic-sdk-python" target="_blank" rel="noopener">
+      <span class="kind">🐍 SDK</span>
+      <h4>SDK Python</h4>
+      <p>La bibliothèque officielle Python&nbsp;: installation, exemples, types, gestion des erreurs et du streaming.</p>
+    </a>
+    <a class="resource-card" href="https://github.com/anthropics/anthropic-sdk-typescript" target="_blank" rel="noopener">
+      <span class="kind">🟦 SDK</span>
+      <h4>SDK TypeScript</h4>
+      <p>La bibliothèque officielle TypeScript / JavaScript, pour Node.js et les environnements serveur.</p>
+    </a>
+    <a class="resource-card" href="https://modelcontextprotocol.io" target="_blank" rel="noopener">
+      <span class="kind">🔗 Standard</span>
+      <h4>Model Context Protocol</h4>
+      <p>Le site du protocole ouvert MCP&nbsp;: spécification, SDK, serveurs de référence et écosystème. Modules 4, 5 et 7.</p>
+    </a>
+  </div>
+
+  <!-- ================================================================ -->
+  <div data-premium-block hidden>
+<h2 id="glossaire">📖 Glossaire français de l'IA générative</h2>
+  <p>Les termes que vous rencontrerez partout, la plupart en anglais dans les documentations. Classés par ordre alphabétique.</p>
+
+  <div class="table-wrap">
+  <table>
+    <tr><th>Terme</th><th>Définition</th><th>Module</th></tr>
+    <tr><td><strong>Agent</strong></td><td>Un modèle doté d'outils et d'une boucle d'exécution, capable d'enchaîner des actions pour atteindre un objectif sans intervention à chaque étape.</td><td>4, 5, 6</td></tr>
+    <tr><td><strong>Artéfact</strong> (artifact)</td><td>Contenu autonome produit par Claude et affiché dans un panneau dédié&nbsp;: document, code, page interactive, que l'on peut faire évoluer par itérations.</td><td>2</td></tr>
+    <tr><td><strong>Batch</strong> (traitement par lots)</td><td>Mode de traitement asynchrone d'un grand nombre de requêtes API, moins cher que le traitement immédiat, en contrepartie d'un délai.</td><td>6</td></tr>
+    <tr><td><strong>Chain of thought</strong> (chaîne de raisonnement)</td><td>Technique consistant à faire expliciter les étapes intermédiaires du raisonnement avant la réponse finale, ce qui améliore les tâches logiques.</td><td>3</td></tr>
+    <tr><td><strong>CLAUDE.md</strong></td><td>Fichier de mémoire d'un projet dans Claude&nbsp;Code&nbsp;: conventions, commandes, architecture — lu automatiquement à chaque session.</td><td>5</td></tr>
+    <tr><td><strong>Connecteur</strong></td><td>Liaison autorisée entre Claude et un service externe (Drive, messagerie, agenda, outil métier), qui lui donne accès à vos données de travail.</td><td>4, 7</td></tr>
+    <tr><td><strong>Fenêtre de contexte</strong></td><td>Quantité maximale de tokens que le modèle peut prendre en compte simultanément&nbsp;: prompt, documents joints et réponse comprise.</td><td>1</td></tr>
+    <tr><td><strong>Few-shot</strong></td><td>Fait de fournir quelques exemples de la sortie attendue dans le prompt. Souvent plus efficace qu'une longue description de consignes.</td><td>3</td></tr>
+    <tr><td><strong>Hallucination</strong></td><td>Affirmation plausible mais fausse, produite avec assurance. Conséquence directe du fonctionnement probabiliste du modèle.</td><td>1, 8</td></tr>
+    <tr><td><strong>Hook</strong></td><td>Dans Claude&nbsp;Code, commande déclenchée automatiquement à un moment précis du cycle de travail (avant un outil, après une modification…).</td><td>5</td></tr>
+    <tr><td><strong>Injection de prompt</strong></td><td>Attaque consistant à dissimuler des instructions malveillantes dans un contenu que l'agent va lire, pour détourner son comportement.</td><td>8</td></tr>
+    <tr><td><strong>LLM</strong> (grand modèle de langage)</td><td>Réseau de neurones entraîné à prédire le token suivant, d'où émergent la compréhension et la génération de langage.</td><td>1</td></tr>
+    <tr><td><strong>MCP</strong> (Model Context Protocol)</td><td>Protocole ouvert standardisant la connexion entre un assistant IA et des sources de données ou des outils externes.</td><td>4, 5, 7</td></tr>
+    <tr><td><strong>Prompt</strong></td><td>L'instruction que vous adressez au modèle. Par extension, l'art de la formuler&nbsp;: l'ingénierie de prompt.</td><td>3</td></tr>
+    <tr><td><strong>Prompt caching</strong></td><td>Mise en cache d'une portion stable du prompt (documentation, consignes longues) pour en réduire fortement le coût et la latence aux appels suivants.</td><td>6</td></tr>
+    <tr><td><strong>Prompt système</strong></td><td>Instructions de cadrage données au modèle en amont de la conversation&nbsp;: rôle, ton, règles, périmètre.</td><td>3, 6</td></tr>
+    <tr><td><strong>Projet</strong></td><td>Dans claude.ai, espace regroupant des conversations, des documents de référence et des instructions partagées sur un même sujet.</td><td>2</td></tr>
+    <tr><td><strong>RAG</strong> (génération augmentée par la recherche)</td><td>Architecture consistant à retrouver des documents pertinents et à les fournir dans le contexte, plutôt que de compter sur la mémoire du modèle.</td><td>6, 8</td></tr>
+    <tr><td><strong>Raisonnement étendu</strong></td><td>Mode où le modèle produit une réflexion interne avant de répondre. Améliore les tâches complexes, au prix de tokens et de latence.</td><td>1</td></tr>
+    <tr><td><strong>Skill</strong> (compétence)</td><td>Procédure réutilisable qui enseigne à Claude une méthode, un format ou un style propres à vous, et se déclenche quand le contexte s'y prête.</td><td>4, 5</td></tr>
+    <tr><td><strong>Streaming</strong></td><td>Réception de la réponse token par token au fil de sa génération, plutôt qu'en une fois à la fin.</td><td>6</td></tr>
+    <tr><td><strong>Sycophancy</strong> (complaisance)</td><td>Tendance du modèle à abonder dans le sens de son interlocuteur. À neutraliser en demandant explicitement la critique.</td><td>8</td></tr>
+    <tr><td><strong>Token</strong></td><td>Unité de découpage du texte&nbsp;: environ 3 à 4 caractères en français. Unité de mesure du contexte et de la facturation API.</td><td>1</td></tr>
+    <tr><td><strong>Tool use</strong> (usage d'outils)</td><td>Capacité du modèle à appeler des fonctions que vous lui décrivez&nbsp;: calcul, requête en base, appel d'API — ce qui compense ses faiblesses natives.</td><td>6</td></tr>
+    <tr><td><strong>Température</strong></td><td>Paramètre API réglant le caractère plus ou moins déterministe de la génération&nbsp;: basse pour l'extraction, plus haute pour la créativité.</td><td>6</td></tr>
+  </table>
+  </div>
+
+  <!-- ================================================================ -->
+  </div>
+<div data-premium-locked>
+  <h2>Glossaire français de l'IA générative <span class="premium-badge">Premium</span></h2>
+  <div class="lesson-locked" style="margin-top:1rem">
+    <div class="locked-cta" style="border-top:none;padding-top:0;margin-top:0">
+      <span class="lock-icon">🔒</span>
+      <span class="lock-text">24 termes définis en français — token, contexte, RAG, MCP, prompt caching, injection de prompt — avec le module où chacun est traité.</span>
+      <a class="btn btn-gold" href="../tarifs.html?src=glossaire">Débloquer</a>
+    </div>
+  </div>
+</div>
+<div data-premium-block hidden>
+<h2 id="revision">🗓️ Plan de révision en 4 semaines</h2>
+  <p>Suivre les modules une fois ne suffit pas à ancrer une pratique. Voici un rythme réaliste, à raison de deux à trois heures par semaine, pour transformer la lecture en réflexes.</p>
+
+  <div class="table-wrap">
+  <table>
+    <tr><th>Semaine</th><th>Modules</th><th>Objectif concret de fin de semaine</th></tr>
+    <tr>
+      <td><strong>1 — Les bases</strong></td>
+      <td>1, 2</td>
+      <td>Avoir remplacé au moins trois tâches hebdomadaires par un échange avec Claude (rédaction, synthèse, analyse de document), et savoir joindre un fichier.</td>
+    </tr>
+    <tr>
+      <td><strong>2 — Le prompting</strong></td>
+      <td>3</td>
+      <td>Disposer de trois prompts personnels réutilisables, testés et affinés, pour vos tâches les plus fréquentes.</td>
+    </tr>
+    <tr>
+      <td><strong>3 — Le travail délégué</strong></td>
+      <td>4, 7</td>
+      <td>Avoir créé un Projet complet et branché au moins un connecteur ou une intégration utile à votre quotidien.</td>
+    </tr>
+    <tr>
+      <td><strong>4 — La technique</strong></td>
+      <td>5, 6, 8</td>
+      <td>Selon votre profil&nbsp;: avoir fait tourner Claude&nbsp;Code sur un projet réel, ou réussi votre premier appel API avec un outil. Dans tous les cas&nbsp;: avoir lu le module 8 en entier.</td>
+    </tr>
+  </table>
+  </div>
+
+  <div class="callout tip">
+    <span class="title">💡 La règle des 80&nbsp;%</span>
+    Le plus gros gain de productivité vient des modules 2 et 3, pas des modules techniques. Si votre temps est compté, maîtrisez parfaitement le chat et le prompting avant d'aller vers l'API — c'est là que se joue l'essentiel du bénéfice pour la plupart des métiers.
+  </div>
+
+  <!-- ================================================================ -->
+  </div>
+<div data-premium-locked>
+  <h2>Plan de révision en 4 semaines <span class="premium-badge">Premium</span></h2>
+  <div class="lesson-locked" style="margin-top:1rem">
+    <div class="locked-cta" style="border-top:none;padding-top:0;margin-top:0">
+      <span class="lock-icon">🔒</span>
+      <span class="lock-text">Un rythme réaliste de deux à trois heures par semaine, avec un objectif concret et vérifiable à la fin de chaque semaine.</span>
+      <a class="btn btn-gold" href="../tarifs.html?src=revision">Débloquer</a>
+    </div>
+  </div>
+</div>
+<div data-premium-block hidden>
+<h2 id="antiseches">⚡ Aide-mémoire&nbsp;: les prompts qui marchent</h2>
+  <p>Six formulations à copier, éprouvées, qui couvrent la majorité des situations professionnelles.</p>
+
+  <h3>Analyser un document sans risque d'invention</h3>
+  <pre><code>Analyse le document joint et réponds uniquement à partir de son contenu.
+Pour chaque affirmation, cite le passage sur lequel tu t'appuies.
+Si une information demandée n'y figure pas, écris explicitement
+« Non présent dans le document » — n'extrapole pas.</code></pre>
+
+  <h3>Obtenir une critique honnête plutôt qu'une validation</h3>
+  <pre><code>Voici mon [document / plan / code]. Ne cherche pas à me rassurer.
+Adopte le point de vue d'un [expert du domaine] sceptique :
+liste les 5 faiblesses les plus sérieuses, par ordre de gravité.
+Pour chacune : le risque concret, et ce qui te ferait changer d'avis.</code></pre>
+
+  <h3>Faire produire un livrable au bon format</h3>
+  <pre><code>Rédige [le livrable].
+Contexte : [qui, pour qui, pourquoi, quel enjeu].
+Contraintes : [longueur], [ton], [ce qu'il faut absolument éviter].
+Format attendu : [tableau / plan en 3 parties / e-mail prêt à envoyer].
+Commence par me proposer un plan en 5 lignes ; je le valide avant
+que tu ne rédiges.</code></pre>
+
+  <h3>Extraire des données structurées</h3>
+  <pre><code>Extrais les informations suivantes de chaque document :
+date, émetteur, montant total, échéance.
+Réponds uniquement par un tableau, une ligne par document,
+sans commentaire avant ni après.
+Si une valeur est absente ou illisible, écris « N/D ».</code></pre>
+
+  <h3>Comprendre un sujet à votre niveau</h3>
+  <pre><code>Explique-moi [le concept] à trois niveaux successifs :
+1. en trois phrases, pour quelqu'un qui n'y connaît rien ;
+2. en un paragraphe, pour un professionnel non spécialiste ;
+3. en détail, avec le vocabulaire technique exact.
+Termine par les deux erreurs de compréhension les plus fréquentes.</code></pre>
+
+  <h3>Débloquer une itération qui n'avance pas</h3>
+  <pre><code>Ta dernière proposition ne me convient pas, mais j'ai du mal
+à formuler pourquoi. Pose-moi 5 questions ciblées pour identifier
+ce qui manque, une par une, avant de proposer une nouvelle version.</code></pre>
+
+  <div class="callout">
+    <span class="title">✳ Le principe commun</span>
+    Ces six prompts partagent la même ossature&nbsp;: un <strong>objectif</strong> explicite, un <strong>contexte</strong> suffisant, des <strong>contraintes</strong> claires et un <strong>format</strong> de sortie imposé. C'est exactement la structure enseignée au module&nbsp;3 — le reste n'est que variation.
+  </div>
+
+  </div>
+<div data-premium-locked>
+  <h2>Aide-mémoire : les prompts qui marchent <span class="premium-badge">Premium</span></h2>
+  <div class="lesson-locked" style="margin-top:1rem">
+    <div class="locked-cta" style="border-top:none;padding-top:0;margin-top:0">
+      <span class="lock-icon">🔒</span>
+      <span class="lock-text">Six formulations éprouvées, prêtes à copier, qui couvrent la majorité des situations professionnelles.</span>
+      <a class="btn btn-gold" href="../tarifs.html?src=antiseches">Débloquer</a>
+    </div>
+  </div>
+</div>
+<nav class="page-nav">
+    <a href="bonnes-pratiques.html">← Module 8 · Bonnes pratiques</a>
+    <a class="next" href="../index.html">Retour à l'accueil →</a>
+  </nav>
+
+</main>
+
+<div class="upsell-bar" data-upsell-bar hidden></div>
+
+<footer class="site-footer">
+  <p>Formation Claude — projet pédagogique indépendant, non affilié à Anthropic.<br>
+  Sources officielles&nbsp;: <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> · <a href="https://docs.claude.com" target="_blank" rel="noopener">docs.claude.com</a> · <a href="https://www.anthropic.com/learn" target="_blank" rel="noopener">Anthropic Academy</a></p>
+</footer>
+
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

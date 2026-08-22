@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Chat — Formation Claude Premium</title>
+<meta name="description" content="Maîtriser claude.ai : interface, pièces jointes, recherche web, Projets, Artéfacts, styles, mémoire, partage et confidentialité. Cours, exercices et quiz en français.">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✳️</text></svg>">
+</head>
+<body>
+
+<div class="demo-banner">
+  <strong>Démonstration</strong> — modèle freemium simulé : aucun paiement réel, et le verrouillage n'est pas une protection.
+</div>
+
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="../index.html"><span class="spark">✳</span> Formation Claude</a>
+    <nav class="main-nav" aria-label="Navigation principale">
+      <a href="../index.html">Accueil</a>
+      <a href="fondamentaux.html">Fondamentaux</a>
+      <a href="chat.html" aria-current="page">Chat</a>
+      <a href="prompting.html">Prompting</a>
+      <a href="cowork.html">Cowork</a>
+      <a href="claude-code.html">Claude Code</a>
+      <a href="api.html">API</a>
+      <a href="integrations.html">Intégrations</a>
+      <a href="bonnes-pratiques.html">Bonnes pratiques</a>
+      <a href="ressources.html">Ressources</a>
+      <a href="../tarifs.html">Tarifs</a>
+    </nav>
+    <div data-plan-pill data-base="../"></div>
+    <div data-level-switcher></div>
+  </div>
+</header>
+
+<main>
+
+  <p><span class="lvl-badge debutant">Module 2</span></p>
+  <h1>💬 Claude Chat — maîtriser claude.ai</h1>
+  <p class="lead">claude.ai est la porte d'entrée principale vers Claude, et la plus sous-exploitée&nbsp;: la plupart des utilisateurs s'arrêtent à la zone de saisie. Ce module explore méthodiquement tout ce qu'il y a autour — pièces jointes, recherche web, Projets, Artéfacts, styles, mémoire, partage et réglages de confidentialité.</p>
+
+  <div class="page-progress" data-page-progress></div>
+
+  <div class="value-teaser" data-value-teaser hidden></div>
+
+  <div class="toc">
+    <strong>Objectifs de ce module</strong>
+    <ul>
+      <li>Connaître chaque zone de l'interface et savoir choisir son modèle.</li>
+      <li>Exploiter les pièces jointes et la recherche web sans se faire piéger.</li>
+      <li>Structurer son travail avec les Projets, les Artéfacts et les styles.</li>
+      <li>Maîtriser la mémoire, le partage et les réglages de confidentialité.</li>
+    </ul>
+  </div>
+
+  <div class="hidden-notice" data-hidden-notice hidden></div>
+
+  <!-- ================================================================
+       NIVEAU DÉBUTANT
+       ================================================================ -->
+
+  <h2>🟢 Niveau débutant</h2>
+
+  <section class="lesson" data-lesson="chat:interface" data-level="debutant">
+    <div class="lesson-head">
+      <h3>1. L'interface de claude.ai en détail</h3>
+      <span class="lvl-badge debutant">Débutant</span>
+    </div>
+    <p>Ouvrez <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>&nbsp;: l'écran paraît minimaliste, mais chaque zone porte une fonction précise.</p>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Zone</th><th>Ce qu'on y fait</th></tr>
+      <tr><td><strong>Barre latérale gauche</strong></td><td>Nouvelle conversation, historique daté, liste des Projets, accès aux paramètres du compte</td></tr>
+      <tr><td><strong>Fil central</strong></td><td>L'échange&nbsp;; chaque réponse peut être copiée, régénérée, ou modifiée en réécrivant votre message</td></tr>
+      <tr><td><strong>Zone de saisie</strong></td><td>Votre prompt, le bouton de pièce jointe, l'activation des outils disponibles</td></tr>
+      <tr><td><strong>Sélecteur de modèle</strong></td><td>Choisir la gamme (Haiku, Sonnet, Opus) et, selon les cas, le mode de réflexion étendue</td></tr>
+    </table>
+    </div>
+    <p>Trois réflexes à prendre immédiatement&nbsp;:</p>
+    <ul>
+      <li><strong>Renommer vos conversations.</strong> Claude propose un titre automatique&nbsp;; remplacez-le par un intitulé qui vous parlera dans deux semaines. L'historique devient alors une vraie base de travail, consultable par recherche.</li>
+      <li><strong>Modifier un message plutôt qu'en ajouter un.</strong> En repassant sur l'un de vos messages, vous créez une branche&nbsp;: Claude repart de ce point avec la nouvelle formulation, sans traîner l'échange raté.</li>
+      <li><strong>Changer de conversation quand on change de sujet.</strong> Un fil long et hétéroclite dilue le contexte utile (voir le module 1 sur la fenêtre de contexte).</li>
+    </ul>
+    <p>Claude existe aussi en <strong>application mobile</strong> (iOS et Android) et en <strong>application de bureau</strong> (macOS et Windows). Le compte, l'historique et les Projets sont synchronisés&nbsp;: vous commencez une analyse sur votre poste et vous la reprenez dans le train. L'application de bureau sert par ailleurs de socle aux usages plus avancés vus au module 4.</p>
+    <div class="callout tip">
+      <span class="title">💡 À retenir</span>
+      Prenez l'habitude de vérifier le modèle sélectionné <em>avant</em> d'envoyer une demande difficile&nbsp;: le sélecteur conserve votre dernier choix, et une analyse fine lancée avec un modèle rapide donne un résultat décevant sans que rien ne vous prévienne.
+    </div>
+  </section>
+
+  <section class="lesson" data-lesson="chat:fichiers" data-level="debutant">
+    <div class="lesson-head">
+      <h3>2. Joindre des fichiers et des images</h3>
+      <span class="lvl-badge debutant">Débutant</span>
+    </div>
+    <p>Le bouton de pièce jointe accepte des documents (PDF, Word, texte, Markdown), des tableurs et fichiers CSV, du code, ainsi que des <strong>images</strong>&nbsp;: photos, captures d'écran, schémas, diagrammes. Claude lit le texte, mais aussi la mise en page, les tableaux et ce que montre une image.</p>
+    <p>Trois cas concrets, avec le prompt qui va avec.</p>
+    <p><strong>Analyser un contrat.</strong> Joignez le PDF, puis&nbsp;:</p>
+    <pre><code>Voici un contrat de prestation que l'on me propose de signer.
+1. Résume-le en 10 lignes maximum.
+2. Liste les clauses qui m'engagent au-delà de 12 mois.
+3. Signale les points inhabituels ou déséquilibrés pour un prestataire.
+Pour chaque point, cite l'article et la phrase exacte du contrat.
+Ne donne pas de conseil juridique : je ferai valider par un avocat.</code></pre>
+    <p><strong>Résumer un rapport.</strong> Précisez toujours <em>pour qui</em> et <em>pour quoi</em>&nbsp;:</p>
+    <pre><code>Résume ce rapport de 60 pages pour un comité de direction qui a
+5 minutes. Format : 5 points clés, puis 3 décisions à prendre,
+puis les 2 chiffres à retenir. Signale ce qui est une hypothèse
+plutôt qu'un fait établi.</code></pre>
+    <p><strong>Extraire un tableau depuis une photo.</strong> Photographiez un document papier, puis&nbsp;:</p>
+    <pre><code>Cette photo montre un tableau de relevés. Retranscris-le en CSV,
+colonnes : date ; libellé ; quantité ; montant.
+Si une valeur est illisible, écris ILLISIBLE plutôt que de deviner.</code></pre>
+    <div class="callout warn">
+      <span class="title">⚠️ Prudence</span>
+      La consigne «&nbsp;écris ILLISIBLE plutôt que de deviner&nbsp;» n'est pas un détail de style&nbsp;: sans elle, un modèle a tendance à combler les trous par une valeur plausible. Sur des chiffres, relisez toujours l'extraction ligne à ligne avant de l'utiliser.
+    </div>
+    <p>Les formats acceptés, tailles et nombres de fichiers évoluent&nbsp;; l'état à jour figure dans le <a href="https://support.claude.com" target="_blank" rel="noopener">centre d'aide</a>. En pratique, joignez peu de documents à la fois et ciblez les pages utiles&nbsp;: la qualité d'analyse s'en ressent.</p>
+  </section>
+
+  <section class="lesson" data-lesson="chat:recherche-web" data-level="debutant">
+    <div class="lesson-head">
+      <h3>3. La recherche web</h3>
+      <span class="lvl-badge debutant">Débutant</span>
+    </div>
+    <p>Les connaissances de Claude s'arrêtent à sa date d'entraînement. Pour combler cet écart, claude.ai peut consulter le web pendant la conversation&nbsp;: Claude formule des requêtes, lit les pages trouvées et cite ses sources sous la réponse.</p>
+    <p><strong>Quand Claude cherche-t-il&nbsp;?</strong> Généralement quand votre question porte sur l'actualité, sur une donnée susceptible d'avoir changé, ou quand vous le demandez. Il ne cherche pas pour une reformulation, une explication de concept stable ou une tâche de rédaction — et c'est heureux, car chaque recherche ajoute du délai.</p>
+    <p><strong>Comment le demander explicitement.</strong> Ne laissez pas planer le doute&nbsp;:</p>
+    <pre><code>Cherche sur le web l'état actuel de [sujet], en te limitant aux
+sources publiées dans les 6 derniers mois.
+Pour chaque affirmation, indique la source et sa date.
+Si les sources se contredisent, dis-le explicitement au lieu
+de trancher, et présente les deux versions.</code></pre>
+    <p>À l'inverse, pour éviter toute recherche&nbsp;: «&nbsp;Réponds uniquement à partir du document joint, sans chercher sur le web.&nbsp;»</p>
+    <p><strong>Vérifier les sources.</strong> Trois contrôles, à faire systématiquement dès que la réponse sert à une décision&nbsp;:</p>
+    <ol>
+      <li><strong>Ouvrez au moins un lien.</strong> Une citation peut exister et ne pas dire ce que le résumé lui fait dire.</li>
+      <li><strong>Regardez la date.</strong> Une page bien référencée peut être ancienne, et une donnée périmée fait plus de dégâts qu'une absence de donnée.</li>
+      <li><strong>Regardez qui publie.</strong> Blog d'opinion, communiqué commercial et publication officielle n'ont pas le même poids&nbsp;; demandez à Claude de qualifier la nature de chaque source.</li>
+    </ol>
+    <div class="callout">
+      <span class="title">✳ Le réflexe clé</span>
+      La recherche web réduit fortement le risque d'invention, elle ne l'annule pas&nbsp;: le modèle résume ce qu'il lit, et un résumé peut déformer. Sur un chiffre qui engage, la source fait foi, pas la réponse.
+    </div>
+  </section>
+
+  <!-- ================================================================
+       NIVEAU INTERMÉDIAIRE
+       ================================================================ -->
+
+  <h2 data-level="intermediaire">🟠 Niveau intermédiaire</h2>
+
+  <section class="lesson-locked" data-level="intermediaire" data-locked-for="chat:projets" hidden>
+  <div class="lesson-head">
+    <h3>4. Les Projets&nbsp;: un contexte partagé entre conversations</h3>
+    <span class="lvl-badge intermediaire">Intermédiaire</span>
+    <span class="premium-badge">Premium</span>
+  </div>
+  <div class="locked-teaser"><p>Un Projet est un espace qui regroupe des conversations autour d'un même sujet et leur donne un contexte commun. Il comporte deux briques&nbsp;:</p><p>L'intérêt est immédiat&nbsp;: vous cessez de recoller votre contexte à chaque nouvelle demande, et toutes les réponses gagnent en cohérence.</p></div>
+  <div class="locked-cta">
+    <span class="lock-icon">🔒</span>
+    <span class="lock-text">Cette leçon fait partie des 49 leçons Intermédiaire et Pro incluses dans la formule Premium.</span>
+    <a class="btn btn-gold" href="../tarifs.html?src=chat:projets">Débloquer</a>
+  </div>
+</section>
+<section class="lesson" data-lesson="chat:projets" data-level="intermediaire">
+    <div class="lesson-head">
+      <h3>4. Les Projets&nbsp;: un contexte partagé entre conversations</h3>
+      <span class="lvl-badge intermediaire">Intermédiaire</span>
+    </div>
+    <p>Un <strong>Projet</strong> est un espace qui regroupe des conversations autour d'un même sujet et leur donne un contexte commun. Il comporte deux briques&nbsp;:</p>
+    <ul>
+      <li><strong>Des instructions personnalisées</strong>&nbsp;: un texte que Claude prend en compte dans <em>chaque</em> conversation du Projet — votre rôle, votre entreprise, votre ton, vos interdits.</li>
+      <li><strong>Une base de connaissances</strong>&nbsp;: des documents de référence joints une fois pour toutes et disponibles dans toutes les conversations du Projet.</li>
+    </ul>
+    <p>L'intérêt est immédiat&nbsp;: vous cessez de recoller votre contexte à chaque nouvelle demande, et toutes les réponses gagnent en cohérence.</p>
+    <p><strong>Exemple détaillé&nbsp;: un Projet «&nbsp;Rédaction commerciale&nbsp;».</strong> Base de connaissances&nbsp;: votre plaquette produit, deux propositions commerciales gagnées, votre grille tarifaire interne, votre charte éditoriale. Instructions&nbsp;:</p>
+    <pre><code>Tu es mon assistant de rédaction commerciale.
+
+CONTEXTE
+- Entreprise : cabinet de conseil en organisation, 12 personnes, Lyon.
+- Clients : directions industrielles de PME (50 à 500 salariés).
+- Nos offres et nos références sont dans les documents du Projet.
+
+TON
+- Vouvoiement, phrases courtes, zéro superlatif, zéro anglicisme
+  quand un mot français existe.
+- Toujours partir du problème du client, jamais de notre méthode.
+
+RÈGLES
+- N'invente jamais une référence client, un chiffre ou une date :
+  si l'information manque, écris [À COMPLÉTER].
+- Ne cite aucun prix : je les ajoute moi-même.
+- Termine chaque proposition par une prochaine étape concrète.
+
+FORMAT PAR DÉFAUT
+- Objet, accroche de 3 lignes, 3 bénéfices, preuve, appel à l'action.</code></pre>
+    <p>Ensuite, chaque demande devient minuscule&nbsp;: «&nbsp;Rédige la proposition pour l'usine de Saint-Étienne, sujet&nbsp;: réduction des temps de changement de série.&nbsp;» Le contexte, lui, est déjà là.</p>
+    <div class="callout tip">
+      <span class="title">💡 Repère</span>
+      Une base de connaissances se soigne comme un dossier partagé&nbsp;: retirez les documents obsolètes. Un contrat périmé laissé dans un Projet continuera d'influencer les réponses pendant des mois.
+    </div>
+  </section>
+
+  <section class="lesson-locked" data-level="intermediaire" data-locked-for="chat:artefacts" hidden>
+  <div class="lesson-head">
+    <h3>5. Les Artéfacts&nbsp;: produire, prévisualiser, itérer</h3>
+    <span class="lvl-badge intermediaire">Intermédiaire</span>
+    <span class="premium-badge">Premium</span>
+  </div>
+  <div class="locked-teaser"><p>Quand Claude produit un contenu autonome et réutilisable — un document long, un fichier de code, une page web interactive —, il l'affiche dans un panneau séparé du fil&nbsp;: c'est un artéfact. Le fil garde la conversation, l'artéfact garde le livrable.</p><p>Trois avantages&nbsp;: le document reste lisible d'un bloc au lieu d'être noyé dans les messages&nbsp;; une page HTML s'affiche en aperçu en direct, donc vous voyez le résultat au lieu de lire du code&nbsp;; et chaque demande de modification met à jour l'artéfact au lieu d'en recréer un.</p></div>
+  <div class="locked-cta">
+    <span class="lock-icon">🔒</span>
+    <span class="lock-text">Cette leçon fait partie des 49 leçons Intermédiaire et Pro incluses dans la formule Premium.</span>
+    <a class="btn btn-gold" href="../tarifs.html?src=chat:artefacts">Débloquer</a>
+  </div>
+</section>
+<section class="lesson" data-lesson="chat:artefacts" data-level="intermediaire">
+    <div class="lesson-head">
+      <h3>5. Les Artéfacts&nbsp;: produire, prévisualiser, itérer</h3>
+      <span class="lvl-badge intermediaire">Intermédiaire</span>
+    </div>
+    <p>Quand Claude produit un contenu autonome et réutilisable — un document long, un fichier de code, une page web interactive —, il l'affiche dans un panneau séparé du fil&nbsp;: c'est un <strong>artéfact</strong>. Le fil garde la conversation, l'artéfact garde le livrable.</p>
+    <p>Trois avantages&nbsp;: le document reste lisible d'un bloc au lieu d'être noyé dans les messages&nbsp;; une page HTML s'affiche en <strong>aperçu en direct</strong>, donc vous voyez le résultat au lieu de lire du code&nbsp;; et chaque demande de modification met à jour l'artéfact au lieu d'en recréer un.</p>
+    <p><strong>Exemple&nbsp;: créer un mini-outil web.</strong></p>
+    <pre><code>Crée une page web autonome : un calculateur de délai de congés.
+- Deux champs : date de début, nombre de jours ouvrés.
+- Le résultat affiche la date de reprise, en excluant samedis
+  et dimanches.
+- Interface sobre, en français, utilisable sur mobile.
+- Tout en un seul fichier HTML, sans bibliothèque externe.</code></pre>
+    <p>Puis on itère, message après message&nbsp;: «&nbsp;Ajoute la liste des jours fériés français de l'année en cours, modifiable par l'utilisateur.&nbsp;» → «&nbsp;Affiche aussi le nombre de jours calendaires d'absence.&nbsp;» → «&nbsp;Passe l'interface en deux colonnes sur écran large, une seule sur mobile.&nbsp;»</p>
+    <p>Deux principes rendent l'itération efficace&nbsp;:</p>
+    <ul>
+      <li><strong>Un changement à la fois.</strong> Cinq modifications dans un seul message donnent souvent quatre réussites et une régression difficile à isoler.</li>
+      <li><strong>Décrire le comportement voulu, pas la ligne de code.</strong> «&nbsp;Le bouton doit rester visible quand on fait défiler&nbsp;» vaut mieux que «&nbsp;mets position fixed&nbsp;».</li>
+    </ul>
+    <p>Un artéfact se copie, se télécharge, et se partage (leçon&nbsp;8). Les artéfacts servent aussi bien à du texte&nbsp;: procédure interne, modèle de compte rendu, grille d'entretien — tout ce que vous voulez relire et faire évoluer sans le reconstruire.</p>
+  </section>
+
+  <section class="lesson-locked" data-level="intermediaire" data-locked-for="chat:styles" hidden>
+  <div class="lesson-head">
+    <h3>6. Les styles de réponse</h3>
+    <span class="lvl-badge intermediaire">Intermédiaire</span>
+    <span class="premium-badge">Premium</span>
+  </div>
+  <div class="locked-teaser"><p>Les styles agissent sur la forme des réponses&nbsp;: longueur, densité, registre, présence ou non de listes. Ils se choisissent près de la zone de saisie et s'appliquent à la conversation, sans que vous ayez à le redemander à chaque message.</p><p>claude.ai propose des styles prédéfinis&nbsp;: un style normal, un style plus concis, un style plus explicatif, un style plus formel. Vous pouvez surtout créer des styles personnalisés, en décrivant ce que vous voulez ou en fournissant des textes de référence dont Claude déduit le ton.</p></div>
+  <div class="locked-cta">
+    <span class="lock-icon">🔒</span>
+    <span class="lock-text">Cette leçon fait partie des 49 leçons Intermédiaire et Pro incluses dans la formule Premium.</span>
+    <a class="btn btn-gold" href="../tarifs.html?src=chat:styles">Débloquer</a>
+  </div>
+</section>
+<section class="lesson" data-lesson="chat:styles" data-level="intermediaire">
+    <div class="lesson-head">
+      <h3>6. Les styles de réponse</h3>
+      <span class="lvl-badge intermediaire">Intermédiaire</span>
+    </div>
+    <p>Les <strong>styles</strong> agissent sur la <em>forme</em> des réponses&nbsp;: longueur, densité, registre, présence ou non de listes. Ils se choisissent près de la zone de saisie et s'appliquent à la conversation, sans que vous ayez à le redemander à chaque message.</p>
+    <p>claude.ai propose des styles prédéfinis&nbsp;: un style normal, un style plus concis, un style plus explicatif, un style plus formel. Vous pouvez surtout créer des <strong>styles personnalisés</strong>, en décrivant ce que vous voulez ou en fournissant des textes de référence dont Claude déduit le ton.</p>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Situation</th><th>Style adapté</th></tr>
+      <tr><td>Recherche d'information, questions rapides</td><td>Concis&nbsp;: la réponse d'abord, les nuances ensuite</td></tr>
+      <tr><td>Apprentissage d'un sujet nouveau</td><td>Explicatif&nbsp;: exemples, analogies, progression</td></tr>
+      <tr><td>Écrits externes (clients, partenaires)</td><td>Formel, ou style maison personnalisé</td></tr>
+      <tr><td>Brainstorming</td><td>Style libre, sans listes imposées</td></tr>
+    </table>
+    </div>
+    <p>Exemple de style personnalisé, tel qu'on peut le décrire&nbsp;:</p>
+    <pre><code>Écris comme une note interne de direction :
+- Une phrase de conclusion en tête, en gras.
+- Ensuite 3 paragraphes maximum, 4 lignes chacun.
+- Aucune liste à puces, aucun emoji, aucune formule de politesse.
+- Vocabulaire simple ; si un terme technique est indispensable,
+  l'expliquer entre parenthèses en 5 mots.</code></pre>
+    <p><strong>Style ou instructions de Projet&nbsp;?</strong> Le style porte sur la manière de s'exprimer et vous suit partout&nbsp;; les instructions de Projet portent sur le contexte métier et ne valent que dans ce Projet. Les deux se combinent&nbsp;: un Projet «&nbsp;Support client&nbsp;» avec un style «&nbsp;concis&nbsp;» pour les réponses rapides, le même Projet avec un style «&nbsp;explicatif&nbsp;» quand vous rédigez la documentation.</p>
+    <div class="callout">
+      <span class="title">✳ Le réflexe clé</span>
+      Si vous répétez la même consigne de forme dans trois conversations d'affilée («&nbsp;plus court&nbsp;», «&nbsp;sans puces&nbsp;»), c'est le signal qu'il faut en faire un style.
+    </div>
+  </section>
+
+  <!-- ================================================================
+       NIVEAU PRO
+       ================================================================ -->
+
+  <h2 data-level="pro">🟣 Niveau pro</h2>
+
+  <section class="lesson-locked" data-level="pro" data-locked-for="chat:memoire" hidden>
+  <div class="lesson-head">
+    <h3>7. Mémoire et contexte entre conversations</h3>
+    <span class="lvl-badge pro">Pro</span>
+    <span class="premium-badge">Premium</span>
+  </div>
+  <div class="locked-teaser"><p>Par défaut, chaque conversation est étanche&nbsp;: Claude ne sait rien de ce que vous lui avez dit hier. Plusieurs mécanismes, aux portées différentes, viennent nuancer ce principe. Les distinguer évite deux erreurs symétriques&nbsp;: croire que Claude se souvient de tout, ou croire qu'il ne retient jamais rien.</p><p>La mémoire permet à Claude de conserver des éléments utiles d'une conversation à l'autre&nbsp;: vos préférences de format, le nom de votre équipe, un projet en cours. Sa disponibilité dépend de l'offre et des réglages de l'organisation&nbsp;; l'état exact des fonctionnalités est documenté sur support.claude.com.</p></div>
+  <div class="locked-cta">
+    <span class="lock-icon">🔒</span>
+    <span class="lock-text">Cette leçon fait partie des 49 leçons Intermédiaire et Pro incluses dans la formule Premium.</span>
+    <a class="btn btn-gold" href="../tarifs.html?src=chat:memoire">Débloquer</a>
+  </div>
+</section>
+<section class="lesson" data-lesson="chat:memoire" data-level="pro">
+    <div class="lesson-head">
+      <h3>7. Mémoire et contexte entre conversations</h3>
+      <span class="lvl-badge pro">Pro</span>
+    </div>
+    <p>Par défaut, chaque conversation est étanche&nbsp;: Claude ne sait rien de ce que vous lui avez dit hier. Plusieurs mécanismes, aux portées différentes, viennent nuancer ce principe. Les distinguer évite deux erreurs symétriques&nbsp;: croire que Claude se souvient de tout, ou croire qu'il ne retient jamais rien.</p>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Mécanisme</th><th>Portée</th><th>Persistance</th></tr>
+      <tr><td>Fil de conversation</td><td>Cette conversation</td><td>Tant que la conversation existe et tient dans la fenêtre de contexte</td></tr>
+      <tr><td>Instructions et documents d'un Projet</td><td>Toutes les conversations du Projet</td><td>Jusqu'à ce que vous les modifiiez</td></tr>
+      <tr><td>Style</td><td>Là où vous l'appliquez</td><td>Jusqu'à changement de style</td></tr>
+      <tr><td>Mémoire (quand elle est disponible et activée)</td><td>Entre conversations</td><td>Jusqu'à modification ou suppression par vous</td></tr>
+    </table>
+    </div>
+    <p>La <strong>mémoire</strong> permet à Claude de conserver des éléments utiles d'une conversation à l'autre&nbsp;: vos préférences de format, le nom de votre équipe, un projet en cours. Sa disponibilité dépend de l'offre et des réglages de l'organisation&nbsp;; l'état exact des fonctionnalités est documenté sur <a href="https://support.claude.com" target="_blank" rel="noopener">support.claude.com</a>.</p>
+    <p><strong>La gérer activement.</strong> Traitez la mémoire comme un fichier de configuration, pas comme une boîte noire&nbsp;:</p>
+    <ul>
+      <li><strong>Inspectez-la</strong> périodiquement dans les paramètres&nbsp;: ce qui a été retenu vous surprendra parfois.</li>
+      <li><strong>Corrigez-la explicitement.</strong> «&nbsp;Je ne travaille plus sur le projet Aurore&nbsp;: oublie ce point.&nbsp;»</li>
+      <li><strong>Désactivez-la</strong> quand elle nuit&nbsp;: comparaison à l'aveugle de deux options, test d'un prompt, sujet confidentiel qui n'a pas à ressortir ailleurs. Les conversations temporaires ou hors mémoire servent exactement à cela.</li>
+    </ul>
+    <div class="callout warn">
+      <span class="title">⚠️ Prudence</span>
+      Une mémoire qui contient une information erronée la propage silencieusement dans toutes vos conversations suivantes. Quand une réponse semble partir d'un présupposé que vous n'avez pas formulé, allez d'abord vérifier la mémoire et les instructions du Projet.
+    </div>
+  </section>
+
+  <section class="lesson-locked" data-level="pro" data-locked-for="chat:partage" hidden>
+  <div class="lesson-head">
+    <h3>8. Partage et collaboration</h3>
+    <span class="lvl-badge pro">Pro</span>
+    <span class="premium-badge">Premium</span>
+  </div>
+  <div class="locked-teaser"><p>Une conversation ou un artéfact peuvent être partagés au moyen d'un lien. C'est l'un des usages les plus rentables de claude.ai en équipe&nbsp;: on ne partage pas seulement un résultat, on partage la démarche — le prompt, les allers-retours, les impasses.</p><p>Ce qu'il faut savoir avant de partager&nbsp;:</p></div>
+  <div class="locked-cta">
+    <span class="lock-icon">🔒</span>
+    <span class="lock-text">Cette leçon fait partie des 49 leçons Intermédiaire et Pro incluses dans la formule Premium.</span>
+    <a class="btn btn-gold" href="../tarifs.html?src=chat:partage">Débloquer</a>
+  </div>
+</section>
+<section class="lesson" data-lesson="chat:partage" data-level="pro">
+    <div class="lesson-head">
+      <h3>8. Partage et collaboration</h3>
+      <span class="lvl-badge pro">Pro</span>
+    </div>
+    <p>Une conversation ou un artéfact peuvent être partagés au moyen d'un lien. C'est l'un des usages les plus rentables de claude.ai en équipe&nbsp;: on ne partage pas seulement un résultat, on partage <em>la démarche</em> — le prompt, les allers-retours, les impasses.</p>
+    <p><strong>Ce qu'il faut savoir avant de partager&nbsp;:</strong></p>
+    <ul>
+      <li>Le lien expose <strong>le contenu de la conversation à l'instant du partage</strong>, y compris les documents que vous y avez joints. Relisez le fil du début avant de diffuser.</li>
+      <li>Un lien partagé est une <strong>copie figée</strong>&nbsp;: vos messages ultérieurs ne s'y ajoutent pas, et le destinataire ne modifie pas votre conversation. S'il poursuit l'échange, il le fait dans son propre espace.</li>
+      <li>La visibilité, la révocation et les partages internes à l'organisation dépendent de votre offre et des réglages d'administration&nbsp;; vérifiez-les sur <a href="https://support.claude.com" target="_blank" rel="noopener">support.claude.com</a> avant d'en faire une pratique d'équipe.</li>
+    </ul>
+    <p><strong>Bonnes pratiques d'équipe.</strong> Quatre règles simples suffisent à transformer l'usage individuel en pratique collective&nbsp;:</p>
+    <ol>
+      <li><strong>Un Projet par processus récurrent</strong>, pas par personne&nbsp;: «&nbsp;Réponses support&nbsp;», «&nbsp;Appels d'offres&nbsp;», «&nbsp;Revue de contrats&nbsp;». Les instructions deviennent un actif d'équipe qui se relit et se corrige.</li>
+      <li><strong>Une bibliothèque de prompts.</strong> Conservez les prompts qui marchent dans un document partagé, avec un exemple d'entrée et un exemple de sortie attendue.</li>
+      <li><strong>Partagez les échecs.</strong> Une conversation où Claude s'est trompé enseigne plus qu'une réussite&nbsp;: elle documente une limite réelle.</li>
+      <li><strong>Nommez un responsable de la relecture.</strong> Un livrable produit avec Claude reste signé par un humain, qui en répond.</li>
+    </ol>
+    <div class="callout">
+      <span class="title">✳ Le réflexe clé</span>
+      Avant tout partage externe, posez-vous la question&nbsp;: «&nbsp;serais-je à l'aise si ce lien circulait au-delà du destinataire prévu&nbsp;?&nbsp;» Traitez un lien de partage comme un document envoyé par e-mail&nbsp;: une fois parti, il ne revient pas.
+    </div>
+  </section>
+
+  <section class="lesson-locked" data-level="pro" data-locked-for="chat:confidentialite" hidden>
+  <div class="lesson-head">
+    <h3>9. Confidentialité et réglages avancés</h3>
+    <span class="lvl-badge pro">Pro</span>
+    <span class="premium-badge">Premium</span>
+  </div>
+  <div class="locked-teaser"><p>Utiliser Claude dans un cadre professionnel suppose de savoir répondre à trois questions&nbsp;: où vont mes données, qui peut y accéder, et combien de temps sont-elles conservées&nbsp;? Les réponses dépendent de votre offre et des réglages de votre organisation. Les politiques applicables sont publiées par Anthropic&nbsp;; les réglages du compte, eux, sont entre vos mains.</p><p>À vérifier dans vos paramètres&nbsp;:</p></div>
+  <div class="locked-cta">
+    <span class="lock-icon">🔒</span>
+    <span class="lock-text">Cette leçon fait partie des 49 leçons Intermédiaire et Pro incluses dans la formule Premium.</span>
+    <a class="btn btn-gold" href="../tarifs.html?src=chat:confidentialite">Débloquer</a>
+  </div>
+</section>
+<section class="lesson" data-lesson="chat:confidentialite" data-level="pro">
+    <div class="lesson-head">
+      <h3>9. Confidentialité et réglages avancés</h3>
+      <span class="lvl-badge pro">Pro</span>
+    </div>
+    <p>Utiliser Claude dans un cadre professionnel suppose de savoir répondre à trois questions&nbsp;: où vont mes données, qui peut y accéder, et combien de temps sont-elles conservées&nbsp;? Les réponses dépendent de votre offre et des réglages de votre organisation. Les politiques applicables sont publiées par Anthropic&nbsp;; les réglages du compte, eux, sont entre vos mains.</p>
+    <p><strong>À vérifier dans vos paramètres&nbsp;:</strong></p>
+    <ul>
+      <li>Les <strong>réglages de confidentialité et de données</strong>, notamment ce qui concerne l'utilisation de vos échanges pour l'amélioration des modèles, et les options qui vous sont offertes.</li>
+      <li>La <strong>conservation et la suppression</strong>&nbsp;: comment supprimer une conversation, un Projet, la mémoire, ou l'ensemble du compte.</li>
+      <li>Les <strong>conversations temporaires</strong> ou hors historique, quand vous manipulez un contenu qui n'a pas à rester.</li>
+      <li>La <strong>sécurité du compte</strong>&nbsp;: authentification à deux facteurs, sessions actives, appareils connectés.</li>
+    </ul>
+    <p><strong>Points à vérifier en entreprise</strong>, avant tout déploiement&nbsp;:</p>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Question</th><th>Où chercher</th></tr>
+      <tr><td>L'usage de Claude est-il autorisé, et sur quelles données&nbsp;?</td><td>Politique interne, charte informatique, DPO</td></tr>
+      <tr><td>Quelle offre&nbsp;: comptes individuels ou espace administré&nbsp;?</td><td>Direction des systèmes d'information</td></tr>
+      <tr><td>Authentification unique (SSO), gestion des départs, journalisation</td><td>Réglages d'administration de l'offre concernée</td></tr>
+      <tr><td>Traitement des données personnelles et sous-traitance</td><td>Documents contractuels et politiques publiés par Anthropic</td></tr>
+    </table>
+    </div>
+    <div class="callout warn">
+      <span class="title">⚠️ Règle minimale</span>
+      Tant que le cadre interne n'est pas établi&nbsp;: pas de données personnelles de tiers, pas de secrets d'affaires, pas d'identifiants. Une bonne partie du bénéfice s'obtient sur des documents anonymisés — remplacez les noms par des étiquettes avant de coller, le raisonnement de Claude n'en souffre pas.
+    </div>
+  </section>
+
+  <!-- ================================================================
+       EXERCICES
+       ================================================================ -->
+
+  <h2>💪 Exercices pratiques</h2>
+
+  <div class="exercise" data-level="debutant">
+    <span class="ex-label">Exercice · Débutant</span>
+    <h4>Analyser un vrai PDF, puis creuser</h4>
+    <p>Choisissez un document PDF réel et non confidentiel que vous connaissez bien (une notice, un règlement, un rapport public). Joignez-le à une conversation, demandez-en une analyse, puis posez <strong>trois questions de suivi</strong> — sans jamais rejoindre le fichier.</p>
+    <details class="solution" data-premium hidden>
+      <summary>Voir une démarche corrigée</summary>
+      <div class="sol-body">
+        <p>Message initial, après avoir joint le PDF&nbsp;:</p>
+        <pre><code>Voici un document que je dois maîtriser.
+1. Résume-le en 8 lignes maximum.
+2. Donne son plan : les grandes parties et ce que chacune traite.
+3. Liste les 5 informations les plus importantes pour quelqu'un
+   qui doit l'appliquer, avec le numéro de page pour chacune.</code></pre>
+        <p>Puis les trois questions de suivi, de plus en plus exigeantes&nbsp;:</p>
+        <ol>
+          <li><strong>Vérification</strong>&nbsp;: «&nbsp;Sur quel passage exact t'appuies-tu pour le point 3&nbsp;? Cite la phrase entre guillemets.&nbsp;» Vous testez la traçabilité&nbsp;: allez ensuite lire la page. C'est la seule façon de calibrer votre confiance.</li>
+          <li><strong>Angle mort</strong>&nbsp;: «&nbsp;Qu'est-ce que ce document <em>ne</em> dit <em>pas</em> et qu'un lecteur pourrait supposer à tort&nbsp;?&nbsp;» Excellente question sur un règlement ou un contrat&nbsp;: elle fait remonter les silences.</li>
+          <li><strong>Transformation</strong>&nbsp;: «&nbsp;Transforme la partie 2 en une check-list de 10 points actionnables, à l'impératif, une ligne chacun.&nbsp;»</li>
+        </ol>
+        <p><strong>Ce que l'exercice démontre</strong>&nbsp;: le document reste dans le contexte pendant toute la conversation. Vous n'avez donc pas à le renvoyer&nbsp;; vous pouvez enchaîner des questions de plus en plus fines, ce qui est très supérieur à une seule grosse demande initiale. Et surtout&nbsp;: demander la citation exacte est le geste de vérification le moins coûteux et le plus efficace.</p>
+      </div>
+    </details><div class="solution-locked" hidden>
+  <details class="solution">
+    <summary>🔒 Corrigé détaillé — formule Premium</summary>
+    <div class="sol-body">
+      <p>Le corrigé pas à pas de cet exercice est inclus dans la formule Premium, avec les 24 corrigés du parcours.</p>
+      <p><a class="btn btn-gold" href="../tarifs.html?src=corrige">Voir les formules</a></p>
+    </div>
+  </details>
+</div>
+
+  </div>
+
+  <div class="exercise" data-level="intermediaire">
+    <span class="ex-label">Exercice · Intermédiaire</span>
+    <h4>Construire un Projet complet</h4>
+    <p>Créez un Projet correspondant à une tâche que vous répétez au moins une fois par semaine. Rédigez ses instructions personnalisées, constituez sa base de connaissances, puis testez-le sur deux demandes réelles et corrigez les instructions à partir de ce que vous observez.</p>
+    <details class="solution" data-premium hidden>
+      <summary>Voir la solution</summary>
+      <div class="sol-body">
+        <p>Exemple complet pour un Projet «&nbsp;Réponses au support client&nbsp;».</p>
+        <p><strong>Base de connaissances</strong>&nbsp;: la documentation produit à jour, la foire aux questions publique, la grille d'escalade interne, cinq réponses passées jugées exemplaires.</p>
+        <p><strong>Instructions</strong>&nbsp;:</p>
+        <pre><code>Tu rédiges des réponses de support client pour [produit].
+
+CONTEXTE
+- Nos utilisateurs sont des non-techniciens.
+- La documentation de référence est dans les fichiers du Projet.
+
+MÉTHODE
+1. Identifie le problème réel derrière la question posée.
+2. Réponds uniquement à partir des documents du Projet.
+3. Si la réponse n'y figure pas, écris : « À faire vérifier par
+   l'équipe produit » et propose une réponse d'attente.
+
+FORMAT
+- Bonjour [Prénom], une phrase d'accusé de réception.
+- La solution en 3 étapes numérotées maximum.
+- Une phrase de clôture proposant de revenir vers nous.
+- Longueur totale : 150 mots maximum.
+
+INTERDITS
+- Aucun engagement de délai, aucune promesse d'évolution produit.
+- Aucun remboursement ni geste commercial : escalade obligatoire.</code></pre>
+        <p><strong>Le test et la correction, qui font tout l'exercice.</strong> Soumettez deux vraies demandes. Vous constaterez probablement deux dérives classiques&nbsp;: des réponses trop longues, et des affirmations qui ne figurent pas dans la documentation. On corrige alors par des règles <em>vérifiables</em> plutôt que par des adjectifs&nbsp;: remplacez «&nbsp;sois concis&nbsp;» par «&nbsp;150 mots maximum, 3 étapes maximum&nbsp;», et ajoutez «&nbsp;cite le titre de la section de documentation utilisée à la fin de chaque réponse&nbsp;». Une instruction qu'on peut contrôler d'un coup d'œil est une instruction qui tient.</p>
+        <p>Itérez deux ou trois fois&nbsp;: un Projet bien réglé se reconnaît au fait que vos demandes deviennent des phrases d'une ligne.</p>
+      </div>
+    </details><div class="solution-locked" hidden>
+  <details class="solution">
+    <summary>🔒 Corrigé détaillé — formule Premium</summary>
+    <div class="sol-body">
+      <p>Le corrigé pas à pas de cet exercice est inclus dans la formule Premium, avec les 24 corrigés du parcours.</p>
+      <p><a class="btn btn-gold" href="../tarifs.html?src=corrige">Voir les formules</a></p>
+    </div>
+  </details>
+</div>
+
+  </div>
+
+  <div class="exercise" data-level="pro">
+    <span class="ex-label">Exercice · Pro</span>
+    <h4>Créer un artéfact interactif et le faire évoluer</h4>
+    <p>Créez un petit outil web utile à votre travail sous forme d'artéfact, puis faites-le évoluer en <strong>quatre itérations distinctes</strong>&nbsp;: une fonctionnalité, une correction d'ergonomie, une contrainte de robustesse, une amélioration d'accessibilité. Observez ce qui casse en chemin.</p>
+    <details class="solution" data-premium hidden>
+      <summary>Voir la solution</summary>
+      <div class="sol-body">
+        <p><strong>Itération 0 — la demande initiale.</strong> Soyez précis sur le périmètre, sinon vous obtiendrez une usine à gaz&nbsp;:</p>
+        <pre><code>Crée une page web autonome : un suivi de temps par tâche.
+- Ajouter une tâche (nom), démarrer/arrêter un chronomètre.
+- Tableau des tâches avec le temps cumulé, format h:mm:ss.
+- Bouton « Exporter en CSV ».
+- Un seul fichier HTML, aucune bibliothèque externe, interface
+  sobre en français.
+Avant de coder, liste en 5 lignes ce que tu vas construire.</code></pre>
+        <p>La dernière ligne est le vrai geste de pro&nbsp;: on valide l'intention avant de payer une génération complète.</p>
+        <p><strong>Itération 1 — fonctionnalité</strong>&nbsp;: «&nbsp;Ajoute une catégorie par tâche, et un total de temps par catégorie sous le tableau.&nbsp;»</p>
+        <p><strong>Itération 2 — ergonomie</strong>&nbsp;: «&nbsp;Un seul chronomètre peut tourner à la fois&nbsp;: démarrer une tâche arrête automatiquement la précédente. Indique visuellement la tâche en cours.&nbsp;»</p>
+        <p><strong>Itération 3 — robustesse</strong>&nbsp;: «&nbsp;Conserve les données si la page est rechargée. Empêche deux tâches de porter le même nom. Que se passe-t-il si je laisse un chronomètre tourner toute la nuit&nbsp;? Vérifie que l'affichage reste correct au-delà de 24&nbsp;heures.&nbsp;»</p>
+        <p><strong>Itération 4 — accessibilité</strong>&nbsp;: «&nbsp;Rends la page utilisable au clavier seul, avec des libellés explicites sur chaque champ et un contraste suffisant.&nbsp;»</p>
+        <p><strong>Ce que l'exercice démontre.</strong> Trois enseignements reviennent presque toujours&nbsp;: (1)&nbsp;une itération répare parfois une chose et en casse une autre — d'où l'intérêt de tester la fonctionnalité précédente après chaque changement&nbsp;; (2)&nbsp;les demandes formulées en <em>comportement observable</em> («&nbsp;démarrer une tâche arrête la précédente&nbsp;») donnent de bien meilleurs résultats que les demandes formulées en solution technique&nbsp;; (3)&nbsp;quand l'artéfact devient confus après beaucoup d'allers-retours, la bonne manœuvre est de demander «&nbsp;récapitule les règles de fonctionnement actuelles de l'outil&nbsp;», de corriger ce récapitulatif, puis de repartir de lui dans une nouvelle conversation.</p>
+      </div>
+    </details><div class="solution-locked" hidden>
+  <details class="solution">
+    <summary>🔒 Corrigé détaillé — formule Premium</summary>
+    <div class="sol-body">
+      <p>Le corrigé pas à pas de cet exercice est inclus dans la formule Premium, avec les 24 corrigés du parcours.</p>
+      <p><a class="btn btn-gold" href="../tarifs.html?src=corrige">Voir les formules</a></p>
+    </div>
+  </details>
+</div>
+
+  </div>
+
+  <!-- ================================================================
+       QUIZ
+       ================================================================ -->
+
+  <h2>❓ Quiz de validation</h2>
+
+  <div class="quiz">
+    <p><strong>Validez vos acquis</strong> — une seule bonne réponse par question.</p>
+
+    <div class="quiz-q">
+      <p class="q-text">1. À quoi sert principalement un Projet dans claude.ai&nbsp;?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" type="button">À rendre les réponses plus rapides</button>
+        <button class="quiz-opt" type="button" data-correct="true">À partager des instructions et des documents entre toutes les conversations d'un même sujet</button>
+        <button class="quiz-opt" type="button">À sauvegarder automatiquement les conversations sur votre disque</button>
+      </div>
+      <div class="quiz-explain">Un Projet combine des instructions personnalisées et une base de connaissances communes à toutes ses conversations&nbsp;: vous cessez de recoller votre contexte à chaque demande.</div>
+    </div>
+
+    <div class="quiz-q">
+      <p class="q-text">2. Vous faites extraire un tableau chiffré depuis une photo. Quelle consigne réduit le plus le risque d'erreur&nbsp;?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" type="button">«&nbsp;Sois précis et rigoureux&nbsp;»</button>
+        <button class="quiz-opt" type="button">«&nbsp;Utilise le modèle le plus puissant&nbsp;»</button>
+        <button class="quiz-opt" type="button" data-correct="true">«&nbsp;Si une valeur est illisible, écris ILLISIBLE plutôt que de deviner&nbsp;»</button>
+      </div>
+      <div class="quiz-explain">Sans porte de sortie explicite, un modèle a tendance à combler les trous par une valeur plausible. Lui donner le droit de dire «&nbsp;je ne sais pas&nbsp;» est bien plus efficace qu'un appel à la rigueur.</div>
+    </div>
+
+    <div class="quiz-q">
+      <p class="q-text">3. Qu'est-ce qu'un artéfact&nbsp;?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" type="button">Une erreur d'affichage dans la conversation</button>
+        <button class="quiz-opt" type="button" data-correct="true">Un contenu autonome (document, code, page interactive) affiché dans un panneau séparé et modifiable par itérations</button>
+        <button class="quiz-opt" type="button">Un fichier que vous joignez à Claude</button>
+      </div>
+      <div class="quiz-explain">L'artéfact sépare le livrable de la conversation&nbsp;: il reste lisible d'un bloc, s'affiche en aperçu quand c'est une page web, et se met à jour au lieu d'être recréé à chaque demande.</div>
+    </div>
+
+    <div class="quiz-q">
+      <p class="q-text">4. Quelle affirmation sur la recherche web est exacte&nbsp;?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" type="button">Elle supprime tout risque d'information fausse</button>
+        <button class="quiz-opt" type="button">Elle est utilisée à chaque message, quel que soit le sujet</button>
+        <button class="quiz-opt" type="button" data-correct="true">Elle réduit le risque d'invention mais le résumé des sources peut déformer&nbsp;: la vérification reste nécessaire</button>
+      </div>
+      <div class="quiz-explain">Claude cherche surtout quand la question porte sur l'actualité ou quand vous le demandez. Il cite ses sources&nbsp;: ouvrez-les, regardez la date et la nature de l'éditeur dès que la réponse sert à une décision.</div>
+    </div>
+
+    <div class="quiz-q">
+      <p class="q-text">5. Vous répétez «&nbsp;réponds plus court, sans listes à puces&nbsp;» dans toutes vos conversations. Quelle est la bonne réaction&nbsp;?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" type="button">Changer de modèle</button>
+        <button class="quiz-opt" type="button" data-correct="true">Créer un style personnalisé qui décrit cette forme une fois pour toutes</button>
+        <button class="quiz-opt" type="button">Créer un Projet distinct pour chaque conversation</button>
+      </div>
+      <div class="quiz-explain">Les styles portent sur la forme des réponses et vous suivent d'une conversation à l'autre&nbsp;; les Projets portent sur le contexte métier. Une consigne de forme répétée est le signal qu'il faut en faire un style.</div>
+    </div>
+
+    <p class="quiz-score"></p>
+  </div>
+
+  <!-- ================================================================
+       VIDÉOS & RESSOURCES
+       ================================================================ -->
+
+  <h2>🎬 Vidéos &amp; ressources officielles</h2>
+  <p>Pour approfondir ce module avec les sources d'Anthropic&nbsp;:</p>
+
+  <div class="resource-grid">
+    <a class="resource-card" href="https://support.claude.com" target="_blank" rel="noopener">
+      <span class="kind">🛟 Centre d'aide</span>
+      <h4>Aide officielle de Claude</h4>
+      <p>La référence à jour sur les Projets, les Artéfacts, la mémoire, les formats de fichiers acceptés et les réglages du compte.</p>
+    </a>
+    <a class="resource-card" href="https://www.anthropic.com/learn" target="_blank" rel="noopener">
+      <span class="kind">🎓 Cours en ligne</span>
+      <h4>Anthropic Academy</h4>
+      <p>Les parcours officiels et gratuits d'Anthropic, dont l'usage de claude.ai au quotidien et le travail avec des documents.</p>
+    </a>
+    <a class="resource-card" href="https://www.youtube.com/results?search_query=Anthropic+Claude+projects" target="_blank" rel="noopener">
+      <span class="kind">🎬 Vidéos</span>
+      <h4>Démonstrations en vidéo</h4>
+      <p>Recherche YouTube sur les Projets et les Artéfacts&nbsp;: démonstrations officielles et tutoriels de la communauté (en anglais).</p>
+    </a>
+    <a class="resource-card" href="https://www.anthropic.com/news" target="_blank" rel="noopener">
+      <span class="kind">📰 Actualités</span>
+      <h4>Annonces Anthropic</h4>
+      <p>Les nouveautés de claude.ai&nbsp;: nouvelles fonctionnalités, évolutions des modèles et des offres, au fil des publications.</p>
+    </a>
+  </div>
+
+  <nav class="page-nav">
+    <a href="fondamentaux.html">← Module 1 · Fondamentaux</a>
+    <a class="next" href="prompting.html">Module 3 · L'art du prompt →</a>
+  </nav>
+
+</main>
+
+<div class="upsell-bar" data-upsell-bar hidden></div>
+
+<footer class="site-footer">
+  <p>Formation Claude — projet pédagogique indépendant, non affilié à Anthropic.</p>
+</footer>
+
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

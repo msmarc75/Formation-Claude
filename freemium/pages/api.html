@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>API &amp; développeurs — Formation Claude Premium</title>
+<meta name="description" content="Construire avec l'API Anthropic : clé API, première requête, streaming, tool use, vision et PDF, prompt caching, Batch API et mise en production. Cours, exercices et quiz en français.">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✳️</text></svg>">
+</head>
+<body>
+
+<div class="demo-banner">
+  <strong>Démonstration</strong> — modèle freemium simulé : aucun paiement réel, et le verrouillage n'est pas une protection.
+</div>
+
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="../index.html"><span class="spark">✳</span> Formation Claude</a>
+    <nav class="main-nav" aria-label="Navigation principale">
+      <a href="../index.html">Accueil</a>
+      <a href="fondamentaux.html">Fondamentaux</a>
+      <a href="chat.html">Chat</a>
+      <a href="prompting.html">Prompting</a>
+      <a href="cowork.html">Cowork</a>
+      <a href="claude-code.html">Claude Code</a>
+      <a href="api.html" aria-current="page">API</a>
+      <a href="integrations.html">Intégrations</a>
+      <a href="bonnes-pratiques.html">Bonnes pratiques</a>
+      <a href="ressources.html">Ressources</a>
+      <a href="../tarifs.html">Tarifs</a>
+    </nav>
+    <div data-plan-pill data-base="../"></div>
+    <div data-level-switcher></div>
+  </div>
+</header>
+
+<main>
+
+  <p><span class="lvl-badge debutant">Module 6</span></p>
+  <h1>🔌 API &amp; développeurs</h1>
+  <p class="lead">L'API Anthropic, c'est Claude sans interface&nbsp;: une requête HTTP, une réponse, et tout ce que vous construisez autour. Ce module vous mène de la première requête à un pipeline de production — outils, streaming, documents, cache et traitement par lots.</p>
+
+  <div class="page-progress" data-page-progress></div>
+
+  <div class="value-teaser" data-value-teaser hidden></div>
+
+  <div class="toc">
+    <strong>Objectifs de ce module</strong>
+    <ul>
+      <li>Savoir quand l'API est le bon outil — et quand claude.ai suffit.</li>
+      <li>Obtenir une clé, la sécuriser et réussir sa première requête.</li>
+      <li>Maîtriser l'API Messages&nbsp;: rôles, streaming, outils, images et PDF.</li>
+      <li>Optimiser coût et fiabilité&nbsp;: prompt caching, Batch API, évaluations.</li>
+    </ul>
+  </div>
+
+  <div class="hidden-notice" data-hidden-notice hidden></div>
+
+  <!-- ================================================================
+       NIVEAU DÉBUTANT
+       ================================================================ -->
+
+  <h2>🟢 Niveau débutant</h2>
+
+  <section class="lesson" data-lesson="api:pourquoi" data-level="debutant">
+    <div class="lesson-head">
+      <h3>1. À quoi sert l'API — et quand la choisir</h3>
+      <span class="lvl-badge debutant">Débutant</span>
+    </div>
+    <p>Sur <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>, <em>vous</em> parlez à Claude. Avec l'API, c'est <em>votre programme</em> qui lui parle&nbsp;: votre code envoie une requête HTTP contenant des messages, Claude renvoie une réponse structurée, et votre application en fait ce qu'elle veut — l'afficher, la stocker, la transformer, déclencher une action.</p>
+    <p>Trois signaux indiquent qu'il faut passer à l'API&nbsp;:</p>
+    <ul>
+      <li><strong>Le volume</strong>&nbsp;: vous devez traiter 500 tickets, 10&nbsp;000 fiches produit ou tous les e-mails d'une boîte partagée. Personne ne fera cela à la main dans un chat.</li>
+      <li><strong>L'intégration</strong>&nbsp;: le résultat doit atterrir dans votre base de données, votre CRM, votre site — pas dans une fenêtre de conversation.</li>
+      <li><strong>La répétabilité</strong>&nbsp;: la même consigne doit s'appliquer à l'identique, tous les jours, sans dépendre de la mémoire d'un humain.</li>
+    </ul>
+    <p>À l'inverse, restez sur claude.ai (ou sur Cowork, module 4) quand la tâche est ponctuelle, exploratoire ou conversationnelle&nbsp;: rédiger une note, analyser un contrat, préparer une réunion. Écrire du code pour cela coûte plus cher que de le faire directement.</p>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Besoin</th><th>La bonne porte</th></tr>
+      <tr><td>Réfléchir, rédiger, analyser un document ponctuel</td><td>claude.ai / Cowork</td></tr>
+      <tr><td>Automatiser une tâche répétitive sur un corpus</td><td>API</td></tr>
+      <tr><td>Ajouter de l'IA dans un produit existant</td><td>API</td></tr>
+      <tr><td>Travailler sur un dépôt de code</td><td>Claude&nbsp;Code (module 5)</td></tr>
+      <tr><td>Brancher Claude sur vos outils sans coder</td><td>Connecteurs (module 7)</td></tr>
+    </table>
+    </div>
+    <p>La facturation de l'API est indépendante de votre abonnement claude.ai&nbsp;: on paie à l'usage, par million de tokens consommés en entrée et en sortie. Les tarifs à jour figurent sur la <a href="https://docs.claude.com/en/docs/about-claude/models" target="_blank" rel="noopener">page officielle des modèles</a>.</p>
+    <div class="callout tip">
+      <span class="title">💡 À retenir</span>
+      L'API ne rend pas Claude «&nbsp;plus intelligent&nbsp;»&nbsp;: c'est le même modèle. Elle vous donne le contrôle programmatique — et la responsabilité de tout le reste (prompt, contexte, erreurs, coûts).
+    </div>
+  </section>
+
+  <section class="lesson" data-lesson="api:cle" data-level="debutant">
+    <div class="lesson-head">
+      <h3>2. Obtenir une clé API et la sécuriser</h3>
+      <span class="lvl-badge debutant">Débutant</span>
+    </div>
+    <p>Tout commence sur la <a href="https://console.anthropic.com" target="_blank" rel="noopener">console Anthropic</a>&nbsp;: créez une organisation, ajoutez un moyen de paiement, puis générez une clé dans la section <em>API keys</em>. La clé n'est affichée qu'une seule fois — copiez-la immédiatement dans un gestionnaire de secrets.</p>
+    <p><strong>Une clé API est un mot de passe qui coûte de l'argent.</strong> Quiconque la possède peut consommer votre budget. Quatre règles non négociables&nbsp;:</p>
+    <ol>
+      <li><strong>Jamais dans le code.</strong> Pas de chaîne en dur, même «&nbsp;temporairement&nbsp;»&nbsp;: le temporaire finit toujours commité.</li>
+      <li><strong>Jamais dans git.</strong> Ajoutez <code>.env</code> à votre <code>.gitignore</code> <em>avant</em> le premier commit. Une clé poussée sur un dépôt public est compromise en quelques minutes.</li>
+      <li><strong>Jamais côté navigateur.</strong> Un appel à l'API depuis du JavaScript de page expose la clé à tous les visiteurs&nbsp;: passez toujours par votre serveur.</li>
+      <li><strong>Rotation régulière.</strong> Créez une clé par application et par environnement, révoquez-la dès qu'un doute existe, et faites tourner les clés périodiquement depuis la console.</li>
+    </ol>
+    <p>En pratique, la clé vit dans la variable d'environnement <code>ANTHROPIC_API_KEY</code>, que les SDK lisent automatiquement&nbsp;:</p>
+    <pre><code># macOS / Linux — dans votre shell ou dans un fichier .env non versionné
+export ANTHROPIC_API_KEY="votre-cle-ici"
+
+# Vérification : la variable est-elle bien définie ?
+printenv ANTHROPIC_API_KEY | head -c 8
+
+# Ne jamais faire : git add .env
+echo ".env" &gt;&gt; .gitignore</code></pre>
+    <pre><code># En Python, on ne mentionne jamais la clé : le SDK la lit dans l'environnement
+import anthropic
+
+client = anthropic.Anthropic()  # lit ANTHROPIC_API_KEY
+
+# En production, préférez un gestionnaire de secrets (Vault, AWS Secrets
+# Manager, Google Secret Manager…) qui injecte la variable au démarrage.</code></pre>
+    <div class="callout warn">
+      <span class="title">⚠️ Prudence</span>
+      Une clé exposée se révoque en un clic dans la console — faites-le d'abord, enquêtez ensuite. Surveillez aussi la consommation par clé&nbsp;: une hausse inexpliquée est le premier symptôme d'une fuite.
+    </div>
+  </section>
+
+  <section class="lesson" data-lesson="api:premiere-requete" data-level="debutant">
+    <div class="lesson-head">
+      <h3>3. Votre première requête</h3>
+      <span class="lvl-badge debutant">Débutant</span>
+    </div>
+    <p>Installez le SDK officiel — <code>pip install anthropic</code> en Python, <code>npm install @anthropic-ai/sdk</code> en TypeScript — puis exécutez l'un de ces trois programmes équivalents.</p>
+    <pre><code>import anthropic
+
+client = anthropic.Anthropic()  # la clé vient de ANTHROPIC_API_KEY
+
+response = client.messages.create(
+    model="claude-opus-5",
+    max_tokens=1024,
+    system="Tu réponds en français, de façon concise et factuelle.",
+    messages=[
+        {"role": "user", "content": "Explique en trois phrases ce qu'est une API."}
+    ],
+)
+
+for block in response.content:
+    if block.type == "text":
+        print(block.text)
+
+print(response.stop_reason)          # "end_turn" : réponse terminée normalement
+print(response.usage.input_tokens)   # tokens facturés en entrée
+print(response.usage.output_tokens)  # tokens facturés en sortie</code></pre>
+    <pre><code>import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic(); // lit ANTHROPIC_API_KEY
+
+const response = await client.messages.create({
+  model: "claude-opus-5",
+  max_tokens: 1024,
+  system: "Tu réponds en français, de façon concise et factuelle.",
+  messages: [
+    { role: "user", content: "Explique en trois phrases ce qu'est une API." },
+  ],
+});
+
+for (const block of response.content) {
+  if (block.type === "text") console.log(block.text);
+}</code></pre>
+    <pre><code>curl https://api.anthropic.com/v1/messages \
+  -H "Content-Type: application/json" \
+  -H "x-api-key: $ANTHROPIC_API_KEY" \
+  -H "anthropic-version: 2023-06-01" \
+  -d '{
+    "model": "claude-opus-5",
+    "max_tokens": 1024,
+    "system": "Tu réponds en français, de façon concise et factuelle.",
+    "messages": [
+      {"role": "user", "content": "Explique en trois phrases ce que fait une API."}
+    ]
+  }'</code></pre>
+    <p><strong>Lire la réponse, champ par champ</strong>&nbsp;: <code>content</code> n'est pas une chaîne mais une <em>liste de blocs</em> typés (<code>text</code>, <code>thinking</code>, <code>tool_use</code>…)&nbsp;; testez toujours <code>block.type</code> avant de lire <code>block.text</code>. <code>stop_reason</code> dit pourquoi Claude s'est arrêté&nbsp;: <code>end_turn</code> (fini), <code>max_tokens</code> (coupé, augmentez la limite), <code>tool_use</code> (il attend un outil), <code>refusal</code> (refus de sécurité). <code>usage</code> donne les tokens facturés, <code>model</code> le modèle qui a répondu, et <code>id</code> l'identifiant à journaliser pour tout support.</p>
+  </section>
+
+  <!-- ================================================================
+       NIVEAU INTERMÉDIAIRE
+       ================================================================ -->
+
+  <h2 data-level="intermediaire">🟠 Niveau intermédiaire</h2>
+
+  <section class="lesson-locked" data-level="intermediaire" data-locked-for="api:anatomie" hidden>
+  <div class="lesson-head">
+    <h3>4. Anatomie d'une requête Messages</h3>
+    <span class="lvl-badge intermediaire">Intermédiaire</span>
+    <span class="premium-badge">Premium</span>
+  </div>
+  <div class="locked-teaser"><p>Tout passe par un seul point d'entrée, POST /v1/messages. Quatre champs structurent chaque appel&nbsp;:</p><p>L'API est sans mémoire&nbsp;: elle ne conserve rien entre deux appels. Pour une conversation multi-tours, c'est à vous de renvoyer tout l'historique à chaque fois.</p></div>
+  <div class="locked-cta">
+    <span class="lock-icon">🔒</span>
+    <span class="lock-text">Cette leçon fait partie des 49 leçons Intermédiaire et Pro incluses dans la formule Premium.</span>
+    <a class="btn btn-gold" href="../tarifs.html?src=api:anatomie">Débloquer</a>
+  </div>
+</section>
+<section class="lesson" data-lesson="api:anatomie" data-level="intermediaire">
+    <div class="lesson-head">
+      <h3>4. Anatomie d'une requête Messages</h3>
+      <span class="lvl-badge intermediaire">Intermédiaire</span>
+    </div>
+    <p>Tout passe par un seul point d'entrée, <code>POST /v1/messages</code>. Quatre champs structurent chaque appel&nbsp;:</p>
+    <ul>
+      <li><code>model</code>&nbsp;: l'identifiant exact du modèle (par exemple <code>claude-opus-5</code> pour le raisonnement, <code>claude-haiku-4-5</code> pour les tâches simples et massives).</li>
+      <li><code>max_tokens</code>&nbsp;: <strong>obligatoire</strong>. C'est le plafond de la <em>réponse</em>, pas du contexte. Trop bas, la réponse est tronquée (<code>stop_reason: "max_tokens"</code>).</li>
+      <li><code>system</code>&nbsp;: un <strong>paramètre séparé</strong>, jamais un message de la liste. Il porte le rôle, les règles et le format attendu.</li>
+      <li><code>messages</code>&nbsp;: la conversation, sous forme de liste alternant les rôles <code>user</code> et <code>assistant</code>. Le premier message est toujours <code>user</code>.</li>
+    </ul>
+    <p><strong>L'API est sans mémoire</strong>&nbsp;: elle ne conserve rien entre deux appels. Pour une conversation multi-tours, c'est à vous de renvoyer tout l'historique à chaque fois.</p>
+    <pre><code>import anthropic
+
+client = anthropic.Anthropic()
+SYSTEME = "Tu es un assistant juridique. Tu cites toujours l'article invoqué."
+historique = []
+
+def echanger(question: str) -&gt; str:
+    historique.append({"role": "user", "content": question})
+    response = client.messages.create(
+        model="claude-opus-5",
+        max_tokens=2048,
+        system=SYSTEME,          # paramètre séparé, hors de `messages`
+        messages=historique,     # tout l'historique, à chaque appel
+    )
+    reponse = "".join(b.text for b in response.content if b.type == "text")
+    historique.append({"role": "assistant", "content": reponse})
+    return reponse
+
+print(echanger("Qu'est-ce qu'une clause de non-concurrence ?"))
+print(echanger("Et sa durée maximale ?"))  # Claude comprend « sa » grâce à l'historique</code></pre>
+    <p><strong>Et la température&nbsp;?</strong> Historiquement, <code>temperature</code> réglait le caractère aléatoire de la génération. Sur les modèles Claude récents (génération 4.6 et suivantes, dont <code>claude-opus-5</code>), les paramètres d'échantillonnage ont été retirés&nbsp;: on pilote désormais l'effort de réflexion avec <code>output_config={"effort": "low" | "medium" | "high" | "xhigh" | "max"}</code>, combiné à la réflexion adaptative <code>thinking={"type": "adaptive"}</code>. <code>temperature</code> reste disponible sur les modèles antérieurs comme <code>claude-haiku-4-5</code>. Vérifiez toujours ce que votre modèle accepte dans la <a href="https://docs.claude.com/en/api/overview" target="_blank" rel="noopener">référence de l'API</a>.</p>
+  </section>
+
+  <section class="lesson-locked" data-level="intermediaire" data-locked-for="api:streaming" hidden>
+  <div class="lesson-head">
+    <h3>5. Le streaming</h3>
+    <span class="lvl-badge intermediaire">Intermédiaire</span>
+    <span class="premium-badge">Premium</span>
+  </div>
+  <div class="locked-teaser"><p>Par défaut, l'API attend que la réponse soit entièrement générée avant de vous la renvoyer. Pour une réponse de 2&nbsp;000 mots, cela fait plusieurs dizaines de secondes d'écran figé. Le streaming renvoie le texte au fil de sa production, sous forme d'événements successifs.</p><p>Deux raisons de l'utiliser&nbsp;:</p></div>
+  <div class="locked-cta">
+    <span class="lock-icon">🔒</span>
+    <span class="lock-text">Cette leçon fait partie des 49 leçons Intermédiaire et Pro incluses dans la formule Premium.</span>
+    <a class="btn btn-gold" href="../tarifs.html?src=api:streaming">Débloquer</a>
+  </div>
+</section>
+<section class="lesson" data-lesson="api:streaming" data-level="intermediaire">
+    <div class="lesson-head">
+      <h3>5. Le streaming</h3>
+      <span class="lvl-badge intermediaire">Intermédiaire</span>
+    </div>
+    <p>Par défaut, l'API attend que la réponse soit entièrement générée avant de vous la renvoyer. Pour une réponse de 2&nbsp;000 mots, cela fait plusieurs dizaines de secondes d'écran figé. Le <strong>streaming</strong> renvoie le texte au fil de sa production, sous forme d'événements successifs.</p>
+    <p>Deux raisons de l'utiliser&nbsp;:</p>
+    <ul>
+      <li><strong>L'expérience utilisateur</strong>&nbsp;: le texte qui s'écrit progressivement supprime la sensation d'attente — c'est le comportement de claude.ai.</li>
+      <li><strong>La robustesse</strong>&nbsp;: sur les réponses longues (<code>max_tokens</code> élevé), une requête classique peut atteindre le délai d'expiration HTTP. Les SDK exigent d'ailleurs le streaming au-delà d'un certain volume.</li>
+    </ul>
+    <pre><code>import anthropic
+
+client = anthropic.Anthropic()
+
+with client.messages.stream(
+    model="claude-opus-5",
+    max_tokens=8000,
+    system="Tu écris un français clair, sans jargon.",
+    messages=[{"role": "user", "content": "Rédige un guide de 800 mots sur la sauvegarde des données."}],
+) as stream:
+    for texte in stream.text_stream:
+        print(texte, end="", flush=True)
+
+    # Le message complet reste accessible une fois le flux terminé
+    final = stream.get_final_message()
+    print(f"\n\n[{final.usage.output_tokens} tokens de sortie]")</code></pre>
+    <pre><code>import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();
+
+const stream = client.messages
+  .stream({
+    model: "claude-opus-5",
+    max_tokens: 8000,
+    messages: [{ role: "user", content: "Rédige un guide de 800 mots sur la sauvegarde des données." }],
+  })
+  .on("text", (texte) =&gt; process.stdout.write(texte));
+
+const final = await stream.finalMessage();
+console.log(`\n[${final.usage.output_tokens} tokens de sortie]`);</code></pre>
+    <p>En HTTP brut, il suffit d'ajouter <code>"stream": true</code> au corps de la requête&nbsp;: la réponse devient un flux <em>Server-Sent Events</em> avec les événements <code>message_start</code>, <code>content_block_delta</code> (le texte, morceau par morceau), <code>message_delta</code> (qui porte <code>stop_reason</code> et l'usage) puis <code>message_stop</code>.</p>
+    <div class="callout tip">
+      <span class="title">💡 Bon réflexe</span>
+      Même quand vous n'affichez rien en direct, le streaming est une bonne assurance contre les délais d'expiration&nbsp;: lancez <code>stream()</code> et récupérez simplement <code>get_final_message()</code> à la fin.
+    </div>
+  </section>
+
+  <section class="lesson-locked" data-level="intermediaire" data-locked-for="api:tool-use" hidden>
+  <div class="lesson-head">
+    <h3>6. Le tool use&nbsp;: donner des outils à Claude</h3>
+    <span class="lvl-badge intermediaire">Intermédiaire</span>
+    <span class="premium-badge">Premium</span>
+  </div>
+  <div class="locked-teaser"><p>Un modèle de langage ne sait ni consulter votre base de données, ni appeler une API météo, ni calculer de façon exacte. Le tool use comble ce vide&nbsp;: vous décrivez des fonctions, Claude décide quand les appeler, votre code les exécute et lui renvoie le résultat.</p><p>Un outil se décrit par trois éléments&nbsp;: un name, une description (c'est elle qui détermine si Claude s'en sert&nbsp;— soyez explicite sur le quand) et un input_schema au format JSON Schema. La boucle est toujours la même&nbsp;: appel → stop_reason: "tool_use" → exécution → renvoi d'un bloc tool_result portant le même tool_use_id → nouvel appel, jusqu'à end_turn.</p></div>
+  <div class="locked-cta">
+    <span class="lock-icon">🔒</span>
+    <span class="lock-text">Cette leçon fait partie des 49 leçons Intermédiaire et Pro incluses dans la formule Premium.</span>
+    <a class="btn btn-gold" href="../tarifs.html?src=api:tool-use">Débloquer</a>
+  </div>
+</section>
+<section class="lesson" data-lesson="api:tool-use" data-level="intermediaire">
+    <div class="lesson-head">
+      <h3>6. Le tool use&nbsp;: donner des outils à Claude</h3>
+      <span class="lvl-badge intermediaire">Intermédiaire</span>
+    </div>
+    <p>Un modèle de langage ne sait ni consulter votre base de données, ni appeler une API météo, ni calculer de façon exacte. Le <strong>tool use</strong> comble ce vide&nbsp;: vous décrivez des fonctions, Claude décide quand les appeler, <em>votre code</em> les exécute et lui renvoie le résultat.</p>
+    <p>Un outil se décrit par trois éléments&nbsp;: un <code>name</code>, une <code>description</code> (c'est elle qui détermine si Claude s'en sert&nbsp;— soyez explicite sur le <em>quand</em>) et un <code>input_schema</code> au format JSON Schema. La boucle est toujours la même&nbsp;: appel → <code>stop_reason: "tool_use"</code> → exécution → renvoi d'un bloc <code>tool_result</code> portant le même <code>tool_use_id</code> → nouvel appel, jusqu'à <code>end_turn</code>.</p>
+    <pre><code>import json
+import anthropic
+
+client = anthropic.Anthropic()
+
+OUTILS = [{
+    "name": "obtenir_meteo",
+    "description": (
+        "Renvoie la météo actuelle d'une ville. "
+        "À utiliser dès qu'une question porte sur le temps qu'il fait."
+    ),
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "ville": {"type": "string", "description": "Nom de la ville, par exemple Lyon."},
+            "unite": {"type": "string", "enum": ["celsius", "fahrenheit"]},
+        },
+        "required": ["ville"],
+    },
+}]
+
+def obtenir_meteo(ville: str, unite: str = "celsius") -&gt; str:
+    # Ici, appelez votre vraie source de données. Valeur simulée pour l'exemple :
+    return json.dumps({"ville": ville, "temperature": 12, "unite": unite, "ciel": "averses"})
+
+messages = [{"role": "user", "content": "Quel temps fait-il à Lyon ? Dois-je prendre un parapluie ?"}]
+
+while True:
+    response = client.messages.create(
+        model="claude-opus-5",
+        max_tokens=2048,
+        tools=OUTILS,
+        messages=messages,
+    )
+    messages.append({"role": "assistant", "content": response.content})
+
+    if response.stop_reason != "tool_use":
+        break
+
+    resultats = []
+    for bloc in response.content:
+        if bloc.type == "tool_use":
+            sortie = obtenir_meteo(**bloc.input)
+            resultats.append({
+                "type": "tool_result",
+                "tool_use_id": bloc.id,   # doit correspondre au bloc tool_use
+                "content": sortie,
+            })
+    # Tous les résultats repartent dans UN SEUL message user
+    messages.append({"role": "user", "content": resultats})
+
+print(next(b.text for b in response.content if b.type == "text"))</code></pre>
+    <p>Deux pièges classiques&nbsp;: renvoyer les résultats de plusieurs outils dans des messages séparés (Claude cesse alors de paralléliser ses appels), et oublier de répondre à un outil qui a échoué — il faut renvoyer un <code>tool_result</code> avec <code>"is_error": True</code> et un message explicite. La <a href="https://docs.claude.com/en/docs/build-with-claude/tool-use/overview" target="_blank" rel="noopener">documentation du tool use</a> détaille les variantes (outils serveur, exécution de code, sorties structurées).</p>
+  </section>
+
+  <section class="lesson-locked" data-level="intermediaire" data-locked-for="api:vision-documents" hidden>
+  <div class="lesson-head">
+    <h3>7. Vision et documents</h3>
+    <span class="lvl-badge intermediaire">Intermédiaire</span>
+    <span class="premium-badge">Premium</span>
+  </div>
+  <div class="locked-teaser"><p>Un message n'est pas forcément du texte&nbsp;: le champ content accepte une liste de blocs, dont des image (PNG, JPEG, GIF, WebP) et des document (PDF). Claude lit alors la mise en page, les tableaux, les graphiques et le texte manuscrit — ce qui en fait un excellent moteur d'extraction sur des documents scannés.</p><p>Cas d'usage typique&nbsp;: transformer une pile de factures numérisées en lignes de tableur. On combine deux techniques — le bloc document pour le PDF, et les sorties structurées (output_config) pour garantir un JSON conforme à un schéma, directement exploitable.</p></div>
+  <div class="locked-cta">
+    <span class="lock-icon">🔒</span>
+    <span class="lock-text">Cette leçon fait partie des 49 leçons Intermédiaire et Pro incluses dans la formule Premium.</span>
+    <a class="btn btn-gold" href="../tarifs.html?src=api:vision-documents">Débloquer</a>
+  </div>
+</section>
+<section class="lesson" data-lesson="api:vision-documents" data-level="intermediaire">
+    <div class="lesson-head">
+      <h3>7. Vision et documents</h3>
+      <span class="lvl-badge intermediaire">Intermédiaire</span>
+    </div>
+    <p>Un message n'est pas forcément du texte&nbsp;: le champ <code>content</code> accepte une liste de blocs, dont des <code>image</code> (PNG, JPEG, GIF, WebP) et des <code>document</code> (PDF). Claude lit alors la mise en page, les tableaux, les graphiques et le texte manuscrit — ce qui en fait un excellent moteur d'extraction sur des documents scannés.</p>
+    <p>Cas d'usage typique&nbsp;: transformer une pile de factures numérisées en lignes de tableur. On combine deux techniques — le bloc <code>document</code> pour le PDF, et les <strong>sorties structurées</strong> (<code>output_config</code>) pour garantir un JSON conforme à un schéma, directement exploitable.</p>
+    <pre><code>import base64
+import json
+import anthropic
+
+client = anthropic.Anthropic()
+
+with open("facture_scannee.pdf", "rb") as f:
+    pdf_b64 = base64.standard_b64encode(f.read()).decode("utf-8")
+
+response = client.messages.create(
+    model="claude-opus-5",
+    max_tokens=2048,
+    messages=[{
+        "role": "user",
+        "content": [
+            {
+                "type": "document",
+                "source": {
+                    "type": "base64",
+                    "media_type": "application/pdf",
+                    "data": pdf_b64,
+                },
+            },
+            {"type": "text", "text": "Extrais les données de cette facture. Si un champ est absent, mets une chaîne vide."},
+        ],
+    }],
+    output_config={
+        "format": {
+            "type": "json_schema",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "numero": {"type": "string"},
+                    "date": {"type": "string"},
+                    "fournisseur": {"type": "string"},
+                    "montant_ttc": {"type": "number"},
+                },
+                "required": ["numero", "date", "fournisseur", "montant_ttc"],
+                "additionalProperties": False,
+            },
+        }
+    },
+)
+
+texte = next(b.text for b in response.content if b.type == "text")
+facture = json.loads(texte)
+print(facture["fournisseur"], facture["montant_ttc"])</code></pre>
+    <p>Quelques règles pratiques&nbsp;: placez le bloc image ou document <strong>avant</strong> le texte de la consigne&nbsp;; la chaîne base64 ne doit contenir aucun retour à la ligne&nbsp;; une requête reste plafonnée en taille et en nombre de pages. Pour un fichier réutilisé dans plusieurs requêtes, passez par l'API Files et référencez-le par son <code>file_id</code> plutôt que de le réenvoyer à chaque fois.</p>
+    <div class="callout warn">
+      <span class="title">⚠️ Prudence</span>
+      Sur des documents à enjeu (comptabilité, santé, juridique), l'extraction automatique se contrôle&nbsp;: recoupez les totaux, journalisez les extractions douteuses et prévoyez une revue humaine par échantillon.
+    </div>
+  </section>
+
+  <!-- ================================================================
+       NIVEAU PRO
+       ================================================================ -->
+
+  <h2 data-level="pro">🟣 Niveau pro</h2>
+
+  <section class="lesson-locked" data-level="pro" data-locked-for="api:prompt-caching" hidden>
+  <div class="lesson-head">
+    <h3>8. Prompt caching et optimisation des coûts</h3>
+    <span class="lvl-badge pro">Pro</span>
+    <span class="premium-badge">Premium</span>
+  </div>
+  <div class="locked-teaser"><p>Beaucoup d'applications renvoient à chaque requête un contexte identique&nbsp;: un long prompt système, un référentiel produit, une base de connaissances, une liste d'outils. Le prompt caching permet à l'API de mémoriser ce préfixe&nbsp;: les requêtes suivantes le relisent depuis le cache, à une fraction du coût des tokens d'entrée et avec une latence nettement réduite.</p><p>Le mécanisme repose sur une correspondance de préfixe exacte. L'ordre de composition est&nbsp;: tools, puis system, puis messages. Le moindre octet modifié avant le point de rupture invalide tout ce qui suit. D'où la règle d'architecture&nbsp;: le stable d'abord, le variable ensuite.</p></div>
+  <div class="locked-cta">
+    <span class="lock-icon">🔒</span>
+    <span class="lock-text">Cette leçon fait partie des 49 leçons Intermédiaire et Pro incluses dans la formule Premium.</span>
+    <a class="btn btn-gold" href="../tarifs.html?src=api:prompt-caching">Débloquer</a>
+  </div>
+</section>
+<section class="lesson" data-lesson="api:prompt-caching" data-level="pro">
+    <div class="lesson-head">
+      <h3>8. Prompt caching et optimisation des coûts</h3>
+      <span class="lvl-badge pro">Pro</span>
+    </div>
+    <p>Beaucoup d'applications renvoient à chaque requête un contexte identique&nbsp;: un long prompt système, un référentiel produit, une base de connaissances, une liste d'outils. Le <strong>prompt caching</strong> permet à l'API de mémoriser ce préfixe&nbsp;: les requêtes suivantes le relisent depuis le cache, à une fraction du coût des tokens d'entrée et avec une latence nettement réduite.</p>
+    <p>Le mécanisme repose sur une <strong>correspondance de préfixe exacte</strong>. L'ordre de composition est&nbsp;: <code>tools</code>, puis <code>system</code>, puis <code>messages</code>. Le moindre octet modifié <em>avant</em> le point de rupture invalide tout ce qui suit. D'où la règle d'architecture&nbsp;: <strong>le stable d'abord, le variable ensuite</strong>.</p>
+    <pre><code>import anthropic
+
+client = anthropic.Anthropic()
+
+REFERENTIEL = open("base_de_connaissances.md", encoding="utf-8").read()  # long et stable
+
+def repondre(question: str):
+    return client.messages.create(
+        model="claude-opus-5",
+        max_tokens=1024,
+        system=[
+            {"type": "text", "text": "Tu réponds uniquement à partir du référentiel fourni."},
+            {
+                "type": "text",
+                "text": REFERENTIEL,
+                "cache_control": {"type": "ephemeral"},  # point de rupture du cache
+            },
+        ],
+        messages=[{"role": "user", "content": question}],  # partie variable : après le cache
+    )
+
+r1 = repondre("Quelle est la procédure de retour ?")
+print(r1.usage.cache_creation_input_tokens)  # 1re requête : écriture du cache
+r2 = repondre("Et pour un produit hors garantie ?")
+print(r2.usage.cache_read_input_tokens)      # requêtes suivantes : lecture du cache</code></pre>
+    <p>Ce qu'on met <strong>en tête</strong>&nbsp;: instructions figées, référentiel documentaire, exemples de référence, définitions d'outils dans un ordre déterministe. Ce qu'on met <strong>après</strong>&nbsp;: la question de l'utilisateur, l'horodatage, l'identifiant de session, tout ce qui change.</p>
+    <p>Le diagnostic est simple&nbsp;: si <code>cache_read_input_tokens</code> reste à zéro sur des requêtes censées partager un préfixe, un <em>invalidateur silencieux</em> est à l'œuvre — un <code>datetime.now()</code> dans le prompt système, un JSON sérialisé sans tri des clés, une liste d'outils construite dans un ordre aléatoire. Un préfixe trop court (quelques centaines de tokens) n'est simplement pas mis en cache. Détails dans la <a href="https://docs.claude.com/en/docs/build-with-claude/prompt-caching" target="_blank" rel="noopener">documentation du prompt caching</a>.</p>
+  </section>
+
+  <section class="lesson-locked" data-level="pro" data-locked-for="api:batch" hidden>
+  <div class="lesson-head">
+    <h3>9. Traitement par lots — la Batch API</h3>
+    <span class="lvl-badge pro">Pro</span>
+    <span class="premium-badge">Premium</span>
+  </div>
+  <div class="locked-teaser"><p>Quand le travail n'est pas interactif — classer un an d'archives, enrichir un catalogue, résumer des milliers de comptes-rendus — rien n'oblige à attendre chaque réponse. La Batch API accepte un lot de requêtes, les traite de façon asynchrone et applique une réduction de 50&nbsp;% sur le coût des tokens, entrée et sortie comprises.</p><p>Le fonctionnement tient en trois temps&nbsp;: on crée le lot (chaque requête porte un custom_id), on interroge périodiquement son statut jusqu'à ended, puis on parcourt les résultats. La plupart des lots aboutissent en moins d'une heure, avec un plafond de 24&nbsp;heures.</p></div>
+  <div class="locked-cta">
+    <span class="lock-icon">🔒</span>
+    <span class="lock-text">Cette leçon fait partie des 49 leçons Intermédiaire et Pro incluses dans la formule Premium.</span>
+    <a class="btn btn-gold" href="../tarifs.html?src=api:batch">Débloquer</a>
+  </div>
+</section>
+<section class="lesson" data-lesson="api:batch" data-level="pro">
+    <div class="lesson-head">
+      <h3>9. Traitement par lots — la Batch API</h3>
+      <span class="lvl-badge pro">Pro</span>
+    </div>
+    <p>Quand le travail n'est pas interactif — classer un an d'archives, enrichir un catalogue, résumer des milliers de comptes-rendus — rien n'oblige à attendre chaque réponse. La <strong>Batch API</strong> accepte un lot de requêtes, les traite de façon asynchrone et applique une <strong>réduction de 50&nbsp;% sur le coût des tokens</strong>, entrée et sortie comprises.</p>
+    <p>Le fonctionnement tient en trois temps&nbsp;: on crée le lot (chaque requête porte un <code>custom_id</code>), on interroge périodiquement son statut jusqu'à <code>ended</code>, puis on parcourt les résultats. La plupart des lots aboutissent en moins d'une heure, avec un plafond de 24&nbsp;heures.</p>
+    <pre><code>import time
+import anthropic
+from anthropic.types.message_create_params import MessageCreateParamsNonStreaming
+from anthropic.types.messages.batch_create_params import Request
+
+client = anthropic.Anthropic()
+
+avis = ["Livraison rapide, produit conforme.", "Injoignable après achat.", "Correct sans plus."]
+
+requetes = [
+    Request(
+        custom_id=f"avis-{i}",
+        params=MessageCreateParamsNonStreaming(
+            model="claude-haiku-4-5",
+            max_tokens=16,
+            system="Réponds par un seul mot : positif, negatif ou neutre.",
+            messages=[{"role": "user", "content": texte}],
+        ),
+    )
+    for i, texte in enumerate(avis)
+]
+
+lot = client.messages.batches.create(requests=requetes)
+
+while True:
+    lot = client.messages.batches.retrieve(lot.id)
+    if lot.processing_status == "ended":
+        break
+    time.sleep(30)
+
+resultats = {}
+for r in client.messages.batches.results(lot.id):
+    if r.result.type == "succeeded":
+        message = r.result.message
+        resultats[r.custom_id] = next(b.text for b in message.content if b.type == "text")
+    else:
+        resultats[r.custom_id] = f"ÉCHEC : {r.result.type}"
+
+for cle in sorted(resultats):
+    print(cle, "→", resultats[cle])</code></pre>
+    <p>Deux points de vigilance. D'abord, <strong>les résultats arrivent dans un ordre quelconque</strong>&nbsp;: indexez-les par <code>custom_id</code>, jamais par position. Ensuite, chaque résultat porte son propre statut (<code>succeeded</code>, <code>errored</code>, <code>canceled</code>, <code>expired</code>)&nbsp;: un lot «&nbsp;terminé&nbsp;» peut contenir des échecs unitaires à rejouer. Le prompt caching se combine très bien avec les lots quand toutes les requêtes partagent un même préfixe. Référence complète&nbsp;: <a href="https://docs.claude.com/en/docs/build-with-claude/batch-processing" target="_blank" rel="noopener">documentation du traitement par lots</a>.</p>
+  </section>
+
+  <section class="lesson-locked" data-level="pro" data-locked-for="api:production" hidden>
+  <div class="lesson-head">
+    <h3>10. Agent SDK et mise en production</h3>
+    <span class="lvl-badge pro">Pro</span>
+    <span class="premium-badge">Premium</span>
+  </div>
+  <div class="locked-teaser"><p>Un agent, c'est un modèle qui boucle&nbsp;: il observe, choisit un outil, agit, relit le résultat et recommence jusqu'à atteindre son objectif. Vous pouvez écrire cette boucle vous-même (leçon 6), la déléguer au tool runner du SDK, ou partir du Claude Agent SDK — un paquet distinct (claude-agent-sdk en Python, @anthropic-ai/claude-agent-sdk en TypeScript) qui fournit le harnais complet de Claude&nbsp;Code&nbsp;: outils de fichiers, exécution de commandes, sous-agents, permissions.</p><p>Mais l'essentiel de la mise en production n'est pas dans le choix du harnais. Trois chantiers font la différence&nbsp;:</p></div>
+  <div class="locked-cta">
+    <span class="lock-icon">🔒</span>
+    <span class="lock-text">Cette leçon fait partie des 49 leçons Intermédiaire et Pro incluses dans la formule Premium.</span>
+    <a class="btn btn-gold" href="../tarifs.html?src=api:production">Débloquer</a>
+  </div>
+</section>
+<section class="lesson" data-lesson="api:production" data-level="pro">
+    <div class="lesson-head">
+      <h3>10. Agent SDK et mise en production</h3>
+      <span class="lvl-badge pro">Pro</span>
+    </div>
+    <p>Un <strong>agent</strong>, c'est un modèle qui boucle&nbsp;: il observe, choisit un outil, agit, relit le résultat et recommence jusqu'à atteindre son objectif. Vous pouvez écrire cette boucle vous-même (leçon 6), la déléguer au <em>tool runner</em> du SDK, ou partir du <a href="https://docs.claude.com/en/api/agent-sdk/overview" target="_blank" rel="noopener">Claude Agent SDK</a> — un paquet distinct (<code>claude-agent-sdk</code> en Python, <code>@anthropic-ai/claude-agent-sdk</code> en TypeScript) qui fournit le harnais complet de Claude&nbsp;Code&nbsp;: outils de fichiers, exécution de commandes, sous-agents, permissions.</p>
+    <p>Mais l'essentiel de la mise en production n'est pas dans le choix du harnais. Trois chantiers font la différence&nbsp;:</p>
+    <p><strong>1. Erreurs et reprises.</strong> Ne rattrapez pas une exception unique&nbsp;: distinguez le rejouable (429, 5xx, coupure réseau) du définitif (400, 404). Les SDK réessaient déjà avec un repli exponentiel&nbsp;; réglez <code>max_retries</code> plutôt que de réinventer la boucle.</p>
+    <pre><code>import logging
+import anthropic
+
+logging.basicConfig(level=logging.INFO)
+client = anthropic.Anthropic(max_retries=4, timeout=120.0)
+
+def appeler(messages):
+    try:
+        r = client.messages.create(model="claude-opus-5", max_tokens=4096, messages=messages)
+    except anthropic.BadRequestError as e:
+        logging.error("Requête invalide, ne pas rejouer : %s", e.message)
+        raise
+    except anthropic.RateLimitError:
+        logging.warning("Quota atteint après les tentatives du SDK — mise en file d'attente.")
+        raise
+    except anthropic.APIConnectionError:
+        logging.warning("Réseau indisponible — reprise différée.")
+        raise
+
+    logging.info(
+        "req=%s modele=%s stop=%s in=%d out=%d",
+        r._request_id, r.model, r.stop_reason,
+        r.usage.input_tokens, r.usage.output_tokens,
+    )
+    if r.stop_reason == "max_tokens":
+        logging.warning("Réponse tronquée : augmenter max_tokens.")
+    return r</code></pre>
+    <p><strong>2. Journalisation.</strong> Conservez pour chaque appel l'identifiant de requête, le modèle, le <code>stop_reason</code>, les tokens consommés et la version de votre prompt. Sans cela, aucune analyse de coût ni aucun diagnostic n'est possible. Ne journalisez jamais la clé, ni des données personnelles non nécessaires.</p>
+    <p><strong>3. Évaluations avant déploiement.</strong> Un prompt n'est pas du code&nbsp;: il n'a pas de test unitaire exact. Constituez un jeu de 30 à 100 cas représentatifs avec la sortie attendue, mesurez un taux de réussite, et rejouez-le à chaque changement de prompt, d'outil ou de modèle. C'est le seul garde-fou contre les régressions invisibles.</p>
+  </section>
+
+  <!-- ================================================================
+       EXERCICES
+       ================================================================ -->
+
+  <h2>💪 Exercices pratiques</h2>
+
+  <div class="exercise" data-level="debutant">
+    <span class="ex-label">Exercice · Débutant</span>
+    <h4>Première requête et effet des paramètres</h4>
+    <p>Faites tourner votre première requête, puis observez concrètement deux réglages&nbsp;: faites varier <code>max_tokens</code> (16, 100, 1024) sur une consigne longue et regardez <code>stop_reason</code>&nbsp;; puis faites varier <code>temperature</code> sur un modèle qui l'accepte et comparez deux exécutions identiques.</p>
+    <details class="solution" data-premium hidden>
+      <summary>Voir la solution</summary>
+      <div class="sol-body">
+        <p>Programme complet, à exécuter après <code>pip install anthropic</code> et <code>export ANTHROPIC_API_KEY=…</code>&nbsp;:</p>
+        <pre><code>import anthropic
+
+client = anthropic.Anthropic()
+QUESTION = "Explique la photosynthèse à un enfant de 8 ans, avec une comparaison."
+
+# 1) Effet de max_tokens : le plafond porte sur la RÉPONSE
+for limite in (16, 100, 1024):
+    r = client.messages.create(
+        model="claude-opus-5",
+        max_tokens=limite,
+        messages=[{"role": "user", "content": QUESTION}],
+    )
+    texte = "".join(b.text for b in r.content if b.type == "text")
+    print(f"--- max_tokens={limite} | stop_reason={r.stop_reason} "
+          f"| sortie={r.usage.output_tokens} tokens")
+    print(texte[:200], "…\n")
+
+# 2) Effet de temperature : disponible sur les modèles antérieurs à la
+#    génération 4.6 — ici claude-haiku-4-5.
+for temp in (0.0, 1.0):
+    sorties = []
+    for _ in range(2):
+        r = client.messages.create(
+            model="claude-haiku-4-5",
+            max_tokens=120,
+            temperature=temp,
+            messages=[{"role": "user", "content": "Donne un slogan pour une librairie."}],
+        )
+        sorties.append("".join(b.text for b in r.content if b.type == "text"))
+    identiques = sorties[0] == sorties[1]
+    print(f"--- temperature={temp} | deux exécutions identiques : {identiques}")
+    print(sorties[0], "|", sorties[1], "\n")
+
+# 3) Sur claude-opus-5, on ne règle plus temperature : on règle l'effort.
+for effort in ("low", "high"):
+    r = client.messages.create(
+        model="claude-opus-5",
+        max_tokens=2048,
+        output_config={"effort": effort},
+        thinking={"type": "adaptive"},
+        messages=[{"role": "user", "content": "Combien de fenêtres à Paris ? Raisonne par ordres de grandeur."}],
+    )
+    print(f"--- effort={effort} | sortie={r.usage.output_tokens} tokens")</code></pre>
+        <p><strong>Ce que vous devez observer</strong>&nbsp;: à <code>max_tokens=16</code>, la réponse s'arrête en milieu de phrase et <code>stop_reason</code> vaut <code>"max_tokens"</code> — le modèle n'a pas «&nbsp;mal répondu&nbsp;», il a été coupé. À <code>temperature=0.0</code>, les deux exécutions sont quasi identiques&nbsp;; à <code>1.0</code>, elles divergent. Sur <code>claude-opus-5</code>, <code>temperature</code> serait rejetée&nbsp;: c'est <code>effort</code> qui module la profondeur de réflexion, et donc le nombre de tokens produits.</p>
+      </div>
+    </details><div class="solution-locked" hidden>
+  <details class="solution">
+    <summary>🔒 Corrigé détaillé — formule Premium</summary>
+    <div class="sol-body">
+      <p>Le corrigé pas à pas de cet exercice est inclus dans la formule Premium, avec les 24 corrigés du parcours.</p>
+      <p><a class="btn btn-gold" href="../tarifs.html?src=corrige">Voir les formules</a></p>
+    </div>
+  </details>
+</div>
+
+  </div>
+
+  <div class="exercise" data-level="intermediaire">
+    <span class="ex-label">Exercice · Intermédiaire</span>
+    <h4>Un outil de conversion de devises</h4>
+    <p>Implémentez en tool use un outil <code>convertir_devise</code> qui prend un montant, une devise source et une devise cible, et renvoie le montant converti. Faites-le appeler par Claude sur la question&nbsp;: «&nbsp;J'ai 250&nbsp;€ et 300&nbsp;$&nbsp;: combien cela fait-il en livres au total&nbsp;?&nbsp;» — ce qui exige deux appels d'outil.</p>
+    <details class="solution" data-premium hidden>
+      <summary>Voir la solution complète</summary>
+      <div class="sol-body">
+        <p>Le point clé est la boucle&nbsp;: tant que <code>stop_reason</code> vaut <code>"tool_use"</code>, on exécute et on renvoie <strong>tous</strong> les résultats dans un seul message <code>user</code>.</p>
+        <pre><code>import json
+import anthropic
+
+client = anthropic.Anthropic()
+
+# Taux de démonstration. En production : appelez une vraie source, avec cache et date.
+TAUX = {("EUR", "GBP"): 0.85, ("USD", "GBP"): 0.79, ("EUR", "USD"): 1.08}
+
+OUTILS = [{
+    "name": "convertir_devise",
+    "description": (
+        "Convertit un montant d'une devise vers une autre au taux du jour. "
+        "À utiliser pour toute question impliquant deux devises. "
+        "Un seul montant par appel : pour additionner plusieurs devises, "
+        "appeler l'outil une fois par devise."
+    ),
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "montant": {"type": "number", "description": "Montant à convertir."},
+            "source": {"type": "string", "description": "Code ISO de la devise d'origine, ex. EUR."},
+            "cible": {"type": "string", "description": "Code ISO de la devise cible, ex. GBP."},
+        },
+        "required": ["montant", "source", "cible"],
+        "additionalProperties": False,
+    },
+    "strict": True,
+}]
+
+def convertir_devise(montant: float, source: str, cible: str) -&gt; str:
+    source, cible = source.upper(), cible.upper()
+    if source == cible:
+        return json.dumps({"montant_converti": montant, "taux": 1.0})
+    taux = TAUX.get((source, cible))
+    if taux is None:
+        inverse = TAUX.get((cible, source))
+        taux = round(1 / inverse, 6) if inverse else None
+    if taux is None:
+        raise ValueError(f"Couple de devises non pris en charge : {source}/{cible}")
+    return json.dumps({
+        "montant_converti": round(montant * taux, 2),
+        "devise": cible,
+        "taux": taux,
+    })
+
+messages = [{
+    "role": "user",
+    "content": "J'ai 250 € et 300 $. Combien cela fait-il en livres au total ?",
+}]
+
+while True:
+    response = client.messages.create(
+        model="claude-opus-5",
+        max_tokens=2048,
+        system="Tu détailles toujours le calcul intermédiaire avant le total.",
+        tools=OUTILS,
+        messages=messages,
+    )
+    messages.append({"role": "assistant", "content": response.content})
+
+    if response.stop_reason != "tool_use":
+        break
+
+    resultats = []
+    for bloc in response.content:
+        if bloc.type != "tool_use":
+            continue
+        try:
+            contenu = convertir_devise(**bloc.input)
+            erreur = False
+        except Exception as e:            # l'échec d'un outil se RENVOIE, il ne se tait pas
+            contenu = f"Erreur : {e}"
+            erreur = True
+        resultats.append({
+            "type": "tool_result",
+            "tool_use_id": bloc.id,
+            "content": contenu,
+            "is_error": erreur,
+        })
+
+    messages.append({"role": "user", "content": resultats})
+
+print(next(b.text for b in response.content if b.type == "text"))</code></pre>
+        <p><strong>À observer</strong>&nbsp;: Claude émet <em>deux</em> blocs <code>tool_use</code> dans la même réponse (EUR→GBP et USD→GBP), que l'on exécute puis renvoie ensemble. La <code>description</code> de l'outil fait le gros du travail&nbsp;: c'est elle qui lui indique d'appeler la fonction une fois par devise. Le champ <code>strict: True</code> avec <code>additionalProperties: false</code> garantit que les arguments reçus respectent exactement le schéma.</p>
+      </div>
+    </details><div class="solution-locked" hidden>
+  <details class="solution">
+    <summary>🔒 Corrigé détaillé — formule Premium</summary>
+    <div class="sol-body">
+      <p>Le corrigé pas à pas de cet exercice est inclus dans la formule Premium, avec les 24 corrigés du parcours.</p>
+      <p><a class="btn btn-gold" href="../tarifs.html?src=corrige">Voir les formules</a></p>
+    </div>
+  </details>
+</div>
+
+  </div>
+
+  <div class="exercise" data-level="pro">
+    <span class="ex-label">Exercice · Pro</span>
+    <h4>Classifier 50&nbsp;000 documents au meilleur coût</h4>
+    <p>Une direction juridique veut classer 50&nbsp;000 documents (environ 3 pages chacun) selon une taxonomie de 12 catégories, avec un niveau de confidentialité. Concevez le pipeline en optimisant le coût&nbsp;: choix du modèle, structure du prompt, mode d'exécution, contrôle qualité. Chiffrez l'ordre de grandeur en tokens.</p>
+    <details class="solution" data-premium hidden>
+      <summary>Voir la solution</summary>
+      <div class="sol-body">
+        <p><strong>1. Estimation en tokens.</strong> 3 pages ≈ 1&nbsp;500 mots ≈ 2&nbsp;100 tokens. Ajoutez une consigne et une taxonomie stables d'environ 1&nbsp;200 tokens, et une sortie JSON courte d'environ 60 tokens. Soit par document ≈ 3&nbsp;300 tokens d'entrée et 60 de sortie&nbsp;; sur 50&nbsp;000 documents&nbsp;: <strong>≈ 165&nbsp;millions de tokens d'entrée</strong> et <strong>≈ 3&nbsp;millions de tokens de sortie</strong>. Ce seul calcul décide de l'architecture.</p>
+        <p><strong>2. Choix du modèle.</strong> La classification sur taxonomie fermée est une tâche simple et massive&nbsp;: <code>claude-haiku-4-5</code>, la gamme la plus économique. On réserve un modèle plus puissant (<code>claude-opus-5</code>) aux seuls documents que le premier passage marque comme incertains — schéma «&nbsp;routeur + spécialiste&nbsp;».</p>
+        <p><strong>3. Prompt caching.</strong> La taxonomie, les règles et les exemples (≈ 1&nbsp;200 tokens) sont identiques pour les 50&nbsp;000 appels&nbsp;: on les place en tête de <code>system</code> avec un point de rupture de cache, le document venant après. Le préfixe stable est alors relu depuis le cache à une fraction du prix.</p>
+        <p><strong>4. Batch API.</strong> Le travail n'est pas interactif&nbsp;: on soumet par lots, avec <strong>50&nbsp;% de réduction</strong> sur tous les tokens. Cumulé au cache, c'est l'essentiel de l'économie.</p>
+        <p><strong>5. Sorties structurées + échantillon d'évaluation.</strong> On impose un JSON Schema pour éviter tout post-traitement fragile, et on annote à la main 200 documents avant le lancement pour mesurer le taux d'exactitude.</p>
+        <pre><code>import json
+import anthropic
+from anthropic.types.message_create_params import MessageCreateParamsNonStreaming
+from anthropic.types.messages.batch_create_params import Request
+
+client = anthropic.Anthropic()
+
+TAXONOMIE = open("taxonomie.md", encoding="utf-8").read()  # stable : ~1200 tokens
+
+SYSTEME = [
+    {"type": "text", "text": "Tu classes des documents juridiques. Tu ne classes que d'après le texte fourni."},
+    {"type": "text", "text": TAXONOMIE, "cache_control": {"type": "ephemeral"}},  # préfixe caché
+]
+
+SCHEMA = {
+    "type": "object",
+    "properties": {
+        "categorie": {"type": "string"},
+        "confidentialite": {"type": "string", "enum": ["public", "interne", "restreint"]},
+        "confiance": {"type": "number"},
+    },
+    "required": ["categorie", "confidentialite", "confiance"],
+    "additionalProperties": False,
+}
+
+def requete(doc_id: str, texte: str, modele: str = "claude-haiku-4-5") -&gt; Request:
+    return Request(
+        custom_id=doc_id,
+        params=MessageCreateParamsNonStreaming(
+            model=modele,
+            max_tokens=200,
+            system=SYSTEME,
+            messages=[{"role": "user", "content": texte}],   # partie variable : après le cache
+            output_config={"format": {"type": "json_schema", "schema": SCHEMA}},
+        ),
+    )
+
+# --- Étape 1 : évaluation sur 200 documents annotés à la main ---------------
+lot_eval = client.messages.batches.create(requests=[requete(i, t) for i, t in echantillon])
+# … attendre la fin, comparer aux annotations, mesurer le taux d'exactitude.
+# En dessous du seuil visé : on corrige le prompt, PAS le volume.
+
+# --- Étape 2 : production, par lots de 10 000 ------------------------------
+for debut in range(0, 50_000, 10_000):
+    tranche = documents[debut:debut + 10_000]
+    client.messages.batches.create(requests=[requete(i, t) for i, t in tranche])
+
+# --- Étape 3 : reprise ciblée des cas incertains ---------------------------
+incertains = [(i, t) for i, t in documents_traites if resultats[i]["confiance"] &lt; 0.75]
+client.messages.batches.create(
+    requests=[requete(i, t, modele="claude-opus-5") for i, t in incertains]
+)</code></pre>
+        <p><strong>Le raisonnement à retenir</strong>&nbsp;: on ne réduit pas un coût en négociant un tarif, mais en agissant sur quatre leviers multiplicatifs — la gamme de modèle, le cache sur le préfixe stable, la remise du traitement par lots, et le volume de tokens réellement envoyé (n'envoyez pas 3 pages si les 400 premiers mots suffisent&nbsp;: mesurez-le sur l'échantillon d'évaluation).</p>
+      </div>
+    </details><div class="solution-locked" hidden>
+  <details class="solution">
+    <summary>🔒 Corrigé détaillé — formule Premium</summary>
+    <div class="sol-body">
+      <p>Le corrigé pas à pas de cet exercice est inclus dans la formule Premium, avec les 24 corrigés du parcours.</p>
+      <p><a class="btn btn-gold" href="../tarifs.html?src=corrige">Voir les formules</a></p>
+    </div>
+  </details>
+</div>
+
+  </div>
+
+  <!-- ================================================================
+       QUIZ
+       ================================================================ -->
+
+  <h2>❓ Quiz de validation</h2>
+
+  <div class="quiz">
+    <p><strong>Validez vos acquis</strong> — une seule bonne réponse par question.</p>
+
+    <div class="quiz-q">
+      <p class="q-text">1. Quel paramètre est <em>obligatoire</em> dans toute requête à l'API Messages&nbsp;?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" type="button">temperature</button>
+        <button class="quiz-opt" type="button" data-correct="true">max_tokens</button>
+        <button class="quiz-opt" type="button">stream</button>
+      </div>
+      <div class="quiz-explain"><code>max_tokens</code> plafonne la longueur de la <em>réponse</em> et doit être fourni à chaque appel. S'il est trop bas, la réponse est tronquée et <code>stop_reason</code> vaut <code>"max_tokens"</code>.</div>
+    </div>
+
+    <div class="quiz-q">
+      <p class="q-text">2. Où doit vivre votre clé API dans une application&nbsp;?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" type="button">Dans une constante en haut du fichier, c'est plus lisible</button>
+        <button class="quiz-opt" type="button">Dans le JavaScript de la page, pour éviter un aller-retour serveur</button>
+        <button class="quiz-opt" type="button" data-correct="true">Dans une variable d'environnement ou un gestionnaire de secrets, côté serveur</button>
+      </div>
+      <div class="quiz-explain">Une clé en dur finit dans git&nbsp;; une clé côté navigateur est lisible par tous les visiteurs. Variable d'environnement (<code>ANTHROPIC_API_KEY</code>) ou coffre de secrets, avec rotation régulière.</div>
+    </div>
+
+    <div class="quiz-q">
+      <p class="q-text">3. Comment transmet-on le prompt système&nbsp;?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" type="button" data-correct="true">Dans le paramètre <code>system</code>, séparé de la liste <code>messages</code></button>
+        <button class="quiz-opt" type="button">Comme premier message de la liste, avec le rôle <code>system</code></button>
+        <button class="quiz-opt" type="button">Dans un en-tête HTTP dédié</button>
+      </div>
+      <div class="quiz-explain">Le prompt système est un paramètre à part entière de la requête. La liste <code>messages</code> commence toujours par un message <code>user</code> et alterne <code>user</code> / <code>assistant</code>.</div>
+    </div>
+
+    <div class="quiz-q">
+      <p class="q-text">4. En tool use, que fait votre code quand <code>stop_reason</code> vaut <code>"tool_use"</code>&nbsp;?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" type="button">Rien&nbsp;: l'API exécute l'outil elle-même</button>
+        <button class="quiz-opt" type="button" data-correct="true">Il exécute la fonction, puis renvoie un bloc <code>tool_result</code> portant le même <code>tool_use_id</code></button>
+        <button class="quiz-opt" type="button">Il relance la requête à l'identique jusqu'à obtenir du texte</button>
+      </div>
+      <div class="quiz-explain">Claude décide <em>quand</em> appeler l'outil&nbsp;; c'est votre programme qui l'exécute. Le résultat repart dans un message <code>user</code>, et tous les résultats d'un même tour tiennent dans un seul message.</div>
+    </div>
+
+    <div class="quiz-q">
+      <p class="q-text">5. Pour que le prompt caching fonctionne, où placer le contenu variable&nbsp;?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" type="button">Au tout début, pour que Claude le voie en premier</button>
+        <button class="quiz-opt" type="button" data-correct="true">Après le préfixe stable et son point de rupture de cache</button>
+        <button class="quiz-opt" type="button">Peu importe&nbsp;: le cache reconnaît les portions identiques où qu'elles soient</button>
+      </div>
+      <div class="quiz-explain">Le cache fonctionne par correspondance de <em>préfixe</em>&nbsp;: un octet modifié invalide tout ce qui suit. Le stable d'abord (instructions, référentiel, outils), le variable ensuite (question, horodatage).</div>
+    </div>
+
+    <p class="quiz-score"></p>
+  </div>
+
+  <!-- ================================================================
+       VIDÉOS & RESSOURCES
+       ================================================================ -->
+
+  <h2>🎬 Vidéos &amp; ressources officielles</h2>
+  <p>Pour approfondir ce module avec les sources d'Anthropic&nbsp;:</p>
+
+  <div class="resource-grid">
+    <a class="resource-card" href="https://docs.claude.com/en/api/overview" target="_blank" rel="noopener">
+      <span class="kind">📄 Documentation</span>
+      <h4>Référence de l'API</h4>
+      <p>Tous les paramètres de l'API Messages, les codes d'erreur et les points d'entrée annexes (Files, Batches, comptage de tokens).</p>
+    </a>
+    <a class="resource-card" href="https://github.com/anthropics/anthropic-cookbook" target="_blank" rel="noopener">
+      <span class="kind">💻 Code</span>
+      <h4>Anthropic Cookbook</h4>
+      <p>Des dizaines de notebooks prêts à exécuter&nbsp;: tool use, RAG, extraction, évaluations, sous-agents.</p>
+    </a>
+    <a class="resource-card" href="https://console.anthropic.com" target="_blank" rel="noopener">
+      <span class="kind">🔧 Outil</span>
+      <h4>Console Anthropic</h4>
+      <p>Clés API, suivi de consommation et Workbench pour tester un prompt avant de l'inscrire dans votre code.</p>
+    </a>
+    <a class="resource-card" href="https://www.youtube.com/results?search_query=Anthropic+API+tool+use" target="_blank" rel="noopener">
+      <span class="kind">🎬 Vidéos</span>
+      <h4>Démonstrations tool use</h4>
+      <p>Recherche YouTube sur le tool use et l'API Anthropic&nbsp;: démonstrations et sessions techniques officielles (en anglais).</p>
+    </a>
+  </div>
+
+  <nav class="page-nav">
+    <a href="claude-code.html">← Module 5 · Claude Code</a>
+    <a class="next" href="integrations.html">Module 7 · Intégrations →</a>
+  </nav>
+
+</main>
+
+<div class="upsell-bar" data-upsell-bar hidden></div>
+
+<footer class="site-footer">
+  <p>Formation Claude — projet pédagogique indépendant, non affilié à Anthropic.</p>
+</footer>
+
+<script src="../assets/js/app.js"></script>
+</body>
+</html>

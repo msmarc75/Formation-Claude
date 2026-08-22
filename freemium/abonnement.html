@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Abonnement — Formation Claude Premium</title>
+<meta name="description" content="Tunnel d'abonnement de démonstration à la Formation Claude Premium. Aucun paiement réel.">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✳️</text></svg>">
+</head>
+<body>
+
+<div class="demo-banner">
+  <strong>Démonstration</strong> — tunnel simulé : aucun paiement n'est encaissé, aucune donnée ne quitte votre navigateur.
+</div>
+
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="index.html"><span class="spark">✳</span> Formation Claude</a>
+    <nav class="main-nav" aria-label="Navigation principale">
+      <a href="index.html">Accueil</a>
+      <a href="tarifs.html">Tarifs</a>
+      <a href="compte.html">Mon compte</a>
+    </nav>
+    <div data-plan-pill data-base=""></div>
+  </div>
+</header>
+
+<main>
+
+  <h1>Abonnement Premium</h1>
+
+  <div class="checkout-steps">
+    <span data-step="1" class="active">1. Votre formule</span>
+    <span data-step="2">2. Coordonnées</span>
+    <span data-step="3">3. Confirmation</span>
+  </div>
+
+  <!-- ÉTAPE 1 ------------------------------------------------------------- -->
+  <section class="checkout-panel" data-panel="1">
+    <h2 style="margin-top:0">Récapitulatif</h2>
+    <div class="field">
+      <label for="periodicite">Périodicité</label>
+      <select id="periodicite">
+        <option value="mensuel">Mensuel — 19 € / mois</option>
+        <option value="annuel">Annuel — 15 € / mois, soit 180 € par an (−20 %)</option>
+      </select>
+    </div>
+    <div class="recap">
+      <div class="line"><span>Formation Claude Premium</span><span data-r-plan>Mensuel</span></div>
+      <div class="line"><span>49 leçons Intermédiaire et Pro</span><span>incluses</span></div>
+      <div class="line"><span>24 corrigés d'exercices</span><span>inclus</span></div>
+      <div class="line"><span>Mises à jour du contenu</span><span>incluses</span></div>
+      <div class="line total"><span>À payer aujourd'hui</span><span data-r-total>19,00 €</span></div>
+    </div>
+    <p style="margin-top:1.2rem">
+      <button class="btn btn-gold" type="button" data-next="2">Continuer</button>
+      <a class="btn btn-ghost" href="tarifs.html">Retour aux tarifs</a>
+    </p>
+  </section>
+
+  <!-- ÉTAPE 2 ------------------------------------------------------------- -->
+  <section class="checkout-panel" data-panel="2" hidden>
+    <h2 style="margin-top:0">Vos coordonnées</h2>
+    <div class="callout warn">
+      <span class="title">⚠️ Formulaire de démonstration</span>
+      Ces champs ne sont reliés à rien. Aucune donnée n'est transmise ni enregistrée, et aucun moyen de paiement ne vous est demandé — n'en saisissez d'ailleurs jamais sur une page de démonstration.
+    </div>
+    <div class="field">
+      <label for="prenom">Prénom</label>
+      <input id="prenom" type="text" autocomplete="off" placeholder="Camille">
+    </div>
+    <div class="field">
+      <label for="email">Adresse e-mail</label>
+      <input id="email" type="email" autocomplete="off" placeholder="camille@exemple.fr">
+      <p class="hint">Sert uniquement à afficher un nom sur la page « Mon compte ». Reste dans votre navigateur.</p>
+    </div>
+    <div class="field">
+      <label for="moyen">Moyen de paiement</label>
+      <select id="moyen">
+        <option>Carte bancaire (simulée)</option>
+        <option>Prélèvement SEPA (simulé)</option>
+        <option>Virement (simulé)</option>
+      </select>
+      <p class="hint">Aucun numéro de carte n'est demandé : ce tunnel ne traite aucun paiement.</p>
+    </div>
+    <p style="margin-top:1.2rem">
+      <button class="btn btn-gold" type="button" data-next="3">Valider l'abonnement (simulation)</button>
+      <button class="btn btn-ghost" type="button" data-back="1">Retour</button>
+    </p>
+  </section>
+
+  <!-- ÉTAPE 3 ------------------------------------------------------------- -->
+  <section class="checkout-panel" data-panel="3" hidden>
+    <div class="success-box">
+      <div class="big">🎉</div>
+      <h2>Bienvenue en Premium<span data-hello></span> !</h2>
+      <p class="lead" style="margin:0 auto">Les 49 leçons Intermédiaire et Pro et les 24 corrigés d'exercices sont désormais ouverts sur l'ensemble des modules.</p>
+      <p style="margin-top:1.4rem">
+        <a class="btn btn-gold" href="pages/claude-code.html">Ouvrir le module Claude Code</a>
+        <a class="btn btn-ghost" href="compte.html">Mon compte</a>
+      </p>
+      <p style="font-size:.85rem;color:var(--text-soft);margin-top:1.5rem">
+        Rappel : cet abonnement est fictif. Aucun paiement n'a été effectué. L'état est stocké dans votre navigateur et peut être annulé à tout moment depuis la page « Mon compte ».
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>Formation Claude — projet pédagogique indépendant, non affilié à Anthropic.<br>
+  <a href="../index.html">Version 1 — intégralement gratuite</a> · <a href="tarifs.html">Tarifs</a></p>
+</footer>
+
+<script src="assets/js/app.js"></script>
+<script>
+(function () {
+  var P = window.fcPrices || { mensuel: 19, annuel: 15 };
+  var sel = document.getElementById("periodicite");
+  var rPlan = document.querySelector("[data-r-plan]");
+  var rTotal = document.querySelector("[data-r-total]");
+
+  try {
+    var saved = localStorage.getItem("fc2-billing");
+    if (saved === "annuel") sel.value = "annuel";
+  } catch (e) {}
+
+  function refreshRecap() {
+    var annuel = sel.value === "annuel";
+    rPlan.textContent = annuel ? "Annuel" : "Mensuel";
+    rTotal.textContent = (annuel ? (P.annuel * 12) : P.mensuel).toFixed(2).replace(".", ",") + " €";
+  }
+  sel.addEventListener("change", refreshRecap);
+  refreshRecap();
+
+  function show(n) {
+    document.querySelectorAll("[data-panel]").forEach(function (p) {
+      p.hidden = p.dataset.panel !== String(n);
+    });
+    document.querySelectorAll("[data-step]").forEach(function (s) {
+      var i = parseInt(s.dataset.step, 10);
+      s.classList.toggle("active", i === n);
+      s.classList.toggle("done", i < n);
+    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  document.querySelectorAll("[data-next]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var n = parseInt(b.dataset.next, 10);
+      if (n === 3) {
+        // Le « paiement » se résume à basculer l'état local : c'est bien une
+        // simulation, pas une transaction.
+        var prenom = (document.getElementById("prenom").value || "").trim();
+        try {
+          localStorage.setItem("fc2-billing", sel.value);
+          if (prenom) localStorage.setItem("fc2-prenom", prenom);
+        } catch (e) {}
+        var hello = document.querySelector("[data-hello]");
+        if (hello && prenom) hello.textContent = ", " + prenom;
+        window.fcSetPlan("premium");
+      }
+      show(n);
+    });
+  });
+  document.querySelectorAll("[data-back]").forEach(function (b) {
+    b.addEventListener("click", function () { show(parseInt(b.dataset.back, 10)); });
+  });
+})();
+</script>
+</body>
+</html>
