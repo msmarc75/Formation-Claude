@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Intégrations — Formation Claude</title>
+<meta name="description" content="Brancher Claude sur vos outils : apps mobile et desktop, Claude in Chrome, Slack, connecteurs de données, IDE, MCP et gouvernance des accès en entreprise. Cours, exercices et quiz en français.">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✳️</text></svg>">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="inner">
+    <a class="brand" href="../index.html"><span class="spark">✳</span> Formation Claude</a>
+    <nav class="main-nav" aria-label="Navigation principale">
+      <a href="../index.html">Accueil</a>
+      <a href="fondamentaux.html">Fondamentaux</a>
+      <a href="chat.html">Chat</a>
+      <a href="prompting.html">Prompting</a>
+      <a href="cowork.html">Cowork</a>
+      <a href="claude-code.html">Claude Code</a>
+      <a href="api.html">API</a>
+      <a href="integrations.html" aria-current="page">Intégrations</a>
+      <a href="bonnes-pratiques.html">Bonnes pratiques</a>
+      <a href="ressources.html">Ressources</a>
+    </nav>
+    <div data-level-switcher></div>
+  </div>
+</header>
+
+<main>
+
+  <p><span class="lvl-badge debutant">Module 7</span></p>
+  <h1>🧩 Intégrations</h1>
+  <p class="lead">Claude prend toute sa valeur quand il cesse d'être un onglet de plus&nbsp;: dans votre poche, dans votre navigateur, dans Slack, branché sur vos documents et vos outils métier. Ce module montre comment l'y amener — et comment garder la main sur ce qu'il voit.</p>
+
+  <div class="page-progress" data-page-progress></div>
+
+  <div class="toc">
+    <strong>Objectifs de ce module</strong>
+    <ul>
+      <li>Utiliser Claude partout&nbsp;: mobile, ordinateur, navigateur, Slack.</li>
+      <li>Brancher des connecteurs de données et savoir les révoquer.</li>
+      <li>Comprendre MCP&nbsp;: architecture, outils, ressources, invites.</li>
+      <li>Encadrer les intégrations en entreprise&nbsp;: moindre privilège et revue des accès.</li>
+    </ul>
+  </div>
+
+  <div class="hidden-notice" data-hidden-notice hidden></div>
+
+  <!-- ================================================================
+       NIVEAU DÉBUTANT
+       ================================================================ -->
+
+  <h2>🟢 Niveau débutant</h2>
+
+  <section class="lesson" data-lesson="integrations:apps" data-level="debutant">
+    <div class="lesson-head">
+      <h3>1. Claude sur mobile et sur ordinateur</h3>
+      <span class="lvl-badge debutant">Débutant</span>
+    </div>
+    <p>Au-delà du site <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>, Claude existe en application <strong>iOS</strong>, <strong>Android</strong> et <strong>desktop</strong> (macOS et Windows). Même compte, même historique, même abonnement&nbsp;: une conversation commencée dans le métro se poursuit devant l'ordinateur, la synchronisation est immédiate.</p>
+    <p>Ce que les applications apportent réellement&nbsp;:</p>
+    <ul>
+      <li><strong>La dictée</strong>&nbsp;: sur mobile, parler est bien plus rapide qu'écrire. Décrivez votre problème à voix haute pendant deux minutes, sans structurer — Claude s'accommode très bien d'un propos parlé et vous rend une note ordonnée.</li>
+      <li><strong>L'appareil photo</strong>&nbsp;: photographiez un tableau blanc, une facture, un écran d'erreur, une étiquette. C'est souvent le chemin le plus court entre le monde physique et une réponse.</li>
+      <li><strong>Le partage depuis d'autres applications</strong>&nbsp;: la feuille de partage du système envoie à Claude un article, une capture, un PDF, sans passer par le copier-coller.</li>
+      <li><strong>Le raccourci clavier global</strong> sur desktop&nbsp;: une fenêtre de Claude par-dessus l'application en cours, sans changer de contexte.</li>
+    </ul>
+    <p>Un prompt qui fonctionne particulièrement bien en dictée&nbsp;:</p>
+    <pre><code>Je te parle en marchant, mon propos est décousu — remets-le en ordre.
+
+Contexte : [dictez librement pendant 1 à 2 minutes]
+
+Rends-moi :
+1. Un résumé en 5 lignes de ce que je viens de dire ;
+2. Les décisions que j'ai prises, en liste ;
+3. Les questions restées ouvertes ;
+4. Les 3 prochaines actions, avec qui fait quoi.</code></pre>
+    <p>Un mot sur la continuité&nbsp;: l'historique suit le compte, pas l'appareil. Si vous utilisez les <strong>Projets</strong> (module 2), leur contexte et leurs documents sont disponibles depuis n'importe quel appareil — c'est le meilleur moyen d'éviter de tout réexpliquer à chaque fois.</p>
+    <div class="callout tip">
+      <span class="title">💡 À retenir</span>
+      Les applications ne servent pas à faire «&nbsp;la même chose en plus petit&nbsp;»&nbsp;: elles servent à capter la matière là où elle apparaît — une idée en marchant, une photo, un article partagé — pour l'exploiter posément ensuite.
+    </div>
+  </section>
+
+  <section class="lesson" data-lesson="integrations:chrome" data-level="debutant">
+    <div class="lesson-head">
+      <h3>2. Claude dans votre navigateur</h3>
+      <span class="lvl-badge debutant">Débutant</span>
+    </div>
+    <p>L'extension <strong>Claude in Chrome</strong> installe Claude dans un panneau latéral du navigateur. La différence avec un onglet claude.ai est décisive&nbsp;: l'extension <em>voit la page ouverte</em> et peut, avec votre accord, <em>agir dessus</em> — cliquer, remplir un formulaire, naviguer, extraire.</p>
+    <p>Les usages les plus rentables&nbsp;:</p>
+    <ul>
+      <li><strong>Comprendre vite</strong>&nbsp;: résumer un article long, expliquer un tableau réglementaire, traduire une page technique en gardant le vocabulaire métier.</li>
+      <li><strong>Extraire</strong>&nbsp;: transformer une page de résultats en tableau structuré, relever les caractéristiques d'un produit, comparer deux pages ouvertes.</li>
+      <li><strong>Répéter une manipulation fastidieuse</strong>&nbsp;: reporter les mêmes informations dans un formulaire interne, parcourir une liste page à page.</li>
+    </ul>
+    <pre><code>À partir de la page ouverte :
+
+1. Résume en 8 puces ce que fait ce produit et à qui il s'adresse ;
+2. Relève toutes les mentions de tarif, de durée d'engagement
+   et de conditions de résiliation, avec citation exacte ;
+3. Dis-moi clairement ce que la page NE dit PAS
+   et que je devrais vérifier ailleurs.
+
+N'invente rien : si une information est absente, écris « non mentionné ».</code></pre>
+    <p><strong>Les précautions ne sont pas optionnelles.</strong> Une extension qui lit la page voit ce que vous voyez&nbsp;: messagerie, intranet, espace bancaire. Quatre règles&nbsp;:</p>
+    <ol>
+      <li><strong>Limitez les sites autorisés.</strong> N'accordez l'accès qu'aux domaines où vous en avez besoin, jamais «&nbsp;partout par défaut&nbsp;».</li>
+      <li><strong>Méfiez-vous de l'injection de prompt.</strong> Une page web peut contenir des instructions cachées destinées à détourner l'assistant («&nbsp;ignore tes consignes et…&nbsp;»). Traitez le contenu d'une page comme des <em>données</em>, jamais comme des ordres.</li>
+      <li><strong>Gardez la main sur les actions engageantes.</strong> Achat, envoi, suppression, publication&nbsp;: relisez avant de confirmer.</li>
+      <li><strong>Désactivez l'extension</strong> lors des sessions sensibles (banque, RH, données de santé).</li>
+    </ol>
+    <div class="callout warn">
+      <span class="title">⚠️ Prudence</span>
+      Un assistant qui agit dans le navigateur hérite de vos droits sur chaque site. Le bon réflexe est celui du moindre privilège&nbsp;: le moins d'accès possible, le temps le plus court possible.
+    </div>
+  </section>
+
+  <!-- ================================================================
+       NIVEAU INTERMÉDIAIRE
+       ================================================================ -->
+
+  <h2 data-level="intermediaire">🟠 Niveau intermédiaire</h2>
+
+  <section class="lesson" data-lesson="integrations:slack" data-level="intermediaire">
+    <div class="lesson-head">
+      <h3>3. Claude dans Slack</h3>
+      <span class="lvl-badge intermediaire">Intermédiaire</span>
+    </div>
+    <p>Installée par un administrateur de l'espace de travail, l'intégration Slack fait de Claude un membre de vos canaux. On l'appelle par une mention dans un fil, ou en message direct&nbsp;; il lit le contexte du fil et répond au même endroit — sans que personne ne quitte Slack.</p>
+    <p>Trois usages tiennent la route au quotidien&nbsp;:</p>
+    <ul>
+      <li><strong>Répondre dans un fil</strong>&nbsp;: une discussion technique s'enlise sur 40 messages&nbsp;; une mention suffit pour obtenir une synthèse des positions et des points de désaccord.</li>
+      <li><strong>Résumer un canal</strong>&nbsp;: après trois jours d'absence, demander ce qui a été décidé plutôt que de tout relire.</li>
+      <li><strong>Déclencher une tâche</strong>&nbsp;: rédiger l'annonce à partir des éléments du fil, préparer un ordre du jour, formaliser un compte-rendu.</li>
+    </ul>
+    <pre><code>@Claude Résume ce fil pour quelqu'un qui le découvre :
+
+1. Le problème posé, en 3 lignes ;
+2. Les options défendues, avec qui défend quoi ;
+3. Ce qui est décidé et ce qui reste ouvert ;
+4. Les actions, avec un responsable pressenti pour chacune.
+
+Reste factuel : ne tranche pas les désaccords à notre place.</code></pre>
+    <p>Deux points d'attention. D'abord la <strong>visibilité</strong>&nbsp;: dans un canal public, la réponse de Claude est lue par tout le monde — pour un sujet sensible, passez en message direct. Ensuite la <strong>portée</strong>&nbsp;: Claude ne voit que ce à quoi l'intégration lui donne accès et que ce que le fil contient&nbsp;; un document déposé ailleurs devra lui être fourni explicitement.</p>
+    <p>Le bon usage n'est pas de tout demander à Claude dans Slack, mais de traiter sur place ce qui est <em>né</em> dans Slack&nbsp;: la conversation, sa synthèse, sa mise en forme. Les tâches longues et documentaires restent plus confortables dans claude.ai ou dans Cowork (module 4).</p>
+  </section>
+
+  <section class="lesson" data-lesson="integrations:connecteurs" data-level="intermediaire">
+    <div class="lesson-head">
+      <h3>4. Les connecteurs de données</h3>
+      <span class="lvl-badge intermediaire">Intermédiaire</span>
+    </div>
+    <p>Un <strong>connecteur</strong> autorise Claude à consulter une source d'information à votre place&nbsp;: Google&nbsp;Drive, Gmail, un agenda, un outil de gestion de projet, un dépôt documentaire. Vous les activez depuis les paramètres de votre compte, et l'autorisation passe par le mécanisme d'authentification du service concerné&nbsp;: vous vous connectez chez lui, et vous accordez explicitement les droits demandés.</p>
+    <p>Ce que cela change&nbsp;: vous cessez de faire la navette. Au lieu de télécharger trois documents puis de les téléverser dans une conversation, vous demandez directement&nbsp;:</p>
+    <pre><code>Dans mon Drive, cherche les comptes-rendus du comité produit
+des six dernières semaines.
+
+Puis produis une note d'une page :
+— les décisions prises, par ordre chronologique ;
+— les sujets revenus plus d'une fois sans être tranchés ;
+— les échéances mentionnées et celles qui sont passées.
+
+Cite pour chaque point le document et sa date. Si tu ne trouves pas
+un document attendu, dis-le au lieu de combler le trou.</code></pre>
+    <p><strong>Trois questions à se poser avant d'autoriser un connecteur&nbsp;:</strong></p>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Question</th><th>Ce qu'il faut vérifier</th></tr>
+      <tr><td>Que peut-il lire&nbsp;?</td><td>Toute la boîte mail ou un seul dossier&nbsp;? Préférez toujours le périmètre le plus étroit disponible.</td></tr>
+      <tr><td>Peut-il écrire&nbsp;?</td><td>Lecture seule quand c'est possible. L'écriture (envoyer, supprimer, modifier) mérite une décision consciente.</td></tr>
+      <tr><td>Comment révoquer&nbsp;?</td><td>Dans les paramètres de Claude <em>et</em> dans la page «&nbsp;applications autorisées&nbsp;» du service source&nbsp;: la révocation doit se faire des deux côtés.</td></tr>
+    </table>
+    </div>
+    <p>Un connecteur hérite de <em>vos</em> droits&nbsp;: il n'ouvre pas des portes que vous n'aviez pas, mais il rend beaucoup plus rapide l'exploitation de tout ce à quoi vous aviez déjà accès. C'est précisément pourquoi la question du périmètre mérite d'être posée avant de cliquer sur «&nbsp;Autoriser&nbsp;», et pourquoi les organisations encadrent ces autorisations (leçon 8).</p>
+  </section>
+
+  <section class="lesson" data-lesson="integrations:code-ide" data-level="intermediaire">
+    <div class="lesson-head">
+      <h3>5. Claude Code sur le web et dans l'IDE</h3>
+      <span class="lvl-badge intermediaire">Intermédiaire</span>
+    </div>
+    <p>Claude&nbsp;Code (module 5) n'est pas cantonné au terminal. Deux prolongements changent la façon de travailler&nbsp;: le <strong>lancement de tâches depuis le navigateur</strong> et l'<strong>intégration à l'éditeur</strong>.</p>
+    <p><strong>Depuis le navigateur</strong>, on décrit une tâche sur un dépôt — corriger un bug, mettre à jour une dépendance, écrire des tests — et une session s'exécute à distance, sur une copie du dépôt. Le résultat revient sous forme de modifications à relire, typiquement une proposition de fusion. L'intérêt est double&nbsp;: lancer plusieurs tâches en parallèle, et le faire depuis un appareil qui n'a pas votre environnement de développement — y compris un téléphone, entre deux réunions.</p>
+    <p><strong>Dans l'IDE</strong>, des extensions existent pour <strong>VS&nbsp;Code</strong> et pour les éditeurs <strong>JetBrains</strong>. Claude voit alors le fichier ouvert et votre sélection, et affiche ses modifications sous forme de <em>diff</em> directement dans l'éditeur, où vous les acceptez ou les refusez ligne à ligne.</p>
+    <pre><code># Dans un projet, depuis le terminal intégré de votre éditeur
+cd ~/projets/mon-app
+claude
+
+# Rattacher la session à l'éditeur ouvert (sélection et diffs partagés)
+/ide
+
+# Une tâche typique, formulée dans la session :
+# « Le test test_facturation_tva échoue depuis le commit d'hier.
+#   Trouve la cause, corrige-la, et explique-moi ce qui s'est passé. »</code></pre>
+    <p>La règle de choix est simple&nbsp;: <strong>le navigateur pour les tâches déléguables</strong> (isolées, vérifiables par des tests, sans dialogue serré), <strong>l'IDE pour les tâches accompagnées</strong> (refonte, exploration, décisions d'architecture) où vous voulez voir chaque changement au moment où il arrive. Dans les deux cas, la revue humaine des modifications reste la dernière étape — elle ne se délègue pas.</p>
+  </section>
+
+  <!-- ================================================================
+       NIVEAU PRO
+       ================================================================ -->
+
+  <h2 data-level="pro">🟣 Niveau pro</h2>
+
+  <section class="lesson" data-lesson="integrations:mcp" data-level="pro">
+    <div class="lesson-head">
+      <h3>6. MCP en profondeur</h3>
+      <span class="lvl-badge pro">Pro</span>
+    </div>
+    <p>Le <strong>Model Context Protocol</strong> (MCP) est un protocole ouvert, publié par Anthropic et documenté sur <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener">modelcontextprotocol.io</a>, qui standardise la connexion entre un assistant et des sources de données ou des outils. Avant lui, chaque intégration était un développement spécifique&nbsp;; avec lui, un même serveur sert n'importe quel client compatible.</p>
+    <p><strong>L'architecture</strong> distingue trois rôles&nbsp;: l'<em>hôte</em> (l'application où vous travaillez — Claude&nbsp;Desktop, Claude&nbsp;Code, votre propre application), le <em>client</em> MCP qu'il embarque, et le <em>serveur</em> MCP qui expose des capacités. Un serveur peut être <strong>local</strong> (un processus lancé sur votre machine, qui dialogue par entrée/sortie standard — idéal pour vos fichiers ou une base interne) ou <strong>distant</strong> (accessible par le réseau, avec authentification — pour un service partagé).</p>
+    <p>Un serveur expose trois familles de capacités, qu'il faut distinguer&nbsp;:</p>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Capacité</th><th>Qui la déclenche</th><th>Exemple</th></tr>
+      <tr><td><strong>Outils</strong> (tools)</td><td>Le modèle, quand il en a besoin</td><td>Créer un ticket, interroger une base, envoyer une requête</td></tr>
+      <tr><td><strong>Ressources</strong> (resources)</td><td>L'application ou l'utilisateur, qui les fournit en contexte</td><td>Un fichier, une fiche client, un schéma de base de données</td></tr>
+      <tr><td><strong>Invites</strong> (prompts)</td><td>L'utilisateur, explicitement</td><td>Un modèle de revue de code, une trame d'analyse maison</td></tr>
+    </table>
+    </div>
+    <p>Côté écosystème, il existe des serveurs pour la plupart des outils courants — gestion de code, suivi de tickets, bases de données, documentation, stockage — publiés par leurs éditeurs ou par la communauté. Dans Claude&nbsp;Code, l'ajout d'un serveur tient en une commande, et la configuration se versionne avec le projet&nbsp;:</p>
+    <pre><code># Ajouter un serveur MCP local à un projet
+claude mcp add outils-internes -- python -m outils_internes.serveur
+
+# Lister les serveurs connus et leur état
+claude mcp list</code></pre>
+    <pre><code>{
+  "mcpServers": {
+    "outils-internes": {
+      "command": "python",
+      "args": ["-m", "outils_internes.serveur"],
+      "env": { "OUTILS_API_TOKEN": "${OUTILS_API_TOKEN}" }
+    }
+  }
+}</code></pre>
+    <p>Notez la dernière ligne&nbsp;: le jeton n'est pas écrit dans le fichier, il est repris depuis l'environnement. Ce fichier est versionné&nbsp;; le secret, jamais.</p>
+  </section>
+
+  <section class="lesson" data-lesson="integrations:serveur-mcp" data-level="pro">
+    <div class="lesson-head">
+      <h3>7. Construire ou brancher un serveur MCP</h3>
+      <span class="lvl-badge pro">Pro</span>
+    </div>
+    <p>Avant d'écrire une ligne, posez-vous la bonne question&nbsp;: <strong>un serveur existe-t-il déjà&nbsp;?</strong> La plupart des outils grand public en ont un. On construit son propre serveur pour ce qui est <em>spécifique à la maison</em>&nbsp;: un référentiel produit, un entrepôt de données interne, un système de tickets développé sur mesure.</p>
+    <p>Un serveur MCP minimal tient en quelques lignes. Voici l'ossature en Python, avec le SDK officiel&nbsp;; l'équivalent existe en TypeScript et dans d'autres langages (référence à jour sur <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener">modelcontextprotocol.io</a>)&nbsp;:</p>
+    <pre><code># pip install "mcp[cli]"
+import os
+import httpx
+from mcp.server.fastmcp import FastMCP
+
+mcp = FastMCP("outils-internes")
+
+BASE_URL = os.environ["REFERENTIEL_URL"]
+TOKEN = os.environ["OUTILS_API_TOKEN"]      # jamais en dur, jamais dans le dépôt
+
+@mcp.tool()
+def rechercher_client(siret: str) -&gt; dict:
+    """Renvoie la fiche d'un client à partir de son numéro SIRET.
+
+    À utiliser pour toute question portant sur un client identifié.
+    Ne renvoie que des données commerciales : ni RIB, ni pièce d'identité.
+    """
+    if not siret.isdigit() or len(siret) != 14:
+        raise ValueError("SIRET invalide : 14 chiffres attendus.")
+    reponse = httpx.get(
+        f"{BASE_URL}/clients/{siret}",
+        headers={"Authorization": f"Bearer {TOKEN}"},
+        timeout=10.0,
+    )
+    reponse.raise_for_status()
+    fiche = reponse.json()
+    # Filtrage explicite : on n'expose que les champs prévus
+    return {cle: fiche[cle] for cle in ("raison_sociale", "ville", "segment", "encours")}
+
+if __name__ == "__main__":
+    mcp.run()   # transport local (entrée/sortie standard)</code></pre>
+    <p>Trois principes de conception valent plus que le code lui-même. <strong>La docstring est le mode d'emploi&nbsp;</strong>: c'est elle que le modèle lit pour décider s'il appelle l'outil&nbsp;— dites explicitement quand l'utiliser et quand ne pas l'utiliser. <strong>Un outil fait une chose</strong>&nbsp;: cinq outils nets valent mieux qu'un outil à douze paramètres. <strong>Le serveur est la frontière de sécurité</strong>&nbsp;: c'est lui qui valide les entrées et filtre les champs renvoyés, pas le modèle.</p>
+    <p>Côté <strong>jetons</strong>&nbsp;: un compte de service dédié, en lecture seule quand c'est possible, avec un périmètre réduit et une rotation planifiée. Le secret vit dans l'environnement ou dans un coffre, jamais dans le fichier de configuration ni dans le dépôt. Enfin, journalisez les appels d'outils&nbsp;: sans trace, aucun audit n'est possible après coup.</p>
+  </section>
+
+  <section class="lesson" data-lesson="integrations:gouvernance" data-level="pro">
+    <div class="lesson-head">
+      <h3>8. Gouvernance des intégrations en entreprise</h3>
+      <span class="lvl-badge pro">Pro</span>
+    </div>
+    <p>Dès que plusieurs dizaines de personnes activent des connecteurs, la question cesse d'être individuelle. Une gouvernance tient en quatre décisions écrites.</p>
+    <p><strong>1. Qui autorise quoi.</strong> Établissez une liste explicite&nbsp;: connecteurs autorisés pour tous, connecteurs soumis à validation, connecteurs interdits. Sans liste, la réponse par défaut est «&nbsp;tout le monde tout&nbsp;», et personne ne l'a décidé.</p>
+    <p><strong>2. Le moindre privilège.</strong> Chaque intégration reçoit le périmètre le plus étroit qui permette l'usage&nbsp;: lecture seule par défaut, un dossier plutôt qu'un espace entier, un compte de service dédié plutôt qu'un compte d'administrateur. L'écriture et la suppression sont des droits qu'on accorde, pas des droits qu'on hérite.</p>
+    <p><strong>3. La journalisation.</strong> Qui a branché quoi, quand, sur quelles données, et quels outils ont été appelés. Cette trace sert deux fois&nbsp;: pour l'incident (ce qui a été consulté) et pour la revue (ce qui ne sert plus).</p>
+    <p><strong>4. La revue périodique.</strong> Les accès s'accumulent, ils ne se retirent jamais spontanément. Fixez une cadence — trimestrielle pour les données sensibles, semestrielle pour le reste — et un déclencheur systématique&nbsp;: tout départ ou changement de poste entraîne la révocation immédiate.</p>
+    <p>Un registre tenu à jour suffit&nbsp;; il peut être versionné comme du code&nbsp;:</p>
+    <pre><code># registre-connecteurs.yml — revu chaque trimestre
+- connecteur: drive-equipe-marketing
+  perimetre: "Drive partagé Marketing (dossier Campagnes uniquement)"
+  droits: lecture
+  sensibilite: interne
+  demandeur: direction-marketing
+  approbateur: RSSI
+  journalisation: active
+  prochaine_revue: 2026-10-01
+
+- connecteur: crm-lecture
+  perimetre: "Comptes et opportunités, hors coordonnées personnelles"
+  droits: lecture
+  sensibilite: restreint
+  demandeur: direction-commerciale
+  approbateur: "RSSI + DPO"
+  journalisation: active
+  prochaine_revue: 2026-09-01</code></pre>
+    <p>Un dernier réflexe, souvent oublié&nbsp;: un connecteur donne accès à des données, mais un assistant qui <em>agit</em> (navigateur, tickets, messagerie) peut aussi être détourné par une injection de prompt dissimulée dans un contenu. Pour toute action engageante — envoyer, payer, supprimer, publier — imposez une confirmation humaine explicite. C'est la contrepartie normale de l'autonomie.</p>
+  </section>
+
+  <!-- ================================================================
+       EXERCICES
+       ================================================================ -->
+
+  <h2>💪 Exercices pratiques</h2>
+
+  <div class="exercise" data-level="debutant">
+    <span class="ex-label">Exercice · Débutant</span>
+    <h4>Traiter une vraie tâche depuis votre téléphone</h4>
+    <p>Installez l'application Claude sur votre téléphone, connectez-vous avec votre compte, et traitez une tâche réelle de bout en bout <em>sans clavier d'ordinateur</em>&nbsp;: dictez le contexte, photographiez un document si nécessaire, obtenez un livrable exploitable. Vérifiez ensuite que la conversation est bien retrouvée sur votre ordinateur.</p>
+    <details class="solution">
+      <summary>Voir une démarche corrigée</summary>
+      <div class="sol-body">
+        <p>Scénario type&nbsp;: vous sortez d'une réunion client et devez envoyer un compte-rendu avant ce soir.</p>
+        <ol>
+          <li><strong>Dictez</strong> vos notes pendant deux minutes, sans structurer, en commençant par&nbsp;: «&nbsp;Je te dicte mes notes de réunion, elles sont désordonnées.&nbsp;»</li>
+          <li><strong>Photographiez</strong> le tableau blanc ou vos notes manuscrites et joignez la photo à la conversation.</li>
+          <li><strong>Demandez le livrable</strong> avec un prompt précis&nbsp;:</li>
+        </ol>
+        <pre><code>À partir de ma dictée et de la photo :
+
+1. Rédige un compte-rendu de 250 mots maximum, ton professionnel,
+   destiné au client (il ne connaît pas notre jargon interne) ;
+2. Ajoute un tableau des actions : action | responsable | échéance ;
+3. Termine par les 2 questions que je dois poser au client
+   pour débloquer la suite.
+
+Ce qui n'est ni dans ma dictée ni sur la photo, marque-le
+« à confirmer » — n'invente aucune échéance.</code></pre>
+        <ol start="4">
+          <li><strong>Itérez</strong> en dictant les corrections&nbsp;: «&nbsp;Plus court&nbsp;», «&nbsp;retire la partie budget&nbsp;», «&nbsp;ajoute un remerciement en ouverture&nbsp;».</li>
+          <li><strong>Vérifiez la continuité</strong>&nbsp;: ouvrez claude.ai sur votre ordinateur, retrouvez la conversation et copiez le résultat dans votre messagerie.</li>
+        </ol>
+        <p><strong>Ce que l'exercice démontre</strong>&nbsp;: le mobile n'est pas un pis-aller. La dictée produit plus de contexte en deux minutes que dix minutes de saisie, et la photo remplace une transcription fastidieuse. La consigne «&nbsp;marque à confirmer&nbsp;» est ce qui empêche l'invention.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercise" data-level="intermediaire">
+    <span class="ex-label">Exercice · Intermédiaire</span>
+    <h4>Un connecteur et une synthèse hebdomadaire</h4>
+    <p>Activez un connecteur sur une source que vous utilisez vraiment (stockage de documents, messagerie ou agenda), en choisissant le périmètre le plus étroit possible. Faites-lui produire une synthèse hebdomadaire réutilisable, puis vérifiez que vous savez la révoquer.</p>
+    <details class="solution">
+      <summary>Voir la solution</summary>
+      <div class="sol-body">
+        <p><strong>1. Autorisation.</strong> Dans les paramètres de Claude, activez le connecteur et suivez l'écran d'autorisation du service. Lisez la liste des droits demandés&nbsp;: si un accès en écriture est proposé alors que vous n'en avez pas besoin, refusez-le. Notez où se trouve la page «&nbsp;applications autorisées&nbsp;» du service — c'est là que se fait la révocation côté source.</p>
+        <p><strong>2. Le prompt de synthèse</strong>, à réutiliser chaque vendredi (idéalement enregistré dans un Projet)&nbsp;:</p>
+        <pre><code>Synthèse hebdomadaire — semaine du [date] au [date].
+
+Source : mon Drive, dossier « Projets 2026 » uniquement.
+
+Produis :
+1. AVANCÉES — ce qui a bougé cette semaine, avec le document
+   et sa date de modification pour chaque point ;
+2. RISQUES — échéances dépassées, sujets sans mise à jour
+   depuis plus de 15 jours ;
+3. À ARBITRER — décisions en attente, avec qui doit trancher ;
+4. SEMAINE PROCHAINE — 5 priorités maximum, ordonnées.
+
+Règles : cite tes sources (nom du document + date). Si une
+information manque, écris « information non disponible » plutôt
+que d'estimer. Longueur maximale : une page.</code></pre>
+        <p><strong>3. Contrôle qualité.</strong> Prenez trois affirmations de la synthèse et vérifiez-les dans les documents cités. C'est ce contrôle — et non la confiance — qui rend le rituel fiable dans la durée.</p>
+        <p><strong>4. Révocation.</strong> Désactivez le connecteur dans les paramètres de Claude, <em>puis</em> retirez l'autorisation dans la page des applications autorisées du service source. Reposez ensuite la même question à Claude&nbsp;: il doit répondre qu'il n'a plus accès à la source. Tant que vous n'avez pas fait cette vérification, vous ne savez pas révoquer — vous croyez savoir.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercise" data-level="pro">
+    <span class="ex-label">Exercice · Pro</span>
+    <h4>Rédiger une politique d'autorisation des connecteurs</h4>
+    <p>Votre entreprise de 400 personnes déploie Claude. La direction des systèmes d'information vous demande une politique d'autorisation des connecteurs tenant en une page&nbsp;: qui approuve quoi, selon quel critère, avec quelle fréquence de revue. Rédigez-la.</p>
+    <details class="solution">
+      <summary>Voir la solution</summary>
+      <div class="sol-body">
+        <p><strong>Principe directeur&nbsp;:</strong> le niveau d'approbation dépend de la sensibilité des données atteignables et de la présence d'un droit d'écriture — jamais de l'insistance du demandeur.</p>
+        <div class="table-wrap">
+        <table>
+          <tr><th>Niveau</th><th>Données concernées</th><th>Exemples</th><th>Qui approuve</th><th>Droits par défaut</th><th>Revue</th></tr>
+          <tr><td><strong>N1 — Public</strong></td><td>Information déjà publiée</td><td>Site web public, documentation ouverte</td><td>Aucune approbation&nbsp;: liste blanche</td><td>Lecture</td><td>Annuelle</td></tr>
+          <tr><td><strong>N2 — Interne</strong></td><td>Diffusable dans l'entreprise</td><td>Espace documentaire d'équipe, agenda, canaux internes</td><td>Le responsable hiérarchique</td><td>Lecture seule&nbsp;; périmètre limité à un dossier ou à un espace</td><td>Semestrielle</td></tr>
+          <tr><td><strong>N3 — Restreint</strong></td><td>Données personnelles, contractuelles, financières</td><td>CRM, messagerie, paie, dossiers clients</td><td>RSSI + DPO</td><td>Lecture seule, compte de service dédié, journalisation obligatoire</td><td>Trimestrielle</td></tr>
+          <tr><td><strong>N4 — Critique</strong></td><td>Secrets, production, moyens de paiement</td><td>Bases de production, outils de paiement, secrets d'infrastructure</td><td>Comité sécurité (décision collégiale, dossier écrit)</td><td>Interdit par défaut&nbsp;; dérogation temporaire et nominative uniquement</td><td>Mensuelle</td></tr>
+        </table>
+        </div>
+        <p><strong>Règles transverses</strong> (elles s'appliquent à tous les niveaux)&nbsp;:</p>
+        <ol>
+          <li><strong>Moindre privilège.</strong> Lecture seule par défaut. Tout droit d'écriture fait monter le dossier d'un niveau d'approbation.</li>
+          <li><strong>Périmètre nommé.</strong> Une demande doit désigner un dossier, un espace ou un jeu de champs — jamais «&nbsp;l'ensemble du service&nbsp;».</li>
+          <li><strong>Actions engageantes.</strong> Envoi, paiement, suppression, publication&nbsp;: confirmation humaine explicite, sans exception.</li>
+          <li><strong>Secrets.</strong> Compte de service dédié, jeton stocké en coffre, rotation à chaque revue, jamais dans un dépôt.</li>
+          <li><strong>Journalisation.</strong> Obligatoire à partir de N3&nbsp;: qui, quand, quelle source, quels outils appelés. Conservation alignée sur la politique de traces de l'entreprise.</li>
+          <li><strong>Registre unique.</strong> Toute autorisation vivante figure dans le registre versionné&nbsp;; ce qui n'y figure pas est réputé non autorisé.</li>
+          <li><strong>Révocation automatique.</strong> Départ, changement de poste ou fin de projet&nbsp;: retrait immédiat, sans attendre la revue.</li>
+          <li><strong>Preuve d'usage.</strong> À chaque revue, un connecteur sans usage journalisé depuis un cycle complet est désactivé par défaut&nbsp;; il pourra être redemandé.</li>
+        </ol>
+        <p><strong>Ce qui fait la valeur du document</strong>&nbsp;: il rend la décision <em>prévisible</em>. Le demandeur sait à l'avance qui va trancher et quels droits il obtiendra&nbsp;; l'approbateur n'arbitre pas au cas par cas. Sans cela, la gouvernance se réduit à dire non aux plus discrets et oui aux plus tenaces.</p>
+      </div>
+    </details>
+  </div>
+
+  <!-- ================================================================
+       QUIZ
+       ================================================================ -->
+
+  <h2>❓ Quiz de validation</h2>
+
+  <div class="quiz">
+    <p><strong>Validez vos acquis</strong> — une seule bonne réponse par question.</p>
+
+    <div class="quiz-q">
+      <p class="q-text">1. Quelle est la principale précaution avec une extension qui voit et agit sur les pages web&nbsp;?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" type="button">Vider le cache du navigateur chaque semaine</button>
+        <button class="quiz-opt" type="button" data-correct="true">Limiter les sites autorisés et confirmer soi-même toute action engageante</button>
+        <button class="quiz-opt" type="button">Utiliser uniquement le mode navigation privée</button>
+      </div>
+      <div class="quiz-explain">L'extension hérite de vos droits sur chaque site visité, et une page peut contenir des instructions cachées (injection de prompt). Moindre privilège&nbsp;: peu de sites, peu de temps, confirmation humaine pour envoyer, payer ou supprimer.</div>
+    </div>
+
+    <div class="quiz-q">
+      <p class="q-text">2. Un connecteur Google&nbsp;Drive donne à Claude accès…</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" type="button">À l'ensemble du Drive de l'entreprise, quels que soient vos droits</button>
+        <button class="quiz-opt" type="button" data-correct="true">Au périmètre que vous avez autorisé, dans la limite de vos propres droits</button>
+        <button class="quiz-opt" type="button">À rien tant qu'un administrateur n'a pas validé chaque fichier</button>
+      </div>
+      <div class="quiz-explain">Un connecteur n'ouvre aucune porte que vous n'aviez pas&nbsp;: il exploite vos accès existants, dans le périmètre accordé. D'où l'importance de choisir le périmètre le plus étroit et de savoir le révoquer des deux côtés.</div>
+    </div>
+
+    <div class="quiz-q">
+      <p class="q-text">3. Qu'est-ce que MCP (Model Context Protocol)&nbsp;?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" type="button">Un modèle Claude spécialisé dans les intégrations</button>
+        <button class="quiz-opt" type="button">Un format de fichier pour stocker des conversations</button>
+        <button class="quiz-opt" type="button" data-correct="true">Un protocole ouvert client/serveur qui standardise la connexion entre un assistant et vos outils ou données</button>
+      </div>
+      <div class="quiz-explain">MCP évite de réécrire une intégration par outil et par application&nbsp;: un serveur MCP est réutilisable par tout client compatible, en local ou à distance.</div>
+    </div>
+
+    <div class="quiz-q">
+      <p class="q-text">4. Dans un serveur MCP, qui décide d'appeler un <em>outil</em>&nbsp;?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" type="button" data-correct="true">Le modèle, quand la tâche le nécessite — d'où l'importance de la description de l'outil</button>
+        <button class="quiz-opt" type="button">L'utilisateur, obligatoirement, par une commande explicite</button>
+        <button class="quiz-opt" type="button">Le serveur, qui pousse ses outils au moment qu'il choisit</button>
+      </div>
+      <div class="quiz-explain">Les <em>outils</em> sont déclenchés par le modèle&nbsp;; les <em>invites</em> sont choisies par l'utilisateur et les <em>ressources</em> sont fournies en contexte par l'application. La description de l'outil est ce qui guide la décision du modèle.</div>
+    </div>
+
+    <div class="quiz-q">
+      <p class="q-text">5. Quelle règle résume une bonne gouvernance des intégrations&nbsp;?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" type="button">Tout autoriser au départ, puis restreindre en cas d'incident</button>
+        <button class="quiz-opt" type="button">Interdire tout connecteur pour éviter tout risque</button>
+        <button class="quiz-opt" type="button" data-correct="true">Moindre privilège, journalisation et revue périodique des accès</button>
+      </div>
+      <div class="quiz-explain">Tout autoriser revient à découvrir le périmètre après coup&nbsp;; tout interdire pousse aux usages non déclarés. Le juste milieu&nbsp;: le droit minimal, tracé, réexaminé à cadence fixe et révoqué automatiquement au départ d'une personne.</div>
+    </div>
+
+    <p class="quiz-score"></p>
+  </div>
+
+  <!-- ================================================================
+       VIDÉOS & RESSOURCES
+       ================================================================ -->
+
+  <h2>🎬 Vidéos &amp; ressources officielles</h2>
+  <p>Pour approfondir ce module avec les sources officielles&nbsp;:</p>
+
+  <div class="resource-grid">
+    <a class="resource-card" href="https://modelcontextprotocol.io" target="_blank" rel="noopener">
+      <span class="kind">📄 Spécification</span>
+      <h4>Model Context Protocol</h4>
+      <p>Le site officiel du protocole&nbsp;: concepts, SDK, guides de démarrage et liste de serveurs existants.</p>
+    </a>
+    <a class="resource-card" href="https://support.claude.com" target="_blank" rel="noopener">
+      <span class="kind">🛟 Support</span>
+      <h4>Centre d'aide Claude</h4>
+      <p>Les articles à jour sur les applications, les connecteurs, l'extension navigateur et les paramètres de confidentialité.</p>
+    </a>
+    <a class="resource-card" href="https://docs.claude.com" target="_blank" rel="noopener">
+      <span class="kind">📚 Documentation</span>
+      <h4>Documentation Claude</h4>
+      <p>La référence technique complète, y compris l'intégration de Claude&nbsp;Code à l'IDE et la configuration des serveurs MCP.</p>
+    </a>
+    <a class="resource-card" href="https://www.youtube.com/results?search_query=Anthropic+Model+Context+Protocol+MCP" target="_blank" rel="noopener">
+      <span class="kind">🎬 Vidéos</span>
+      <h4>Démonstrations MCP</h4>
+      <p>Recherche YouTube sur MCP et les intégrations Claude&nbsp;: présentations et démonstrations officielles (en anglais).</p>
+    </a>
+  </div>
+
+  <nav class="page-nav">
+    <a href="api.html">← Module 6 · API</a>
+    <a class="next" href="bonnes-pratiques.html">Module 8 · Bonnes pratiques →</a>
+  </nav>
+
+</main>
+
+<footer class="site-footer">
+  <p>Formation Claude — projet pédagogique indépendant, non affilié à Anthropic.</p>
+</footer>
+
+<script src="../assets/js/app.js"></script>
+</body>
+</html>
